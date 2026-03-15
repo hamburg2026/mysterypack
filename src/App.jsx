@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import { SpielerProvider } from './context/SpielerContext';
 import { WalletProvider }   from './context/WalletContext';
 import { SammlungProvider } from './context/SammlungContext';
+import { LigaProvider }     from './context/LigaContext';
 import Navbar      from './components/Navbar';
 import StatsLeiste from './components/StatsLeiste';
 import TrikotDatenbank from './pages/TrikotDatenbank';
@@ -13,6 +14,7 @@ import './App.css';
 
 export default function App() {
   return (
+    <LigaProvider>
     <SpielerProvider>
     <WalletProvider>
     <SammlungProvider>
@@ -34,5 +36,6 @@ export default function App() {
     </SammlungProvider>
     </WalletProvider>
     </SpielerProvider>
+    </LigaProvider>
   );
 }

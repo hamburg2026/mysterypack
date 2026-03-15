@@ -54,6 +54,53 @@
 .tdb-stat-val { font-size: 22px; font-weight: 800; color: var(--accent); }
 .tdb-stat-lbl { font-size: 11px; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
 
+/* ── Liga-Auswahl ───────────────────────────────────── */
+.tdb-liga-auswahl {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tdb-liga-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  flex: 1;
+  min-width: 110px;
+  padding: 12px 10px;
+  background: rgba(255,255,255,0.03);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tdb-liga-btn:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.2);
+}
+.tdb-liga-btn--aktiv {
+  background: rgba(34,197,94,0.1);
+  border-color: var(--accent);
+}
+.tdb-liga-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+.tdb-liga-name {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-h);
+  text-align: center;
+  white-space: nowrap;
+}
+.tdb-liga-btn--aktiv .tdb-liga-name { color: var(--accent); }
+.tdb-liga-land {
+  font-size: 10px;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
 /* ── Steuerleiste ───────────────────────────────────── */
 .tdb-controls {
   display: flex;

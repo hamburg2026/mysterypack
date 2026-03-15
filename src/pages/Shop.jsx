@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useWallet }    from '../context/WalletContext';
 import { useSammlung }  from '../context/SammlungContext';
 import { useSpieler }   from '../context/SpielerContext';
+import { useLiga, LIGEN } from '../context/LigaContext';
 import { zieheSpieler, RARITAET_FARBE, RARITAET_GLOW } from '../services/ziehung';
 import TrikotSVG        from '../components/trikot/TrikotSVG';
 import '../shop.css';
@@ -91,11 +92,34 @@ function TrikotKarte({ ergebnis, phase }) {
   );
 }
 
+// ── Liga-Hinweis wenn keine Spieler geladen ───────────────────────────────────
+function ShopLigaHinweis({ liga, saison }) {
+  const { ladeVereine } = { ladeVereine: null }; // wird dynamisch geprüft
+  try {
+    const raw = localStorage.getItem(`mysterypack_trikot_${liga.id}_${saison.replace('/', '_')}`);
+    const vereine = raw ? JSON.parse(raw) : [];
+    const spielerCount = vereine.reduce(
+      (n, v) => n + v.spieler.filter((s) => s.marktwert > 0).length, 0
+    );
+    if (spielerCount === 0) {
+      return (
+        <p className="shop-liga-hinweis">
+          ⚠️ Für <strong>{liga.icon} {liga.name} {saison}</strong> sind noch keine Spieler
+          mit Marktwert geladen. Bitte erst in der{' '}
+          <strong>Trikot-Datenbank</strong> die Kader per API laden.
+        </p>
+      );
+    }
+  } catch {}
+  return null;
+}
+
 // ── Hauptseite ────────────────────────────────────────────────────────────────
 export default function Shop() {
   const { guthaben, buchen }   = useWallet();
   const { hinzufuegen }        = useSammlung();
   const { aktiverSpieler, spieler, aktiverIndex, wechseln } = useSpieler();
+  const { liga, saison } = useLiga();
 
   const [phase, setPhase]      = useState('bereit');
   const [ergebnis, setErgebnis]= useState(null);
@@ -129,7 +153,7 @@ export default function Shop() {
     if (!kannKaufen) return;
     buchen(-PACK_PREIS, 'mystery_pack', `Mystery Pack #${gekaufteItems + 1} gekauft`);
     setPhase('kaufen');
-    const gezogen = zieheSpieler('2024/25');
+    const gezogen = zieheSpieler(liga.id, saison);
 
     addTimer(() => setPhase('oeffnen'),      PHASE_DAUER.kaufen);
     addTimer(() => setPhase('verdeckt'),     PHASE_DAUER.kaufen + PHASE_DAUER.oeffnen);
@@ -168,7 +192,9 @@ export default function Shop() {
       <div className="shop-header">
         <div>
           <h1 className="shop-titel">🎁 Shop / Mystery Pack</h1>
-          <p className="shop-subtitel">Ziehe ein zufälliges Trikot – die Seltenheit hängt vom Marktwert ab</p>
+          <p className="shop-subtitel">
+            {liga.icon} {liga.name} · {saison} · Seltenheit nach Marktwert
+          </p>
         </div>
         <div className="shop-header-rechts">
           {/* Aktiver Spieler */}
@@ -197,15 +223,18 @@ export default function Shop() {
               <div className="pack-preis-label">pro Mystery Pack</div>
             </div>
             {phase === 'bereit' && (
-              <button
-                className={`shop-kauf-btn ${!kannKaufen ? 'shop-kauf-btn--disabled' : ''}`}
-                disabled={!kannKaufen}
-                onClick={handleKaufen}
-              >
-                {guthaben < PACK_PREIS
-                  ? `Zu wenig Guthaben (min. ${PACK_PREIS} €)`
-                  : '📦 Pack öffnen'}
-              </button>
+              <>
+                <button
+                  className={`shop-kauf-btn ${!kannKaufen ? 'shop-kauf-btn--disabled' : ''}`}
+                  disabled={!kannKaufen}
+                  onClick={handleKaufen}
+                >
+                  {guthaben < PACK_PREIS
+                    ? `Zu wenig Guthaben (min. ${PACK_PREIS} €)`
+                    : '📦 Pack öffnen'}
+                </button>
+                <ShopLigaHinweis liga={liga} saison={saison} />
+              </>
             )}
             {phase === 'kaufen' && (
               <p className="arena-status">💸 Zahlung wird verarbeitet…</p>

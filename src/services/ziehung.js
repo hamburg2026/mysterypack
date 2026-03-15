@@ -1,29 +1,25 @@
 /**
  * Gewichtete Zufallsziehung aus der Trikot-Datenbank.
- * Liest gespeicherte Daten aus localStorage (inkl. manueller Edits).
- * Fallback: SEED_2024
+ * Liest gecachte API-Daten aus localStorage.
  *
  * Formel: Gewicht = 1 / marktwert  →  teurere Spieler seltener
  */
 
-import { SEED_2024 } from '../data/seed2024';
-import { seltenheit } from '../hooks/useTrikotDaten';
+import { TRIKOT_KEY, seltenheit } from '../hooks/useTrikotDaten';
 
-const TRIKOT_KEY = (saison) => `mysterypack_trikot_${saison.replace('/', '_')}`;
-
-export function ladeVereine(saison = '2024/25') {
+export function ladeVereine(ligaId, saison) {
   try {
-    const raw = localStorage.getItem(TRIKOT_KEY(saison));
+    const raw = localStorage.getItem(TRIKOT_KEY(ligaId, saison));
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) return parsed;
     }
   } catch {}
-  return SEED_2024;
+  return [];
 }
 
-export function zieheSpieler(saison = '2024/25') {
-  const vereine = ladeVereine(saison);
+export function zieheSpieler(ligaId, saison) {
+  const vereine = ladeVereine(ligaId, saison);
 
   // Alle Spieler mit Vereinsinfo flach zusammenführen
   const pool = vereine.flatMap((v) =>
@@ -43,11 +39,9 @@ export function zieheSpieler(saison = '2024/25') {
 
   if (pool.length === 0) return null;
 
-  // Gewichte berechnen: 1 / marktwert (in Mio. €)
   const gewichte = pool.map((e) => 1 / e.spieler.marktwert);
   const summe    = gewichte.reduce((a, b) => a + b, 0);
 
-  // Gewichtete Zufallsziehung
   let zufall = Math.random() * summe;
   let gezogen = pool[pool.length - 1];
   for (let i = 0; i < pool.length; i++) {
@@ -55,7 +49,6 @@ export function zieheSpieler(saison = '2024/25') {
     if (zufall <= 0) { gezogen = pool[i]; break; }
   }
 
-  // Trikot-Typ zufällig: Heim oder Auswärts
   const trikotTyp = Math.random() < 0.5 ? 'heim' : 'auswaerts';
   const trikot    = trikotTyp === 'heim'
     ? gezogen.verein.heimtrikot
@@ -71,17 +64,17 @@ export function zieheSpieler(saison = '2024/25') {
     raritaetLabel,
     raritaetStufe,
     saison,
+    ligaId,
     wahrscheinlichkeit: (gewichte[pool.indexOf(gezogen)] / summe) * 100,
   };
 }
 
-// Raritäts-Farben für die Enthüllungs-Animation
 export const RARITAET_FARBE = {
-  1: '#6b7280',  // Gewöhnlich – grau
-  2: '#22c55e',  // Ungewöhnlich – grün
-  3: '#3b82f6',  // Selten – blau
-  4: '#a855f7',  // Episch – lila
-  5: '#f59e0b',  // Legendär – gold
+  1: '#6b7280',
+  2: '#22c55e',
+  3: '#3b82f6',
+  4: '#a855f7',
+  5: '#f59e0b',
 };
 
 export const RARITAET_GLOW = {

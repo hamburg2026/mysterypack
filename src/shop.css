@@ -434,6 +434,19 @@
   line-height: 1.6;
 }
 
+/* ── Liga-Hinweis ────────────────────────────────────── */
+.shop-liga-hinweis {
+  font-size: 13px;
+  color: #f59e0b;
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: center;
+  max-width: 380px;
+  line-height: 1.5;
+}
+
 /* ── Responsive ─────────────────────────────────────── */
 @media (max-width: 640px) {
   .shop-header { padding: 18px 16px; }

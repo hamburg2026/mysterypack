@@ -5,11 +5,15 @@
  *   VITE_RAPIDAPI_KEY=dein_key_hier
  *
  * Kostenlos: 100 Anfragen/Tag
- * Champions League ID: 2
+ *
+ * Liga-IDs:
+ *   Champions League : 2
+ *   Bundesliga       : 78
+ *   La Liga          : 140
+ *   Premier League   : 39
  */
 
 const BASE_URL = 'https://api-football-v1.p.rapidapi.com/v3';
-const LEAGUE_ID = 2; // UEFA Champions League
 
 const getHeaders = () => {
   const key = import.meta.env.VITE_RAPIDAPI_KEY;
@@ -33,12 +37,16 @@ async function apiFetch(path) {
   return json.response;
 }
 
-/** Alle Teilnehmer einer CL-Saison laden */
-export async function ladeTeams(saison) {
+/**
+ * Alle Teilnehmer einer Liga und Saison laden.
+ * @param {number} apiLigaId  – API-ID der Liga (z. B. 2 für CL, 78 für BL)
+ * @param {string} saison     – z. B. "2024/25"
+ */
+export async function ladeTeams(apiLigaId, saison) {
   const year = parseInt(saison); // "2024/25" → 2024
-  const data = await apiFetch(`/teams?league=${LEAGUE_ID}&season=${year}`);
+  const data = await apiFetch(`/teams?league=${apiLigaId}&season=${year}`);
   return data.map(({ team }) => ({
-    id: team.id,
+    id:   team.id,
     name: team.name,
     land: team.country,
     logo: team.logo,
@@ -50,22 +58,16 @@ export async function ladeKader(teamId) {
   const data = await apiFetch(`/players/squads?team=${teamId}`);
   if (!data || data.length === 0) return [];
   return data[0].players.map((p) => ({
-    id: p.id,
-    name: p.name,
-    nummer: p.number ?? 0,
+    id:       p.id,
+    name:     p.name,
+    nummer:   p.number ?? 0,
     position: mapPosition(p.position),
-    marktwert: null, // nicht in kostenlosem Plan verfügbar
+    marktwert: null, // nicht im kostenlosen Plan
   }));
 }
 
-/** Hilfsfunktion: API-Position auf Kurzform mappen */
 function mapPosition(pos) {
-  const map = {
-    Goalkeeper: 'TW',
-    Defender: 'IV',
-    Midfielder: 'ZM',
-    Attacker: 'ST',
-  };
+  const map = { Goalkeeper: 'TW', Defender: 'IV', Midfielder: 'ZM', Attacker: 'ST' };
   return map[pos] ?? pos;
 }
 

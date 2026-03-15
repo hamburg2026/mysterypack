@@ -1,11 +1,12 @@
 import { useTrikotDaten } from '../hooks/useTrikotDaten';
+import { useLiga, LIGEN, SAISONS } from '../context/LigaContext';
 import VereinSektion from '../components/trikot/VereinSektion';
-import { SAISONS } from '../data/seed2024';
 import '../trikot.css';
 
 export default function TrikotDatenbank() {
+  const { liga, ligaId, setLiga, saison, setSaison } = useLiga();
+
   const {
-    saison, setSaison,
     vereine, alleVereine,
     laedt, apiStatus,
     suchbegriff, setSuchbegriff,
@@ -15,10 +16,10 @@ export default function TrikotDatenbank() {
     spielerAktualisieren,
     spielerHinzufuegen,
     spielerLoeschen,
-    resetSaison,
+    refreshDaten,
   } = useTrikotDaten();
 
-  const gesamtSpieler = alleVereine.reduce((s, v) => s + v.spieler.length, 0);
+  const gesamtSpieler  = alleVereine.reduce((s, v) => s + v.spieler.length, 0);
   const gesamtMarktwert = alleVereine
     .flatMap((v) => v.spieler)
     .reduce((s, p) => s + (p.marktwert ?? 0), 0)
@@ -34,7 +35,7 @@ export default function TrikotDatenbank() {
               <span className="tdb-title-icon">👕</span>
               Trikot-Datenbank
             </h1>
-            <p className="tdb-subtitle">Champions League · Alle Vereins- und Spielerdaten</p>
+            <p className="tdb-subtitle">{liga.icon} {liga.name} · {saison}</p>
           </div>
           <div className="tdb-stats">
             <div className="tdb-stat">
@@ -50,6 +51,21 @@ export default function TrikotDatenbank() {
               <span className="tdb-stat-lbl">Mio. € gesamt</span>
             </div>
           </div>
+        </div>
+
+        {/* ── Liga-Auswahl ── */}
+        <div className="tdb-liga-auswahl">
+          {LIGEN.map((l) => (
+            <button
+              key={l.id}
+              className={`tdb-liga-btn ${ligaId === l.id ? 'tdb-liga-btn--aktiv' : ''}`}
+              onClick={() => setLiga(l.id)}
+            >
+              <span className="tdb-liga-icon">{l.icon}</span>
+              <span className="tdb-liga-name">{l.name}</span>
+              <span className="tdb-liga-land">{l.land}</span>
+            </button>
+          ))}
         </div>
 
         {/* ── Steuerleiste ── */}
@@ -88,22 +104,26 @@ export default function TrikotDatenbank() {
             </div>
           </div>
 
-          {/* Reset */}
+          {/* Cache leeren & neu laden */}
           <button
             className="btn-ghost btn-sm"
-            onClick={() => { if (confirm('Alle Änderungen zurücksetzen?')) resetSaison(); }}
-            title="Alle Änderungen auf Seed-Daten zurücksetzen"
+            onClick={() => { if (confirm('Cache löschen und Daten neu von der API laden?')) refreshDaten(); }}
+            title="Lokalen Cache löschen und Daten neu von der API laden"
           >
-            ↩ Zurücksetzen
+            ↩ Neu laden
           </button>
         </div>
 
-        {/* API-Key Hinweis */}
+        {/* Status-Hinweise */}
         {apiStatus === 'no_key' && (
           <div className="tdb-api-hint">
             💡 Kein RapidAPI-Key gefunden. Erstelle <code>.env.local</code> mit{' '}
-            <code>VITE_RAPIDAPI_KEY=dein_key</code> um Kader live zu laden.
-            Bis dahin werden die eingebetteten Seed-Daten verwendet.
+            <code>VITE_RAPIDAPI_KEY=dein_key</code> um Teams und Kader zu laden.
+          </div>
+        )}
+        {apiStatus === 'loading' && (
+          <div className="tdb-api-hint">
+            ⏳ Lade Teams von der API…
           </div>
         )}
         {apiStatus === 'error' && (
@@ -118,7 +138,9 @@ export default function TrikotDatenbank() {
         <div className="tdb-loading">⏳ Daten werden geladen…</div>
       ) : vereine.length === 0 ? (
         <div className="tdb-leer">
-          Keine Vereine gefunden{suchbegriff ? ` für „${suchbegriff}"` : ''}.
+          {apiStatus === 'no_key'
+            ? 'API-Key fehlt – bitte VITE_RAPIDAPI_KEY in .env.local setzen.'
+            : `Keine Vereine für ${liga.name} ${saison} gefunden.`}
         </div>
       ) : (
         <div className="verein-liste">
