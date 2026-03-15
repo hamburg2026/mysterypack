@@ -102,9 +102,22 @@ export default function Shop() {
   const [gekaufteItems, setGekaufteItems] = useState(0);
   const timerRef               = useRef([]);
 
+  // Refs damit der Cleanup-Effekt immer die aktuellen Werte sieht
+  const phaseRef    = useRef(phase);
+  const wechselnRef = useRef(wechseln);
+  phaseRef.current    = phase;
+  wechselnRef.current = wechseln;
+
   const kannKaufen = guthaben >= PACK_PREIS && phase === 'bereit';
 
-  useEffect(() => () => timerRef.current.forEach(clearTimeout), []);
+  useEffect(() => () => {
+    timerRef.current.forEach(clearTimeout);
+    // Wenn ein Pack gezogen wurde und der Spieler einfach navigiert statt
+    // den Wechsel-Button zu drücken, trotzdem automatisch wechseln.
+    if (phaseRef.current === 'ergebnis') {
+      wechselnRef.current();
+    }
+  }, []);
 
   function addTimer(fn, ms) {
     const t = setTimeout(fn, ms);
@@ -137,9 +150,11 @@ export default function Shop() {
   }
 
   function handleSpielerWechsel() {
-    wechseln();
-    setErgebnis(null);
+    // Phase zuerst zurücksetzen, damit der Unmount-Cleanup
+    // keinen zweiten wechseln()-Aufruf macht.
     setPhase('bereit');
+    setErgebnis(null);
+    wechseln();
   }
 
   const naechsterSpieler = spieler[aktiverIndex === 0 ? 1 : 0];
