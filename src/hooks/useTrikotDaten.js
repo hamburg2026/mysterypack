@@ -8,6 +8,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLiga } from '../context/LigaContext';
 import { ladeTeams, ladeKader, hatApiKey } from '../services/footballApi';
+import { SEED_2024 } from '../data/seed2024';
 
 // Gemeinsamer Storage-Key für Hook und Ziehungs-Service
 export const TRIKOT_KEY = (ligaId, saison) =>
@@ -80,10 +81,15 @@ export function useTrikotDaten() {
       return;
     }
 
-    // Kein Cache → von API laden
+    // Kein Cache → von API laden, sonst Seed-Fallback für CL 2024/25
     if (!hatApiKey()) {
-      setVereine([]);
-      setApiStatus('no_key');
+      if (liga.id === 'cl' && saison === '2024/25') {
+        speichern(liga.id, saison, SEED_2024);
+        setVereine(SEED_2024);
+      } else {
+        setVereine([]);
+        setApiStatus('no_key');
+      }
       setLaedt(false);
       return;
     }
