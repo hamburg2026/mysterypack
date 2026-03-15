@@ -1,0 +1,445 @@
+/* ═══════════════════════════════════════════════════════
+   Shop / Mystery Pack
+   ═══════════════════════════════════════════════════════ */
+
+.shop-page { display: flex; flex-direction: column; gap: 24px; }
+
+/* ── Header ─────────────────────────────────────────── */
+.shop-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-card2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+}
+.shop-titel   { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin: 0 0 4px; }
+.shop-subtitel{ font-size: 14px; color: var(--text); }
+
+/* Aktiver Spieler im Header */
+.shop-header-rechts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.shop-aktiver-spieler {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: color-mix(in srgb, var(--sp-farbe, #22c55e) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--sp-farbe, #22c55e) 30%, transparent);
+  border-radius: 20px;
+  padding: 5px 12px 5px 8px;
+}
+.shop-sp-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--sp-farbe, #22c55e);
+  flex-shrink: 0;
+}
+.shop-sp-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sp-farbe, #22c55e);
+}
+
+.shop-guthaben { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+.shop-guthaben-label  { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text); font-weight: 700; }
+.shop-guthaben-betrag { font-size: 24px; font-weight: 900; color: #22c55e; font-variant-numeric: tabular-nums; }
+.shop-guthaben--knapp { color: #ef4444 !important; }
+
+/* ── Haupt-Arena ─────────────────────────────────────── */
+.shop-arena {
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 30%, rgba(34,197,94,0.06) 0%, transparent 65%),
+              var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px 24px;
+}
+
+/* ── Pack-Bereich ─────────────────────────────────────── */
+.arena-pack-bereich {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.pack-wrap {
+  position: relative;
+  width: 200px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Idle: sanftes Schweben */
+.pack-wrap--bereit .pack-body {
+  animation: pack-float 3s ease-in-out infinite;
+}
+@keyframes pack-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* Kaufen: Schütteln */
+.pack-wrap--kaufen .pack-body {
+  animation: pack-shake 0.5s ease-in-out;
+}
+@keyframes pack-shake {
+  0%, 100% { transform: rotate(0deg); }
+  20%       { transform: rotate(-6deg) scale(1.05); }
+  40%       { transform: rotate(6deg)  scale(1.08); }
+  60%       { transform: rotate(-4deg) scale(1.06); }
+  80%       { transform: rotate(4deg)  scale(1.04); }
+}
+
+/* Öffnen: Aufspringen + verschwinden */
+.pack-wrap--oeffnen .pack-body {
+  animation: pack-open 1.8s cubic-bezier(0.36, 0, 0.66, -0.56) forwards;
+}
+@keyframes pack-open {
+  0%   { transform: scale(1)    rotate(0deg);   opacity: 1; }
+  30%  { transform: scale(1.15) rotate(-3deg);  opacity: 1; }
+  60%  { transform: scale(1.3)  rotate(5deg);   opacity: 0.8; }
+  100% { transform: scale(0.1)  rotate(720deg); opacity: 0; }
+}
+
+/* Pack-Körper */
+.pack-body {
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #1e293b 0%, #0f172a 50%, #1e293b 100%);
+  border: 2px solid rgba(34,197,94,0.5);
+  box-shadow: 0 0 30px rgba(34,197,94,0.25), 0 8px 32px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pack-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(34,197,94,0.15) 0%, transparent 60%);
+  animation: pack-glow-pulse 2s ease-in-out infinite;
+}
+@keyframes pack-glow-pulse {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+.pack-streifen {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 18px,
+    rgba(255,255,255,0.02) 18px,
+    rgba(255,255,255,0.02) 36px
+  );
+}
+
+.pack-logo   { font-size: 52px; position: relative; z-index: 1; filter: drop-shadow(0 0 12px rgba(34,197,94,0.6)); }
+.pack-text   { font-size: 13px; font-weight: 800; color: #22c55e; letter-spacing: 1.5px; text-transform: uppercase; position: relative; z-index: 1; }
+.pack-preis  { font-size: 12px; color: rgba(255,255,255,0.4); position: relative; z-index: 1; }
+
+/* Partikel */
+.pack-partikel {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.partikel {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  top: 50%;
+  left: 50%;
+  animation: partikel-fly 1.5s calc(var(--i) * 0.08s) ease-out forwards;
+}
+.partikel:nth-child(odd)  { background: #f59e0b; width: 8px; height: 8px; }
+.partikel:nth-child(3n)   { background: #a855f7; }
+@keyframes partikel-fly {
+  0%   { transform: translate(-50%,-50%) scale(0); opacity: 1; }
+  100% {
+    transform: translate(
+      calc(-50% + cos(calc(var(--i) * 30deg)) * 120px),
+      calc(-50% + sin(calc(var(--i) * 30deg)) * 120px)
+    ) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Pack-Info */
+.pack-preis-gross { font-size: 40px; font-weight: 900; color: var(--accent); font-variant-numeric: tabular-nums; }
+.pack-preis-label { font-size: 13px; color: var(--text); text-align: center; }
+
+/* Kauf-Button */
+.shop-kauf-btn {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 16px 40px;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.15s;
+  box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+}
+.shop-kauf-btn:hover:not(.shop-kauf-btn--disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(34,197,94,0.45);
+}
+.shop-kauf-btn--disabled {
+  background: rgba(255,255,255,0.07);
+  color: var(--text);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.arena-status {
+  font-size: 16px;
+  color: var(--text);
+  text-align: center;
+  animation: fade-in 0.3s ease;
+}
+.arena-status--spannend {
+  color: #f59e0b;
+  font-weight: 700;
+  animation: status-pulse 0.8s ease-in-out infinite;
+}
+.arena-status--enthuellung {
+  font-size: 22px;
+  font-weight: 900;
+  animation: enthuellung-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes status-pulse {
+  0%, 100% { opacity: 0.7; }
+  50%       { opacity: 1; }
+}
+@keyframes enthuellung-pop {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Karten-Flip ─────────────────────────────────────── */
+.arena-karte-bereich {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  perspective: 1200px;
+}
+
+.trikot-karte-flip {
+  width: 220px;
+  height: 320px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: karte-erscheinen 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+.trikot-karte-flip--aufgedeckt { transform: rotateY(180deg); }
+
+@keyframes karte-erscheinen {
+  from { transform: scale(0.3) translateY(40px); opacity: 0; }
+  to   { transform: scale(1)   translateY(0);    opacity: 1; }
+}
+
+.trikot-karte-rueck,
+.trikot-karte-vorder {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* Rückseite */
+.trikot-karte-rueck {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border: 2px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trikot-karte-rueck-muster {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.02) 0px,
+    rgba(255,255,255,0.02) 2px,
+    transparent 2px,
+    transparent 20px
+  );
+}
+.trikot-karte-rueck-logo {
+  font-size: 64px;
+  filter: drop-shadow(0 0 20px rgba(34,197,94,0.4));
+  animation: rueck-rotate 6s linear infinite;
+  position: relative;
+}
+@keyframes rueck-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Vorderseite */
+.trikot-karte-vorder {
+  transform: rotateY(180deg);
+  background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
+  border: 2px solid var(--raritaet-farbe, #6b7280);
+  box-shadow: 0 0 30px var(--raritaet-glow, transparent);
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 6px;
+}
+
+.trikot-karte-raritaet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 0;
+}
+.trikot-karte-sterne { font-size: 13px; letter-spacing: 1px; }
+.trikot-karte-label  { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.trikot-karte-svg-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.trikot-karte-svg-wrap .trikot-svg {
+  width: 110px;
+  height: 120px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+}
+
+.trikot-karte-info { display: flex; flex-direction: column; gap: 3px; }
+.trikot-karte-spieler { font-size: 14px; font-weight: 800; color: #f1f5f9; line-height: 1.2; }
+.trikot-karte-verein  { font-size: 11px; color: var(--text); }
+.trikot-karte-details { display: flex; justify-content: space-between; font-size: 11px; color: var(--text); margin-top: 2px; }
+.trikot-karte-wert    { font-size: 13px; font-weight: 800; }
+
+/* ── Ergebnis-Aktionen ───────────────────────────────── */
+.ergebnis-aktionen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  animation: fade-in 0.4s ease both;
+}
+.ergebnis-zusammenfassung { display: flex; flex-direction: column; gap: 4px; }
+.ergebnis-gz-text { font-size: 15px; color: var(--text-h); margin: 0; }
+.ergebnis-prob    { font-size: 12px; color: var(--text); margin: 0; }
+
+.ergebnis-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+.ergebnis-btn {
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 24px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+}
+.ergebnis-btn--nochmal {
+  background: var(--accent);
+  color: #000;
+}
+.ergebnis-btn--nochmal:hover { opacity: 0.85; transform: translateY(-1px); }
+.ergebnis-btn--sammlung {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  color: var(--text-h);
+}
+.ergebnis-btn--sammlung:hover { background: rgba(255,255,255,0.1); }
+.ergebnis-btn--wechsel {
+  background: color-mix(in srgb, var(--sp-farbe, #3b82f6) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--sp-farbe, #3b82f6) 40%, transparent);
+  color: var(--sp-farbe, #3b82f6);
+  font-weight: 800;
+}
+.ergebnis-btn--wechsel:hover {
+  background: color-mix(in srgb, var(--sp-farbe, #3b82f6) 25%, transparent);
+  transform: translateY(-1px);
+}
+
+/* ── Raritäts-Tabelle ───────────────────────────────── */
+.shop-raritaeten {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.shop-raritaeten-titel {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-h);
+}
+.raritaet-grid { display: flex; flex-direction: column; gap: 8px; }
+.raritaet-zeile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.02);
+  border-left: 3px solid var(--r-farbe);
+  border-radius: 0 6px 6px 0;
+}
+.raritaet-sterne  { font-size: 14px; letter-spacing: 1px; width: 70px; flex-shrink: 0; }
+.raritaet-label   { font-size: 13px; font-weight: 700; width: 110px; flex-shrink: 0; }
+.raritaet-bedingung{ font-size: 12px; color: var(--text); }
+
+.shop-hinweis {
+  font-size: 12px;
+  color: var(--text);
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  .shop-header { padding: 18px 16px; }
+  .shop-titel  { font-size: 22px; }
+  .pack-wrap   { width: 160px; height: 224px; }
+  .pack-logo   { font-size: 40px; }
+  .trikot-karte-flip { width: 180px; height: 260px; }
+  .shop-kauf-btn { font-size: 15px; padding: 13px 28px; }
+}

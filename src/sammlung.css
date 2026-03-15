@@ -1,0 +1,310 @@
+/* ═══════════════════════════════════════════════════════
+   Meine Sammlung
+   ═══════════════════════════════════════════════════════ */
+
+.sammlung-page { display: flex; flex-direction: column; gap: 20px; }
+
+/* ── Spieler-Tabs ───────────────────────────────────── */
+.sammlung-spieler-tabs {
+  display: flex;
+  gap: 8px;
+}
+.sammlung-spieler-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex: 1;
+  justify-content: center;
+}
+.sammlung-spieler-tab:hover {
+  border-color: color-mix(in srgb, var(--sp-farbe) 50%, var(--border));
+}
+.sammlung-spieler-tab--aktiv {
+  border-color: var(--sp-farbe);
+  background: color-mix(in srgb, var(--sp-farbe) 10%, var(--bg-card));
+}
+.sst-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--sp-farbe);
+  flex-shrink: 0;
+}
+.sst-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-h);
+}
+.sammlung-spieler-tab--aktiv .sst-name { color: var(--sp-farbe); }
+.sst-anzahl {
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── Header ─────────────────────────────────────────── */
+.sammlung-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-card2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+}
+.sammlung-titel   { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin: 0 0 4px; }
+.sammlung-subtitel{ font-size: 14px; color: var(--text); }
+
+.sammlung-stats { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.sammlung-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: color-mix(in srgb, var(--r-farbe, #334155) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--r-farbe, #334155) 35%, transparent);
+  border-radius: 8px;
+  padding: 6px 12px;
+  min-width: 52px;
+}
+.sammlung-stat-sterne { font-size: 12px; letter-spacing: 1px; }
+.sammlung-stat-anzahl { font-size: 16px; font-weight: 800; color: var(--text-h); }
+.sammlung-stat-lbl    { font-size: 10px; color: var(--text); text-transform: uppercase; letter-spacing: 0.4px; }
+.sammlung-stat--wert  { --r-farbe: #334155; }
+
+/* ── Filter-Leiste ──────────────────────────────────── */
+.sammlung-filter-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.sammlung-filter-gruppe {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.sammlung-filter-gruppe .filter-label {
+  padding-top: 7px;
+  width: 76px;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
+}
+
+/* Chips (wiederverwendet aus quiz.css) */
+.filter-chips       { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.filter-chip:hover           { background: rgba(255,255,255,0.08); color: var(--text-h); }
+.filter-chip--aktiv          { background: rgba(34,197,94,0.14); border-color: var(--accent); color: var(--accent); }
+.filter-chip--aktiv[style]   { background: color-mix(in srgb, var(--akzent) 14%, transparent) !important;
+                                border-color: var(--akzent) !important; color: var(--akzent) !important; }
+.chip-anzahl {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* ── Leer-Zustand ───────────────────────────────────── */
+.sammlung-leer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 80px 24px;
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+.sammlung-leer-icon { font-size: 64px; opacity: 0.4; }
+.sammlung-leer h2   { font-size: 22px; margin: 0; }
+.sammlung-leer p    { color: var(--text); margin: 0; }
+
+.sammlung-filter-leer {
+  text-align: center;
+  padding: 48px;
+  color: var(--text);
+  font-size: 15px;
+}
+
+/* ── Gruppen ────────────────────────────────────────── */
+.sammlung-gruppen {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.sammlung-gruppe {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sammlung-gruppe-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: color-mix(in srgb, var(--g-farbe, var(--border)) 8%, var(--bg-card));
+  border-left: 3px solid var(--g-farbe, var(--border));
+  border-radius: 0 8px 8px 0;
+}
+.sammlung-gruppe-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-h);
+  flex: 1;
+}
+.sammlung-gruppe-anzahl {
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 1px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── Karten-Grid ────────────────────────────────────── */
+.sammlung-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+/* ── Einzelkarte ────────────────────────────────────── */
+.s-karte {
+  background: var(--bg-card);
+  border: 2px solid color-mix(in srgb, var(--r-farbe) 30%, var(--border));
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 0 0 transparent;
+}
+.s-karte:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--r-farbe) 20%, transparent);
+}
+
+.s-karte-raritaet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+}
+.s-karte-r-label {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
+}
+
+.s-karte-trikot {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+.s-karte-trikot .trikot-svg {
+  width: 88px;
+  height: 96px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+}
+
+.s-karte-info  { display: flex; flex-direction: column; gap: 3px; }
+.s-karte-spieler { font-size: 13px; font-weight: 800; color: var(--text-h); line-height: 1.2; }
+.s-karte-verein  { font-size: 11px; color: var(--text); }
+.s-karte-meta    { display: flex; justify-content: space-between; font-size: 11px; color: var(--text); margin-top: 2px; }
+.s-karte-typ     { font-size: 11px; }
+.s-karte-nr      { font-weight: 700; color: var(--text); }
+.s-karte-wert    { font-size: 13px; font-weight: 800; }
+.s-karte-datum   { font-size: 10px; color: var(--text); opacity: 0.6; margin-top: 2px; }
+
+/* Duplikat-Badge */
+.s-karte--duplikat {
+  opacity: 0.72;
+}
+.s-karte-duplikat-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(239,68,68,0.18);
+  border: 1px solid rgba(239,68,68,0.5);
+  color: #ef4444;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.s-karte-saison {
+  font-size: 10px;
+  color: var(--text);
+  opacity: 0.55;
+  margin-top: 1px;
+}
+
+.s-karte-loeschen {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  padding: 3px;
+  line-height: 1;
+}
+.s-karte:hover .s-karte-loeschen { opacity: 0.45; }
+.s-karte-loeschen:hover           { opacity: 1 !important; }
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  .sammlung-header  { padding: 18px 16px; }
+  .sammlung-titel   { font-size: 22px; }
+  .sammlung-grid    { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .sammlung-filter-bar { padding: 14px 16px; }
+  .sammlung-filter-gruppe .filter-label { width: 60px; }
+}

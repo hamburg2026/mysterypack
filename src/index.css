@@ -1,0 +1,329 @@
+/* ===== Design-Tokens: Fußball-Feeling ===== */
+:root {
+  --green:        #16a34a;
+  --green-dark:   #15803d;
+  --green-light:  #dcfce7;
+  --accent:       #22c55e;
+  --accent-glow:  rgba(34, 197, 94, 0.25);
+  --bg:           #0f172a;
+  --bg-card:      #1e293b;
+  --bg-card2:     #273549;
+  --border:       #334155;
+  --text:         #94a3b8;
+  --text-h:       #f1f5f9;
+  --shadow:       0 4px 24px rgba(0, 0, 0, 0.4);
+  --radius:       12px;
+  --sans:         'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --navbar-h:     68px;
+
+  font: 16px/150% var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { background: var(--bg); }
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3 {
+  color: var(--text-h);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ===== App Layout ===== */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--navbar-h);
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  gap: 16px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand-icon { font-size: 28px; }
+
+.brand-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-h);
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #fff 40%, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-item:hover {
+  background: var(--bg-card);
+  color: var(--text-h);
+}
+
+.nav-item.active {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--accent);
+}
+
+.nav-icon { font-size: 20px; }
+.nav-label { line-height: 1; }
+
+/* ===== Main Content ===== */
+.main-content {
+  flex: 1;
+  padding: 40px 24px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ===== Page Layout ===== */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.page-header {
+  text-align: center;
+  padding: 48px 24px 32px;
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card2) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.page-icon {
+  font-size: 56px;
+  display: block;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 12px var(--accent-glow));
+}
+
+.page-header h1 {
+  font-size: 36px;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: var(--text);
+  font-size: 16px;
+}
+
+/* ===== Coming Soon Card ===== */
+.coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 64px 24px;
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.coming-soon-icon {
+  font-size: 48px;
+  opacity: 0.4;
+}
+
+.coming-soon h2 {
+  font-size: 22px;
+  color: var(--text-h);
+}
+
+.coming-soon p {
+  max-width: 380px;
+  color: var(--text);
+}
+
+/* ===== Stats-Leiste ===== */
+.stats-leiste {
+  position: sticky;
+  top: var(--navbar-h);
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 44px;
+}
+
+.sl-spieler {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+.sl-spieler:last-of-type {
+  justify-content: flex-end;
+}
+
+.sl-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sp-farbe);
+  flex-shrink: 0;
+}
+.sl-name {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--sp-farbe);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+.sl-trenner {
+  width: 1px;
+  height: 14px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.sl-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.sl-stat-icon { font-size: 12px; }
+.sl-stat-val  { font-size: 12px; font-weight: 700; color: var(--text-h); }
+
+.sl-reset-btn {
+  flex-shrink: 0;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  border-radius: 8px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.sl-reset-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.6);
+}
+
+/* ===== Navbar: Spieler-Indikator ===== */
+.navbar-spieler {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: color-mix(in srgb, var(--sp-farbe, #22c55e) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--sp-farbe, #22c55e) 35%, transparent);
+  border-radius: 20px;
+  padding: 6px 12px 6px 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+.navbar-spieler:hover {
+  background: color-mix(in srgb, var(--sp-farbe, #22c55e) 18%, transparent);
+}
+.navbar-spieler-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sp-farbe, #22c55e);
+  flex-shrink: 0;
+}
+.navbar-spieler-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sp-farbe, #22c55e);
+  letter-spacing: 0.3px;
+}
+.navbar-spieler-wechsel {
+  font-size: 14px;
+  color: var(--text);
+  opacity: 0.6;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+  .navbar { padding: 0 12px; }
+  .brand-name { display: none; }
+  .nav-item { padding: 6px 10px; }
+  .nav-label { display: none; }
+  .nav-icon { font-size: 22px; }
+  .main-content { padding: 24px 16px; }
+  .page-header h1 { font-size: 26px; }
+  .page-icon { font-size: 40px; }
+  .navbar-spieler-name { display: none; }
+  .stats-leiste { padding: 0 12px; gap: 8px; }
+  .sl-name { max-width: 64px; overflow: hidden; text-overflow: ellipsis; }
+  .sl-stat-icon { display: none; }
+}

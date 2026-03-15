@@ -1,0 +1,586 @@
+/* ═══════════════════════════════════════════════════════
+   Trikot-Datenbank Styles
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Seite ──────────────────────────────────────────── */
+.trikot-db { display: flex; flex-direction: column; gap: 24px; }
+
+/* ── Header ─────────────────────────────────────────── */
+.tdb-header {
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-card2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 28px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tdb-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.tdb-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.tdb-title-icon { font-size: 32px; }
+.tdb-subtitle   { color: var(--text); font-size: 14px; }
+
+.tdb-stats {
+  display: flex;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.tdb-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: 8px;
+  padding: 8px 16px;
+  min-width: 72px;
+}
+.tdb-stat-val { font-size: 22px; font-weight: 800; color: var(--accent); }
+.tdb-stat-lbl { font-size: 11px; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ── Steuerleiste ───────────────────────────────────── */
+.tdb-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.tdb-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.tdb-control-group label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.tdb-select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.tdb-select:focus { border-color: var(--accent); }
+
+.tdb-search { flex: 1; min-width: 200px; }
+.tdb-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.tdb-search-icon {
+  position: absolute;
+  left: 10px;
+  font-size: 14px;
+  pointer-events: none;
+}
+.tdb-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+  padding: 8px 32px 8px 34px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.tdb-input:focus { border-color: var(--accent); }
+.tdb-clear {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px 4px;
+  line-height: 1;
+}
+.tdb-clear:hover { color: var(--text-h); }
+
+/* API Hint */
+.tdb-api-hint {
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text);
+}
+.tdb-api-hint code {
+  background: rgba(255,255,255,0.07);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+}
+.tdb-api-error { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.25); }
+
+/* ── Loading / Leer ─────────────────────────────────── */
+.tdb-loading, .tdb-leer {
+  text-align: center;
+  padding: 60px;
+  color: var(--text);
+  font-size: 18px;
+}
+
+/* ── Vereinsliste ───────────────────────────────────── */
+.verein-liste { display: flex; flex-direction: column; gap: 8px; }
+
+/* ── Vereins-Sektion ────────────────────────────────── */
+.verein-sektion {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.verein-sektion.offen { border-color: rgba(34,197,94,0.35); }
+
+.verein-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+  gap: 12px;
+}
+.verein-header:hover { background: rgba(255,255,255,0.03); }
+
+.verein-header-left  { display: flex; align-items: center; gap: 14px; }
+.verein-header-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+
+.verein-toggle    { color: var(--text); font-size: 11px; width: 14px; }
+.verein-trikot-mini { display: flex; gap: 4px; align-items: center; }
+
+.verein-info      { display: flex; flex-direction: column; gap: 2px; }
+.verein-name      { font-weight: 700; font-size: 16px; color: var(--text-h); }
+.verein-land      { font-size: 12px; color: var(--text); }
+
+.verein-spielerzahl { font-size: 13px; color: var(--text); }
+.verein-marktwert   { font-size: 13px; color: var(--accent); font-weight: 600; }
+
+/* ── Vereins-Inhalt ─────────────────────────────────── */
+.verein-inhalt {
+  padding: 0 18px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trikot-edit-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  align-items: center;
+}
+
+.trikot-edit-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.trikot-edit-trigger:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--accent);
+  color: var(--text-h);
+}
+
+.verein-leer {
+  text-align: center;
+  padding: 32px;
+  color: var(--text);
+  font-size: 14px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
+.btn-add-spieler {
+  align-self: flex-start;
+  background: rgba(34,197,94,0.1);
+  border: 1px dashed rgba(34,197,94,0.4);
+  border-radius: 8px;
+  color: var(--accent);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-add-spieler:hover {
+  background: rgba(34,197,94,0.18);
+  border-style: solid;
+}
+
+/* ── Spieler-Grid ───────────────────────────────────── */
+.spieler-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+/* ── Spieler-Karte ──────────────────────────────────── */
+.spieler-karte {
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.spieler-karte:hover {
+  transform: translateY(-2px);
+  border-color: var(--akzent, var(--border));
+}
+
+.karte-raritaet {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.karte-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  margin-left: 2px;
+}
+
+.karte-trikots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.karte-trikot-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.karte-trikot-wrap span {
+  font-size: 10px;
+  color: var(--text);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.trikot-svg {
+  width: 72px;
+  height: 80px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+}
+
+.karte-info { display: flex; flex-direction: column; gap: 3px; }
+.karte-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-h);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.karte-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+}
+.karte-pos {
+  background: rgba(255,255,255,0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--text-h);
+}
+.karte-nr { color: var(--text); }
+.karte-wert { font-size: 12px; color: var(--accent); font-weight: 600; }
+.karte-prob {
+  font-size: 11px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.prob-icon { font-size: 12px; }
+
+.karte-edit-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+  font-size: 14px;
+  padding: 2px;
+  line-height: 1;
+}
+.spieler-karte:hover .karte-edit-btn { opacity: 1; }
+
+/* ── Shared Buttons ─────────────────────────────────── */
+.btn-primary {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.btn-primary:hover { opacity: 0.85; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-ghost {
+  background: rgba(255,255,255,0.05);
+  color: var(--text-h);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.1); }
+.btn-ghost:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+
+.btn-danger {
+  background: rgba(239,68,68,0.12);
+  color: #ef4444;
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-danger:hover { background: rgba(239,68,68,0.22); }
+
+/* ── Modal ──────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  padding: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.modal-header h2 { font-size: 18px; margin: 0; }
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+.modal-close:hover { color: var(--text-h); }
+
+.modal-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-preview {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+}
+.modal-preview .trikot-svg { width: 90px; height: 100px; }
+
+.modal-preview-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.modal-preview-pair span {
+  font-size: 11px;
+  color: var(--text);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.modal-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.modal-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 600;
+}
+.modal-fields input,
+.modal-fields select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+  padding: 9px 12px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.modal-fields input:focus,
+.modal-fields select:focus { border-color: var(--accent); }
+.modal-fields small { color: var(--text); font-size: 11px; font-weight: 400; }
+
+.modal-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.color-input-wrap {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.color-input-wrap input[type="color"] {
+  width: 40px;
+  height: 40px;
+  padding: 3px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.color-input-wrap input[type="text"] { flex: 1; }
+
+.muster-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.muster-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex: 1;
+  min-width: 64px;
+}
+.muster-btn span { font-size: 11px; color: var(--text); font-weight: 600; }
+.muster-btn.active {
+  border-color: var(--accent);
+  background: rgba(34,197,94,0.1);
+}
+.muster-btn.active span { color: var(--accent); }
+.muster-btn:hover { background: rgba(255,255,255,0.08); }
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px 20px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  .tdb-header    { padding: 18px 16px 14px; }
+  .tdb-stats     { gap: 10px; }
+  .tdb-stat      { padding: 6px 10px; min-width: 60px; }
+  .tdb-stat-val  { font-size: 18px; }
+  .tdb-controls  { gap: 10px; }
+  .spieler-grid  { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .verein-header { padding: 12px 14px; }
+  .modal         { border-radius: 12px; }
+  .modal-row     { grid-template-columns: 1fr; }
+  .tdb-title     { font-size: 22px; }
+}
