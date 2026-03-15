@@ -50,7 +50,7 @@ function SammlungsKarte({ item, isDuplikat, onLoeschen }) {
         <div className="s-karte-wert" style={{ color: farbe }}>
           {item.spieler.marktwert} Mio. €
         </div>
-        {item.saison && <div className="s-karte-saison">{item.saison}</div>}
+        {item.ligaId && <div className="s-karte-saison">{item.ligaId.toUpperCase()}</div>}
         <div className="s-karte-datum">{formatDatum(item.gezogenAm)}</div>
       </div>
 
@@ -80,7 +80,7 @@ function gruppeKey(item, gruppiertNach) {
   switch (gruppiertNach) {
     case 'verein':    return item.verein.name;
     case 'raritaet':  return String(item.raritaetStufe);
-    case 'saison':    return item.saison ?? 'Unbekannt';
+    case 'liga':      return item.ligaId ?? 'Unbekannt';
     case 'typ':       return item.trikotTyp === 'heim' ? 'Heimtrikots' : 'Auswärtstrikots';
     default:          return 'Alle';
   }
@@ -115,7 +115,6 @@ export default function MeineSammlung() {
   const [filterStufe,  setFilterStufe]  = useState(0);
   const [filterTyp,    setFilterTyp]    = useState('alle');
   const [filterVerein, setFilterVerein] = useState('alle');
-  const [filterSaison, setFilterSaison] = useState('alle');
   const [sortierung,   setSortierung]   = useState('neu');
   const [gruppiertNach, setGruppiertNach] = useState('verein');
   const [loescheId,    setLoescheId]    = useState(null);
@@ -142,18 +141,12 @@ export default function MeineSammlung() {
     () => [...new Set(sammlung.map((i) => i.verein.name))].sort(),
     [sammlung]
   );
-  const verfuegbareSaisons = useMemo(
-    () => [...new Set(sammlung.map((i) => i.saison).filter(Boolean))].sort().reverse(),
-    [sammlung]
-  );
-
   // ── Gefiltert + sortiert ──
   const gefiltert = useMemo(() => {
     let liste = [...sammlung];
     if (filterStufe > 0)         liste = liste.filter((i) => i.raritaetStufe === filterStufe);
     if (filterTyp !== 'alle')    liste = liste.filter((i) => i.trikotTyp === filterTyp);
     if (filterVerein !== 'alle') liste = liste.filter((i) => i.verein.name === filterVerein);
-    if (filterSaison !== 'alle') liste = liste.filter((i) => i.saison === filterSaison);
     switch (sortierung) {
       case 'alt':        liste.sort((a, b) => new Date(a.gezogenAm) - new Date(b.gezogenAm)); break;
       case 'marktwert':  liste.sort((a, b) => (b.spieler.marktwert ?? 0) - (a.spieler.marktwert ?? 0)); break;
@@ -161,7 +154,7 @@ export default function MeineSammlung() {
       default:           liste.sort((a, b) => new Date(b.gezogenAm) - new Date(a.gezogenAm));
     }
     return liste;
-  }, [sammlung, filterStufe, filterTyp, filterVerein, filterSaison, sortierung]);
+  }, [sammlung, filterStufe, filterTyp, filterVerein, sortierung]);
 
   // ── Gruppen bilden ──
   const gruppen = useMemo(() => {
@@ -255,7 +248,7 @@ export default function MeineSammlung() {
                 {[
                   ['verein',   '🏟 Verein'],
                   ['raritaet', '⭐ Rarität'],
-                  ['saison',   '📅 Saison'],
+                  ['liga',     '🏆 Liga'],
                   ['typ',      '👕 Typ'],
                   ['keine',    'Keine'],
                 ].map(([v, l]) => (
@@ -315,25 +308,6 @@ export default function MeineSammlung() {
                       onClick={() => setFilterVerein(v)}>
                       {v}
                       <span className="chip-anzahl">{sammlung.filter((i) => i.verein.name === v).length}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Saison */}
-            {verfuegbareSaisons.length > 1 && (
-              <div className="sammlung-filter-gruppe">
-                <span className="filter-label">Saison</span>
-                <div className="filter-chips">
-                  <button className={`filter-chip ${filterSaison === 'alle' ? 'filter-chip--aktiv' : ''}`}
-                    onClick={() => setFilterSaison('alle')}>Alle</button>
-                  {verfuegbareSaisons.map((s) => (
-                    <button key={s}
-                      className={`filter-chip ${filterSaison === s ? 'filter-chip--aktiv' : ''}`}
-                      onClick={() => setFilterSaison(s)}>
-                      {s}
-                      <span className="chip-anzahl">{sammlung.filter((i) => i.saison === s).length}</span>
                     </button>
                   ))}
                 </div>

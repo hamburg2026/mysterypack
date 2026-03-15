@@ -7,9 +7,9 @@
 
 import { TRIKOT_KEY, seltenheit } from '../hooks/useTrikotDaten';
 
-export function ladeVereine(ligaId, saison) {
+export function ladeVereine(ligaId) {
   try {
-    const raw = localStorage.getItem(TRIKOT_KEY(ligaId, saison));
+    const raw = localStorage.getItem(TRIKOT_KEY(ligaId));
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -18,8 +18,8 @@ export function ladeVereine(ligaId, saison) {
   return [];
 }
 
-export function zieheSpieler(ligaId, saison) {
-  const vereine = ladeVereine(ligaId, saison);
+export function zieheSpieler(ligaId) {
+  const vereine = ladeVereine(ligaId);
 
   // Alle Spieler mit Vereinsinfo flach zusammenführen
   const pool = vereine.flatMap((v) =>
@@ -63,7 +63,6 @@ export function zieheSpieler(ligaId, saison) {
     trikot,
     raritaetLabel,
     raritaetStufe,
-    saison,
     ligaId,
     wahrscheinlichkeit: (gewichte[pool.indexOf(gezogen)] / summe) * 100,
   };

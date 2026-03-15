@@ -1,10 +1,10 @@
 import { useTrikotDaten } from '../hooks/useTrikotDaten';
-import { useLiga, LIGEN, SAISONS } from '../context/LigaContext';
+import { useLiga, LIGEN } from '../context/LigaContext';
 import VereinSektion from '../components/trikot/VereinSektion';
 import '../trikot.css';
 
 export default function TrikotDatenbank() {
-  const { liga, ligaId, setLiga, saison, setSaison } = useLiga();
+  const { liga, ligaId, setLiga } = useLiga();
 
   const {
     vereine, alleVereine,
@@ -35,7 +35,7 @@ export default function TrikotDatenbank() {
               <span className="tdb-title-icon">👕</span>
               Trikot-Datenbank
             </h1>
-            <p className="tdb-subtitle">{liga.icon} {liga.name} · {saison}</p>
+            <p className="tdb-subtitle">{liga.icon} {liga.name}</p>
           </div>
           <div className="tdb-stats">
             <div className="tdb-stat">
@@ -70,21 +70,6 @@ export default function TrikotDatenbank() {
 
         {/* ── Steuerleiste ── */}
         <div className="tdb-controls">
-          {/* Saison-Dropdown */}
-          <div className="tdb-control-group">
-            <label htmlFor="saison-select">Saison</label>
-            <select
-              id="saison-select"
-              value={saison}
-              onChange={(e) => setSaison(e.target.value)}
-              className="tdb-select"
-            >
-              {SAISONS.map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
-          </div>
-
           {/* Suche */}
           <div className="tdb-control-group tdb-search">
             <label htmlFor="tdb-suche">Suche</label>
@@ -140,7 +125,7 @@ export default function TrikotDatenbank() {
         <div className="tdb-leer">
           {apiStatus === 'no_key'
             ? 'API-Key fehlt – bitte VITE_RAPIDAPI_KEY in .env.local setzen.'
-            : `Keine Vereine für ${liga.name} ${saison} gefunden.`}
+            : `Keine Vereine für ${liga.name} gefunden.`}
         </div>
       ) : (
         <div className="verein-liste">

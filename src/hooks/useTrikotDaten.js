@@ -1,20 +1,20 @@
-/**
- * Haupt-Datenhook für die Trikot-Datenbank.
- *
- * Priorität: localStorage → API (automatisch beim ersten Aufruf)
- * Alle Änderungen werden sofort in localStorage gespeichert.
- */
-
 import { useState, useEffect, useCallback } from 'react';
 import { useLiga } from '../context/LigaContext';
 import { ladeTeams, ladeKader, hatApiKey } from '../services/footballApi';
-import { SEED_2024 } from '../data/seed2024';
+import { SEED_2024 }           from '../data/seed2024';
+import { SEED_BUNDESLIGA }     from '../data/seedBundesliga';
+import { SEED_LA_LIGA }        from '../data/seedLaLiga';
+import { SEED_PREMIER_LEAGUE } from '../data/seedPremierLeague';
 
-// Gemeinsamer Storage-Key für Hook und Ziehungs-Service
-export const TRIKOT_KEY = (ligaId, saison) =>
-  `mysterypack_trikot_${ligaId}_${saison.replace('/', '_')}`;
+export const TRIKOT_KEY = (ligaId) => `mysterypack_trikot_${ligaId}`;
 
-// ── Wahrscheinlichkeit berechnen ──────────────────────────────────────────────
+const SEEDS = {
+  cl: SEED_2024,
+  bl: SEED_BUNDESLIGA,
+  la: SEED_LA_LIGA,
+  pl: SEED_PREMIER_LEAGUE,
+};
+
 export function berechneWahrscheinlichkeiten(vereine) {
   const alleSpieler = vereine.flatMap((v) =>
     v.spieler.map((s) => ({ ...s, vereinId: v.id }))
@@ -28,9 +28,8 @@ export function berechneWahrscheinlichkeiten(vereine) {
   return probMap;
 }
 
-// ── Seltenheits-Label ─────────────────────────────────────────────────────────
 export function seltenheit(marktwert) {
-  if (!marktwert) return { label: '–',           stufe: 0 };
+  if (!marktwert) return { label: '–',            stufe: 0 };
   if (marktwert >= 100) return { label: 'Legendär',    stufe: 5 };
   if (marktwert >= 50)  return { label: 'Episch',      stufe: 4 };
   if (marktwert >= 20)  return { label: 'Selten',      stufe: 3 };
@@ -38,73 +37,68 @@ export function seltenheit(marktwert) {
   return                       { label: 'Gewöhnlich',  stufe: 1 };
 }
 
-// ── Persistenz ────────────────────────────────────────────────────────────────
-function laden(ligaId, saison) {
+function laden(ligaId) {
   try {
-    const raw = localStorage.getItem(TRIKOT_KEY(ligaId, saison));
+    const raw = localStorage.getItem(TRIKOT_KEY(ligaId));
     if (raw) return JSON.parse(raw);
   } catch {}
   return null;
 }
 
-function speichern(ligaId, saison, vereine) {
-  try {
-    localStorage.setItem(TRIKOT_KEY(ligaId, saison), JSON.stringify(vereine));
-  } catch {}
+function speichern(ligaId, vereine) {
+  try { localStorage.setItem(TRIKOT_KEY(ligaId), JSON.stringify(vereine)); } catch {}
 }
 
-// Standard-Trikotfarben für neu geladene Teams
-function defaultTrikot(primary = '#FFFFFF', secondary = '#000000', muster = 'plain') {
-  return { farbe1: primary, farbe2: secondary, muster };
-}
-
-// ── Hook ──────────────────────────────────────────────────────────────────────
 export function useTrikotDaten() {
-  const { liga, saison } = useLiga();
+  const { liga } = useLiga();
 
-  const [vereine,      setVereine]      = useState([]);
-  const [laedt,        setLaedt]        = useState(true);
-  const [apiStatus,    setApiStatus]    = useState('idle');
-  const [suchbegriff,  setSuchbegriff]  = useState('');
-  const [refreshKey,   setRefreshKey]   = useState(0); // erzwingt Neu-Fetch bei Reset
+  const [vereine,     setVereine]     = useState([]);
+  const [laedt,       setLaedt]       = useState(true);
+  const [apiStatus,   setApiStatus]   = useState('idle');
+  const [suchbegriff, setSuchbegriff] = useState('');
+  const [refreshKey,  setRefreshKey]  = useState(0);
 
-  // Daten laden: localStorage → API
   useEffect(() => {
     let aborted = false;
     setLaedt(true);
     setApiStatus('idle');
 
-    const gespeichert = laden(liga.id, saison);
+    // 1. localStorage-Cache
+    const gespeichert = laden(liga.id);
     if (gespeichert && gespeichert.length > 0) {
       setVereine(gespeichert);
       setLaedt(false);
       return;
     }
 
-    // Kein Cache → von API laden, sonst Seed-Fallback für CL 2024/25
+    // 2. Eingebettete Seed-Daten (kein API-Call nötig)
+    const seed = SEEDS[liga.id];
+    if (seed && seed.length > 0) {
+      speichern(liga.id, seed);
+      setVereine(seed);
+      setLaedt(false);
+      return;
+    }
+
+    // 3. API (nur wenn kein Seed und Key vorhanden)
     if (!hatApiKey()) {
-      if (liga.id === 'cl' && saison === '2024/25') {
-        speichern(liga.id, saison, SEED_2024);
-        setVereine(SEED_2024);
-      } else {
-        setVereine([]);
-        setApiStatus('no_key');
-      }
+      setVereine([]);
+      setApiStatus('no_key');
       setLaedt(false);
       return;
     }
 
     setApiStatus('loading');
-    ladeTeams(liga.apiId, saison)
+    ladeTeams(liga.apiId, '2024')
       .then((teams) => {
         if (aborted) return;
         const init = teams.map((t) => ({
           ...t,
-          heimtrikot:      defaultTrikot('#FFFFFF', '#000000'),
-          auswaertstrikot: defaultTrikot('#000000', '#FFFFFF'),
+          heimtrikot:      { farbe1: '#FFFFFF', farbe2: '#000000', muster: 'plain' },
+          auswaertstrikot: { farbe1: '#000000', farbe2: '#FFFFFF', muster: 'plain' },
           spieler: [],
         }));
-        speichern(liga.id, saison, init);
+        speichern(liga.id, init);
         setVereine(init);
         setApiStatus('ok');
         setLaedt(false);
@@ -117,101 +111,80 @@ export function useTrikotDaten() {
       });
 
     return () => { aborted = true; };
-  }, [liga.id, liga.apiId, saison, refreshKey]);
+  }, [liga.id, liga.apiId, refreshKey]);
 
-  // API-Kader für einen Verein laden
-  const ladeApiKader = useCallback(
-    async (verein) => {
-      if (!hatApiKey()) { setApiStatus('no_key'); return; }
-      setApiStatus('loading');
-      try {
-        const spieler = await ladeKader(verein.id);
-        if (spieler.length === 0) { setApiStatus('error'); return; }
-        setVereine((prev) => {
-          const neu = prev.map((v) =>
-            v.id === verein.id
-              ? { ...v, spieler: spieler.map((s) => ({ ...s, marktwert: s.marktwert ?? 1 })) }
-              : v
-          );
-          speichern(liga.id, saison, neu);
-          return neu;
-        });
-        setApiStatus('ok');
-      } catch (e) {
-        setApiStatus(e.message === 'NO_API_KEY' ? 'no_key' : 'error');
-      }
-    },
-    [liga.id, saison]
-  );
+  const ladeApiKader = useCallback(async (verein) => {
+    if (!hatApiKey()) { setApiStatus('no_key'); return; }
+    setApiStatus('loading');
+    try {
+      const spieler = await ladeKader(verein.id);
+      if (spieler.length === 0) { setApiStatus('error'); return; }
+      setVereine((prev) => {
+        const neu = prev.map((v) =>
+          v.id === verein.id
+            ? { ...v, spieler: spieler.map((s) => ({ ...s, marktwert: s.marktwert ?? 1 })) }
+            : v
+        );
+        speichern(liga.id, neu);
+        return neu;
+      });
+      setApiStatus('ok');
+    } catch (e) {
+      setApiStatus(e.message === 'NO_API_KEY' ? 'no_key' : 'error');
+    }
+  }, [liga.id]);
 
-  // Cache löschen + neu von API laden
   const refreshDaten = useCallback(() => {
-    localStorage.removeItem(TRIKOT_KEY(liga.id, saison));
+    localStorage.removeItem(TRIKOT_KEY(liga.id));
     setVereine([]);
     setRefreshKey((n) => n + 1);
-  }, [liga.id, saison]);
+  }, [liga.id]);
 
-  // ── Editier-Funktionen ────────────────────────────────────────────────────
+  const vereinAktualisieren = useCallback((vereinId, felder) => {
+    setVereine((prev) => {
+      const neu = prev.map((v) => (v.id === vereinId ? { ...v, ...felder } : v));
+      speichern(liga.id, neu);
+      return neu;
+    });
+  }, [liga.id]);
 
-  const vereinAktualisieren = useCallback(
-    (vereinId, felder) => {
-      setVereine((prev) => {
-        const neu = prev.map((v) => (v.id === vereinId ? { ...v, ...felder } : v));
-        speichern(liga.id, saison, neu);
-        return neu;
+  const spielerAktualisieren = useCallback((vereinId, spielerId, felder) => {
+    setVereine((prev) => {
+      const neu = prev.map((v) => {
+        if (v.id !== vereinId) return v;
+        return { ...v, spieler: v.spieler.map((s) => (s.id === spielerId ? { ...s, ...felder } : s)) };
       });
-    },
-    [liga.id, saison]
-  );
+      speichern(liga.id, neu);
+      return neu;
+    });
+  }, [liga.id]);
 
-  const spielerAktualisieren = useCallback(
-    (vereinId, spielerId, felder) => {
-      setVereine((prev) => {
-        const neu = prev.map((v) => {
-          if (v.id !== vereinId) return v;
-          return { ...v, spieler: v.spieler.map((s) => (s.id === spielerId ? { ...s, ...felder } : s)) };
-        });
-        speichern(liga.id, saison, neu);
-        return neu;
+  const spielerHinzufuegen = useCallback((vereinId, spieler) => {
+    setVereine((prev) => {
+      const neu = prev.map((v) => {
+        if (v.id !== vereinId) return v;
+        return { ...v, spieler: [...v.spieler, { ...spieler, id: Date.now() }] };
       });
-    },
-    [liga.id, saison]
-  );
+      speichern(liga.id, neu);
+      return neu;
+    });
+  }, [liga.id]);
 
-  const spielerHinzufuegen = useCallback(
-    (vereinId, spieler) => {
-      setVereine((prev) => {
-        const neu = prev.map((v) => {
-          if (v.id !== vereinId) return v;
-          return { ...v, spieler: [...v.spieler, { ...spieler, id: Date.now() }] };
-        });
-        speichern(liga.id, saison, neu);
-        return neu;
+  const spielerLoeschen = useCallback((vereinId, spielerId) => {
+    setVereine((prev) => {
+      const neu = prev.map((v) => {
+        if (v.id !== vereinId) return v;
+        return { ...v, spieler: v.spieler.filter((s) => s.id !== spielerId) };
       });
-    },
-    [liga.id, saison]
-  );
+      speichern(liga.id, neu);
+      return neu;
+    });
+  }, [liga.id]);
 
-  const spielerLoeschen = useCallback(
-    (vereinId, spielerId) => {
-      setVereine((prev) => {
-        const neu = prev.map((v) => {
-          if (v.id !== vereinId) return v;
-          return { ...v, spieler: v.spieler.filter((s) => s.id !== spielerId) };
-        });
-        speichern(liga.id, saison, neu);
-        return neu;
-      });
-    },
-    [liga.id, saison]
-  );
-
-  // ── Wahrscheinlichkeiten ──────────────────────────────────────────────────
   const wahrscheinlichkeiten = vereine.length > 0
     ? berechneWahrscheinlichkeiten(vereine)
     : {};
 
-  // ── Gefilterte Vereine ────────────────────────────────────────────────────
   const gefilterteVereine = suchbegriff.trim()
     ? vereine.filter(
         (v) =>
