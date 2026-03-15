@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { SpielerProvider } from './context/SpielerContext';
 import { WalletProvider }   from './context/WalletContext';
 import { SammlungProvider } from './context/SammlungContext';
@@ -16,7 +16,7 @@ export default function App() {
     <SpielerProvider>
     <WalletProvider>
     <SammlungProvider>
-    <BrowserRouter>
+    <HashRouter>
       <div className="app">
         <Navbar />
         <StatsLeiste />
@@ -30,7 +30,7 @@ export default function App() {
           </Routes>
         </main>
       </div>
-    </BrowserRouter>
+    </HashRouter>
     </SammlungProvider>
     </WalletProvider>
     </SpielerProvider>
