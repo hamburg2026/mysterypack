@@ -456,18 +456,33 @@
   align-items: center;
   gap: 5px;
 }
-.ergebnis-verein-logo {
+.arena-karte-zeile {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 20px;
+}
+.arena-karte-seite {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ergebnis-verein-name--seite {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-h);
+  text-align: center;
+  line-height: 1.3;
   animation: enthuellung-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
 }
-.ergebnis-verein-logo .verein-logo-img,
-.ergebnis-verein-logo .verein-logo-fallback {
+.arena-karte-seite .verein-logo-img,
+.arena-karte-seite .verein-logo-fallback {
   width: 64px;
   height: 64px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  animation: enthuellung-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
 }
 .ergebnis-verein-name {
   font-size: 14px;
