@@ -42,7 +42,6 @@ export default function SpielerKarte({
         <div className="karte-name">{spieler.name}</div>
         <div className="karte-meta">
           <span className="karte-pos">{spieler.position}</span>
-          <span className="karte-nr">#{spieler.nummer}</span>
         </div>
         <div className="karte-wert">
           {spieler.marktwert != null

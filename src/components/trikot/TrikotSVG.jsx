@@ -103,19 +103,6 @@ export default function TrikotSVG({
       <path d={armR} fill={bodyFill} stroke={stroke} strokeWidth="1" />
       {/* Halsausschnitt */}
       <path d={neck} fill="none" stroke={farbe2} strokeWidth="3" strokeLinecap="round" />
-      {/* Rückennummer */}
-      <text
-        x="60" y="90"
-        textAnchor="middle"
-        fontSize="34"
-        fontWeight="800"
-        fontFamily="'Inter',system-ui,sans-serif"
-        fill={numFarbe}
-        opacity="0.85"
-        style={{ userSelect: 'none' }}
-      >
-        {nummer}
-      </text>
       {/* Spielername */}
       {name && (
         <text
