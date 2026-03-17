@@ -97,18 +97,23 @@ function TrikotKarte({ ergebnis, phase }) {
   const glow   = ergebnis ? RARITAET_GLOW[ergebnis.raritaetStufe]   : 'transparent';
   const sterne = ergebnis ? '★'.repeat(ergebnis.raritaetStufe) + '☆'.repeat(5 - ergebnis.raritaetStufe) : '';
 
+  const aufgedeckt = phase === 'enthuellung' || phase === 'ergebnis';
+
   return (
     <div
-      className={`trikot-karte-flip ${phase === 'enthuellung' || phase === 'ergebnis' ? 'trikot-karte-flip--aufgedeckt' : ''}`}
+      className="trikot-karte-flip"
       style={{ '--raritaet-farbe': farbe, '--raritaet-glow': glow }}
     >
-      {/* Rückseite */}
-      <div className="trikot-karte-rueck">
-        <div className="trikot-karte-rueck-muster" />
-        <span className="trikot-karte-rueck-logo">⚽</span>
-      </div>
+      {/* Rückseite – solange nicht aufgedeckt */}
+      {!aufgedeckt && (
+        <div className="trikot-karte-rueck">
+          <div className="trikot-karte-rueck-muster" />
+          <span className="trikot-karte-rueck-logo">⚽</span>
+        </div>
+      )}
 
-      {/* Vorderseite */}
+      {/* Vorderseite – nach Enthüllung */}
+      {aufgedeckt && (
       <div className="trikot-karte-vorder">
         {ergebnis && (
           <>
@@ -160,6 +165,7 @@ function TrikotKarte({ ergebnis, phase }) {
           </>
         )}
       </div>
+      )}
     </div>
   );
 }
