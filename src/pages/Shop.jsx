@@ -68,6 +68,29 @@ function MysteryPackVisual({ phase }) {
   );
 }
 
+// ── Spielerfoto (API-Sports CDN mit Initialen-Fallback) ──────────────────────
+function SpielerFoto({ spieler, size = 54 }) {
+  const [fehler, setFehler] = useState(false);
+  const initialen = spieler.name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+  if (fehler) {
+    return (
+      <span className="spieler-foto-fallback" style={{ width: size, height: size, fontSize: size * 0.36 }}>
+        {initialen}
+      </span>
+    );
+  }
+  return (
+    <img
+      className="spieler-foto-img"
+      src={`https://media.api-sports.io/football/players/${spieler.id}.png`}
+      alt={spieler.name}
+      width={size}
+      height={size}
+      onError={() => setFehler(true)}
+    />
+  );
+}
+
 // ── Trikot-Karte (verdeckt/enthüllt) ─────────────────────────────────────────
 function TrikotKarte({ ergebnis, phase }) {
   const farbe  = ergebnis ? RARITAET_FARBE[ergebnis.raritaetStufe]  : '#6b7280';
@@ -89,31 +112,49 @@ function TrikotKarte({ ergebnis, phase }) {
       <div className="trikot-karte-vorder">
         {ergebnis && (
           <>
+            {/* Rarität */}
             <div className="trikot-karte-raritaet" style={{ color: farbe }}>
               <span className="trikot-karte-sterne">{sterne}</span>
               <span className="trikot-karte-label">{ergebnis.raritaetLabel}</span>
             </div>
-            <div className="trikot-karte-svg-wrap">
-              <TrikotSVG
-                {...ergebnis.trikot}
-                nummer={ergebnis.spieler.nummer}
-                name={ergebnis.spieler.name}
-              />
+
+            {/* Vereins-Header in Trikot-Farbe */}
+            <div
+              className="trikot-karte-verein-header"
+              style={{ background: ergebnis.trikot.farbe1, color: ergebnis.trikot.farbe2 }}
+            >
+              <VereinsLogo verein={ergebnis.verein} size={22} />
+              <span className="trikot-karte-verein-name">{ergebnis.verein.name}</span>
+              <span className="trikot-karte-heimaus-badge">
+                {ergebnis.trikotTyp === 'heim' ? 'Heim' : 'Auswärts'}
+              </span>
             </div>
+
+            {/* Trikot + Spielerfoto */}
+            <div className="trikot-karte-haupt">
+              <div className="trikot-karte-svg-wrap">
+                <TrikotSVG
+                  {...ergebnis.trikot}
+                  nummer={ergebnis.spieler.nummer}
+                  name={ergebnis.spieler.name}
+                />
+              </div>
+              <div className="trikot-karte-foto-col">
+                <SpielerFoto spieler={ergebnis.spieler} size={54} />
+                <div className="trikot-karte-nr-badge" style={{ background: farbe }}>
+                  #{ergebnis.spieler.nummer}
+                </div>
+              </div>
+            </div>
+
+            {/* Spieler-Info */}
             <div className="trikot-karte-info">
               <div className="trikot-karte-spieler">{ergebnis.spieler.name}</div>
-              <div className="trikot-karte-verein">
-                <VereinsLogo verein={ergebnis.verein} size={16} />
-                {ergebnis.verein.name}
-              </div>
-              <div className="trikot-karte-details">
-                <span className="trikot-karte-typ">
-                  {ergebnis.trikotTyp === 'heim' ? '🏠 Heimtrikot' : '✈️ Auswärtstrikot'}
+              <div className="trikot-karte-meta">
+                <span className="trikot-karte-pos">{ergebnis.spieler.position}</span>
+                <span className="trikot-karte-wert" style={{ color: farbe }}>
+                  {ergebnis.spieler.marktwert} Mio. €
                 </span>
-                <span className="trikot-karte-nr">#{ergebnis.spieler.nummer}</span>
-              </div>
-              <div className="trikot-karte-wert" style={{ color: farbe }}>
-                {ergebnis.spieler.marktwert} Mio. €
               </div>
             </div>
           </>
