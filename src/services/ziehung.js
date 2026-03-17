@@ -39,7 +39,8 @@ export function zieheSpieler(ligaId) {
 
   if (pool.length === 0) return null;
 
-  const gewichte = pool.map((e) => 1 / e.spieler.marktwert);
+  // Exponent 0.4 statt 1.0 → flachere Kurve, häufiger gute Karten
+  const gewichte = pool.map((e) => 1 / Math.pow(e.spieler.marktwert, 0.4));
   const summe    = gewichte.reduce((a, b) => a + b, 0);
 
   let zufall = Math.random() * summe;

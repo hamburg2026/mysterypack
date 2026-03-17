@@ -26,7 +26,7 @@ function VereinsLogo({ verein, size = 24 }) {
   return (
     <img
       className="verein-logo-img"
-      src={`https://tmssl.akamaized.net/images/wappen/normquad/${verein.id}.png`}
+      src={`https://media.api-sports.io/football/teams/${verein.id}.png`}
       alt={verein.name}
       width={size}
       height={size}
@@ -278,7 +278,25 @@ export default function Shop() {
         {/* Karten-Enthüllung */}
         {zeigeKarte && (
           <div className="arena-karte-bereich">
-            <TrikotKarte ergebnis={ergebnis} phase={phase} />
+            <div className="arena-karte-zeile">
+              {/* Links: Vereinsname */}
+              <div className="arena-karte-seite">
+                {phase === 'ergebnis' && ergebnis && (
+                  <span className="ergebnis-verein-name ergebnis-verein-name--seite">
+                    {ergebnis.verein.name}
+                  </span>
+                )}
+              </div>
+
+              <TrikotKarte ergebnis={ergebnis} phase={phase} />
+
+              {/* Rechts: Logo */}
+              <div className="arena-karte-seite">
+                {phase === 'ergebnis' && ergebnis && (
+                  <VereinsLogo verein={ergebnis.verein} size={64} />
+                )}
+              </div>
+            </div>
 
             {phase === 'verdeckt' && (
               <p className="arena-status arena-status--spannend">🎲 Ziehung läuft…</p>
@@ -292,10 +310,6 @@ export default function Shop() {
 
             {phase === 'ergebnis' && ergebnis && (
               <div className="ergebnis-aktionen">
-                <div className="ergebnis-verein-logo">
-                  <VereinsLogo verein={ergebnis.verein} size={64} />
-                  <span className="ergebnis-verein-name">{ergebnis.verein.name}</span>
-                </div>
                 <div className="ergebnis-zusammenfassung">
                   <p className="ergebnis-gz-text">
                     <strong>{ergebnis.spieler.name}</strong> wurde der Sammlung von{' '}
