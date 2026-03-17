@@ -7,6 +7,34 @@ import { zieheSpieler, RARITAET_FARBE, RARITAET_GLOW } from '../services/ziehung
 import TrikotSVG        from '../components/trikot/TrikotSVG';
 import '../shop.css';
 
+// ── Vereinslogo (Transfermarkt CDN mit Farb-Fallback) ─────────────────────────
+function VereinsLogo({ verein, size = 24 }) {
+  const [fehler, setFehler] = useState(false);
+  if (!verein) return null;
+  const farbe  = verein.heimtrikot?.farbe1 || '#6b7280';
+  const kuerzel = verein.name.split(/\s+/).map((w) => w[0]).join('').slice(0, 3).toUpperCase();
+  if (fehler) {
+    return (
+      <span
+        className="verein-logo-fallback"
+        style={{ width: size, height: size, background: farbe, fontSize: Math.max(8, size * 0.36) }}
+      >
+        {kuerzel}
+      </span>
+    );
+  }
+  return (
+    <img
+      className="verein-logo-img"
+      src={`https://tmssl.akamaized.net/images/wappen/normquad/${verein.id}.png`}
+      alt={verein.name}
+      width={size}
+      height={size}
+      onError={() => setFehler(true)}
+    />
+  );
+}
+
 const PACK_PREIS = 200;
 
 // Animations-Phasen
@@ -74,7 +102,10 @@ function TrikotKarte({ ergebnis, phase }) {
             </div>
             <div className="trikot-karte-info">
               <div className="trikot-karte-spieler">{ergebnis.spieler.name}</div>
-              <div className="trikot-karte-verein">{ergebnis.verein.name}</div>
+              <div className="trikot-karte-verein">
+                <VereinsLogo verein={ergebnis.verein} size={16} />
+                {ergebnis.verein.name}
+              </div>
               <div className="trikot-karte-details">
                 <span className="trikot-karte-typ">
                   {ergebnis.trikotTyp === 'heim' ? '🏠 Heimtrikot' : '✈️ Auswärtstrikot'}
@@ -261,6 +292,10 @@ export default function Shop() {
 
             {phase === 'ergebnis' && ergebnis && (
               <div className="ergebnis-aktionen">
+                <div className="ergebnis-verein-logo">
+                  <VereinsLogo verein={ergebnis.verein} size={64} />
+                  <span className="ergebnis-verein-name">{ergebnis.verein.name}</span>
+                </div>
                 <div className="ergebnis-zusammenfassung">
                   <p className="ergebnis-gz-text">
                     <strong>{ergebnis.spieler.name}</strong> wurde der Sammlung von{' '}
