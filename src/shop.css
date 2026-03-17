@@ -317,36 +317,104 @@
   box-shadow: 0 0 30px var(--raritaet-glow, transparent);
   display: flex;
   flex-direction: column;
-  padding: 12px;
-  gap: 6px;
+  padding: 10px;
+  gap: 7px;
 }
 
 .trikot-karte-raritaet {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2px 0;
+  padding: 1px 0;
 }
-.trikot-karte-sterne { font-size: 13px; letter-spacing: 1px; }
-.trikot-karte-label  { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+.trikot-karte-sterne { font-size: 12px; letter-spacing: 1px; }
+.trikot-karte-label  { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
 
+/* Vereins-Header */
+.trikot-karte-verein-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  overflow: hidden;
+}
+.trikot-karte-verein-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.trikot-karte-heimaus-badge {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.25);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Trikot + Foto nebeneinander */
+.trikot-karte-haupt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+}
 .trikot-karte-svg-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
 }
 .trikot-karte-svg-wrap .trikot-svg {
-  width: 110px;
-  height: 120px;
+  width: 95px;
+  height: 105px;
   filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
 }
+.trikot-karte-foto-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.spieler-foto-img {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 2px solid var(--raritaet-farbe, #6b7280);
+  object-fit: cover;
+  background: #0f172a;
+  display: block;
+}
+.spieler-foto-fallback {
+  border-radius: 50%;
+  border: 2px solid var(--raritaet-farbe, #6b7280);
+  background: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #94a3b8;
+}
+.trikot-karte-nr-badge {
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
 
+/* Spieler-Info */
 .trikot-karte-info { display: flex; flex-direction: column; gap: 3px; }
-.trikot-karte-spieler { font-size: 14px; font-weight: 800; color: #f1f5f9; line-height: 1.2; }
-.trikot-karte-verein  { font-size: 11px; color: var(--text); }
-.trikot-karte-details { display: flex; justify-content: space-between; font-size: 11px; color: var(--text); margin-top: 2px; }
-.trikot-karte-wert    { font-size: 13px; font-weight: 800; }
+.trikot-karte-spieler { font-size: 13px; font-weight: 800; color: #f1f5f9; line-height: 1.2; }
+.trikot-karte-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text); margin-top: 1px; }
+.trikot-karte-pos  { color: var(--text); }
+.trikot-karte-wert { font-size: 12px; font-weight: 800; }
 
 /* ── Ergebnis-Aktionen ───────────────────────────────── */
 .ergebnis-aktionen {
@@ -450,11 +518,6 @@
   font-weight: 900;
   color: rgba(0,0,0,0.7);
   letter-spacing: -0.5px;
-}
-.trikot-karte-verein {
-  display: flex;
-  align-items: center;
-  gap: 5px;
 }
 .arena-karte-zeile {
   display: flex;
