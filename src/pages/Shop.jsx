@@ -135,7 +135,7 @@ function TrikotKarte({ ergebnis, phase }) {
               </span>
             </div>
 
-            {/* Trikot + Spielerfoto */}
+            {/* Trikot */}
             <div className="trikot-karte-haupt">
               <div className="trikot-karte-svg-wrap">
                 <TrikotSVG
@@ -143,12 +143,6 @@ function TrikotKarte({ ergebnis, phase }) {
                   nummer={ergebnis.spieler.nummer}
                   name={ergebnis.spieler.name}
                 />
-              </div>
-              <div className="trikot-karte-foto-col">
-                <SpielerFoto spieler={ergebnis.spieler} size={54} />
-                <div className="trikot-karte-nr-badge" style={{ background: farbe }}>
-                  #{ergebnis.spieler.nummer}
-                </div>
               </div>
             </div>
 
