@@ -26,7 +26,7 @@ function VereinsLogo({ verein, size = 24 }) {
   return (
     <img
       className="verein-logo-img"
-      src={`https://tmssl.akamaized.net/images/wappen/normquad/${verein.id}.png`}
+      src={`https://media.api-sports.io/football/teams/${verein.id}.png`}
       alt={verein.name}
       width={size}
       height={size}
