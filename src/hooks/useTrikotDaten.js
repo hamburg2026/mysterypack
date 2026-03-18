@@ -6,7 +6,7 @@ import { SEED_BUNDESLIGA }     from '../data/seedBundesliga';
 import { SEED_LA_LIGA }        from '../data/seedLaLiga';
 import { SEED_PREMIER_LEAGUE } from '../data/seedPremierLeague';
 
-export const TRIKOT_KEY = (ligaId) => `mysterypack_trikot_${ligaId}`;
+export const TRIKOT_KEY = (ligaId) => `mysterypack_trikot_v2_${ligaId}`;
 
 const SEEDS = {
   cl: SEED_2024,
