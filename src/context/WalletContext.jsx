@@ -155,12 +155,13 @@ export function useWallet() {
 // ── Hilfsfunktionen (exportiert für alle Module) ──────
 
 export const TYP_META = {
-  startguthaben: { label: 'Startguthaben', icon: '🏦' },
-  quiz_gewinn:   { label: 'Quiz-Gewinn',   icon: '🏆' },
-  quiz_verlust:  { label: 'Quiz-Verlust',  icon: '❌' },
-  mystery_pack:  { label: 'Mystery Pack',  icon: '📦' },
-  einzahlung:    { label: 'Einzahlung',    icon: '💶' },
-  sonstiges:     { label: 'Sonstiges',     icon: '💸' },
+  startguthaben:   { label: 'Startguthaben',   icon: '🏦' },
+  quiz_gewinn:     { label: 'Quiz-Gewinn',      icon: '🏆' },
+  quiz_verlust:    { label: 'Quiz-Verlust',     icon: '❌' },
+  mystery_pack:    { label: 'Mystery Pack',     icon: '📦' },
+  karten_verkauf:  { label: 'Karten-Verkauf',   icon: '💰' },
+  einzahlung:      { label: 'Einzahlung',       icon: '💶' },
+  sonstiges:       { label: 'Sonstiges',        icon: '💸' },
 };
 
 export function formatBetrag(betrag) {

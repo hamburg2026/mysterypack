@@ -32,6 +32,7 @@ export default function Wallet() {
   const [einzahlungOffen, setEinzahlungOffen] = useState(false);
   const [einzahlBetrag, setEinzahlBetrag] = useState('');
   const [einzahlBeschreibung, setEinzahlBeschreibung] = useState('');
+  const [einzahlCode, setEinzahlCode] = useState('');
   const [loescheId, setLoescheId]         = useState(null);
 
   // ── gefilterte Transaktionen ──────────────────────────
@@ -66,12 +67,24 @@ export default function Wallet() {
     }
   }
 
+  function heutigerCode() {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const t = String(d.getDate()).padStart(2, '0');
+    return `${y}${m}${t}`;
+  }
+
+  const codeKorrekt = einzahlCode.trim() === heutigerCode();
+
   function handleEinzahlung() {
     const betrag = parseFloat(einzahlBetrag.replace(',', '.'));
     if (isNaN(betrag) || betrag === 0) return;
+    if (!codeKorrekt) return;
     buchen(betrag, betrag > 0 ? 'einzahlung' : 'sonstiges', einzahlBeschreibung || (betrag > 0 ? 'Manuelle Einzahlung' : 'Manuelle Abbuchung'));
     setEinzahlBetrag('');
     setEinzahlBeschreibung('');
+    setEinzahlCode('');
     setEinzahlungOffen(false);
   }
 
@@ -167,10 +180,25 @@ export default function Wallet() {
           <div className="modal wallet-modal">
             <div className="modal-header">
               <h2>Manuelle Buchung</h2>
-              <button className="modal-close" onClick={() => setEinzahlungOffen(false)}>✕</button>
+              <button className="modal-close" onClick={() => { setEinzahlungOffen(false); setEinzahlCode(''); }}>✕</button>
             </div>
             <div className="modal-body">
               <div className="modal-fields">
+                <label>
+                  Freischalt-Code
+                  <small>Heutiges Datum im Format JJJJMMTT</small>
+                  <input
+                    type="text"
+                    placeholder="z. B. 20260318"
+                    value={einzahlCode}
+                    onChange={(e) => setEinzahlCode(e.target.value)}
+                    autoFocus
+                    style={einzahlCode && !codeKorrekt ? { borderColor: '#ef4444' } : {}}
+                  />
+                  {einzahlCode && !codeKorrekt && (
+                    <span style={{ color: '#ef4444', fontSize: 12 }}>Code falsch.</span>
+                  )}
+                </label>
                 <label>
                   Betrag (€)
                   <small>Positiv = Einzahlung · Negativ = Abbuchung</small>
@@ -180,7 +208,7 @@ export default function Wallet() {
                     placeholder="z. B. 10.00 oder -5.00"
                     value={einzahlBetrag}
                     onChange={(e) => setEinzahlBetrag(e.target.value)}
-                    autoFocus
+                    disabled={!codeKorrekt}
                   />
                 </label>
                 <label>
@@ -191,15 +219,16 @@ export default function Wallet() {
                     value={einzahlBeschreibung}
                     onChange={(e) => setEinzahlBeschreibung(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleEinzahlung()}
+                    disabled={!codeKorrekt}
                   />
                 </label>
               </div>
             </div>
             <div className="modal-footer">
-              <button className="btn-ghost" onClick={() => setEinzahlungOffen(false)}>Abbrechen</button>
+              <button className="btn-ghost" onClick={() => { setEinzahlungOffen(false); setEinzahlCode(''); }}>Abbrechen</button>
               <button
                 className="btn-primary"
-                disabled={!einzahlBetrag || isNaN(parseFloat(einzahlBetrag))}
+                disabled={!codeKorrekt || !einzahlBetrag || isNaN(parseFloat(einzahlBetrag))}
                 onClick={handleEinzahlung}
               >
                 Buchen

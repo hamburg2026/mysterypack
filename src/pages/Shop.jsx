@@ -5,35 +5,8 @@ import { useSpieler }   from '../context/SpielerContext';
 import { useLiga, LIGEN } from '../context/LigaContext';
 import { zieheSpieler, RARITAET_FARBE, RARITAET_GLOW } from '../services/ziehung';
 import TrikotSVG        from '../components/trikot/TrikotSVG';
+import VereinsLogo      from '../components/trikot/VereinsLogo';
 import '../shop.css';
-
-// ── Vereinslogo (Transfermarkt CDN mit Farb-Fallback) ─────────────────────────
-function VereinsLogo({ verein, size = 24 }) {
-  const [fehler, setFehler] = useState(false);
-  if (!verein) return null;
-  const farbe  = verein.heimtrikot?.farbe1 || '#6b7280';
-  const kuerzel = verein.name.split(/\s+/).map((w) => w[0]).join('').slice(0, 3).toUpperCase();
-  if (fehler) {
-    return (
-      <span
-        className="verein-logo-fallback"
-        style={{ width: size, height: size, background: farbe, fontSize: Math.max(8, size * 0.36) }}
-      >
-        {kuerzel}
-      </span>
-    );
-  }
-  return (
-    <img
-      className="verein-logo-img"
-      src={`https://media.api-sports.io/football/teams/${verein.id}.png`}
-      alt={verein.name}
-      width={size}
-      height={size}
-      onError={() => setFehler(true)}
-    />
-  );
-}
 
 const PACK_PREIS = 200;
 

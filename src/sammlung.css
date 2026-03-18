@@ -285,6 +285,32 @@
   margin-top: 1px;
 }
 
+.s-karte-spieler-zeile {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.s-karte-verkaufen {
+  width: 100%;
+  background: rgba(34,197,94,0.12);
+  border: 1px solid rgba(34,197,94,0.35);
+  border-radius: 8px;
+  color: #22c55e;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-top: 4px;
+  opacity: 0;
+}
+.s-karte:hover .s-karte-verkaufen { opacity: 1; }
+.s-karte-verkaufen:hover {
+  background: rgba(34,197,94,0.22);
+  border-color: #22c55e;
+}
+
 .s-karte-loeschen {
   position: absolute;
   top: 8px; right: 8px;

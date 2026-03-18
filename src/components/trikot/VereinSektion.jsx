@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TrikotSVG from './TrikotSVG';
 import SpielerKarte from './SpielerKarte';
+import VereinsLogo from './VereinsLogo';
 import { SpielerEditModal, TrikotEditModal, SpielerHinzufuegenModal } from './EditModal';
 
 export default function VereinSektion({
@@ -28,6 +29,7 @@ export default function VereinSektion({
       <div className="verein-header" onClick={() => setOffen((v) => !v)}>
         <div className="verein-header-left">
           <span className="verein-toggle">{offen ? '▼' : '▶'}</span>
+          <VereinsLogo verein={verein} size={36} />
           <div className="verein-trikot-mini">
             <TrikotSVG {...verein.heimtrikot} mini />
             <TrikotSVG {...verein.auswaertstrikot} mini />

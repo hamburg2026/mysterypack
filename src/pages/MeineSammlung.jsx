@@ -1,9 +1,18 @@
 import { useState, useMemo } from 'react';
 import { useSammlung }   from '../context/SammlungContext';
 import { useSpieler }    from '../context/SpielerContext';
+import { useWallet }     from '../context/WalletContext';
 import { RARITAET_FARBE } from '../services/ziehung';
 import TrikotSVG          from '../components/trikot/TrikotSVG';
+import VereinsLogo         from '../components/trikot/VereinsLogo';
 import '../sammlung.css';
+
+const PACK_PREIS = 200;
+
+/** Verkaufspreis: proportional zum Marktwert, Referenz 100 Mio = 200 € */
+function verkaufsPreis(marktwert) {
+  return Math.max(5, Math.round(PACK_PREIS * (marktwert ?? 0) / 100));
+}
 
 const RARITAET_LABEL = {
   1: 'Gewöhnlich', 2: 'Ungewöhnlich', 3: 'Selten', 4: 'Episch', 5: 'Legendär',
@@ -17,9 +26,10 @@ function formatDatum(iso) {
 }
 
 // ── Einzelne Karte ────────────────────────────────────────────────────────────
-function SammlungsKarte({ item, isDuplikat, onLoeschen }) {
+function SammlungsKarte({ item, isDuplikat, onLoeschen, onVerkaufen }) {
   const farbe  = RARITAET_FARBE[item.raritaetStufe] ?? '#6b7280';
   const sterne = '★'.repeat(item.raritaetStufe) + '☆'.repeat(5 - item.raritaetStufe);
+  const preis  = verkaufsPreis(item.spieler.marktwert);
 
   return (
     <div className={`s-karte ${isDuplikat ? 's-karte--duplikat' : ''}`} style={{ '--r-farbe': farbe }}>
@@ -39,7 +49,10 @@ function SammlungsKarte({ item, isDuplikat, onLoeschen }) {
       </div>
 
       <div className="s-karte-info">
-        <div className="s-karte-spieler">{item.spieler.name}</div>
+        <div className="s-karte-spieler-zeile">
+          <VereinsLogo verein={item.verein} size={18} />
+          <div className="s-karte-spieler">{item.spieler.name}</div>
+        </div>
         <div className="s-karte-verein">{item.verein.name}</div>
         <div className="s-karte-meta">
           <span className="s-karte-typ">
@@ -53,6 +66,16 @@ function SammlungsKarte({ item, isDuplikat, onLoeschen }) {
         {item.ligaId && <div className="s-karte-saison">{item.ligaId.toUpperCase()}</div>}
         <div className="s-karte-datum">{formatDatum(item.gezogenAm)}</div>
       </div>
+
+      {onVerkaufen && (
+        <button
+          className="s-karte-verkaufen"
+          onClick={() => onVerkaufen(item, preis)}
+          title={`Verkaufen für ${preis} €`}
+        >
+          💰 {preis} €
+        </button>
+      )}
 
       {onLoeschen && (
         <button className="s-karte-loeschen" onClick={() => onLoeschen(item.id)} title="Aus Sammlung entfernen">
@@ -110,14 +133,17 @@ function sortiereGruppen(gruppen, gruppiertNach) {
 export default function MeineSammlung() {
   const { sammlungVon, loeschen } = useSammlung();
   const { spieler, aktiverIndex }  = useSpieler();
+  const { buchen }                 = useWallet();
 
   const [ansichtIndex, setAnsichtIndex] = useState(aktiverIndex);
   const [filterStufe,  setFilterStufe]  = useState(0);
   const [filterTyp,    setFilterTyp]    = useState('alle');
   const [filterVerein, setFilterVerein] = useState('alle');
+  const [filterDuplikat, setFilterDuplikat] = useState(false);
   const [sortierung,   setSortierung]   = useState('neu');
   const [gruppiertNach, setGruppiertNach] = useState('verein');
   const [loescheId,    setLoescheId]    = useState(null);
+  const [verkaufItem,  setVerkaufItem]  = useState(null); // { item, preis }
 
   const istEigene = ansichtIndex === aktiverIndex;
   const sammlung  = sammlungVon(ansichtIndex);
@@ -147,6 +173,7 @@ export default function MeineSammlung() {
     if (filterStufe > 0)         liste = liste.filter((i) => i.raritaetStufe === filterStufe);
     if (filterTyp !== 'alle')    liste = liste.filter((i) => i.trikotTyp === filterTyp);
     if (filterVerein !== 'alle') liste = liste.filter((i) => i.verein.name === filterVerein);
+    if (filterDuplikat)          liste = liste.filter((i) => duplikatSet.has(i.id));
     switch (sortierung) {
       case 'alt':        liste.sort((a, b) => new Date(a.gezogenAm) - new Date(b.gezogenAm)); break;
       case 'marktwert':  liste.sort((a, b) => (b.spieler.marktwert ?? 0) - (a.spieler.marktwert ?? 0)); break;
@@ -154,7 +181,7 @@ export default function MeineSammlung() {
       default:           liste.sort((a, b) => new Date(b.gezogenAm) - new Date(a.gezogenAm));
     }
     return liste;
-  }, [sammlung, filterStufe, filterTyp, filterVerein, sortierung]);
+  }, [sammlung, filterStufe, filterTyp, filterVerein, filterDuplikat, sortierung, duplikatSet]);
 
   // ── Gruppen bilden ──
   const gruppen = useMemo(() => {
@@ -261,6 +288,23 @@ export default function MeineSammlung() {
               </div>
             </div>
 
+            {/* Duplikate */}
+            {stats.duplikatAnzahl > 0 && (
+              <div className="sammlung-filter-gruppe">
+                <span className="filter-label">Extras</span>
+                <div className="filter-chips">
+                  <button
+                    className={`filter-chip ${filterDuplikat ? 'filter-chip--aktiv' : ''}`}
+                    style={filterDuplikat ? { '--akzent': '#ef4444' } : {}}
+                    onClick={() => setFilterDuplikat((v) => !v)}
+                  >
+                    🔁 Nur Duplikate
+                    <span className="chip-anzahl">{stats.duplikatAnzahl}</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Rarität */}
             <div className="sammlung-filter-gruppe">
               <span className="filter-label">Rarität</span>
@@ -347,6 +391,7 @@ export default function MeineSammlung() {
                         item={item}
                         isDuplikat={duplikatSet.has(item.id)}
                         onLoeschen={istEigene ? setLoescheId : null}
+                        onVerkaufen={istEigene ? (it, preis) => setVerkaufItem({ item: it, preis }) : null}
                       />
                     ))}
                   </div>
@@ -355,6 +400,65 @@ export default function MeineSammlung() {
             </div>
           )}
         </>
+      )}
+
+      {/* ── Verkaufs-Bestätigung ── */}
+      {verkaufItem && (
+        <div className="modal-overlay" onClick={() => setVerkaufItem(null)}>
+          <div className="modal" style={{ maxWidth: 400 }} onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>💰 Karte verkaufen?</h2>
+              <button className="modal-close" onClick={() => setVerkaufItem(null)}>✕</button>
+            </div>
+            <div className="modal-body">
+              <div style={{ display: 'flex', gap: 14, alignItems: 'center', marginBottom: 14 }}>
+                <TrikotSVG
+                  {...verkaufItem.item.trikot}
+                  nummer={verkaufItem.item.spieler.nummer}
+                  name={verkaufItem.item.spieler.name}
+                  style={{ width: 70, height: 76 }}
+                />
+                <div>
+                  <div style={{ fontWeight: 800, color: 'var(--text-h)', fontSize: 15 }}>
+                    {verkaufItem.item.spieler.name}
+                  </div>
+                  <div style={{ color: 'var(--text)', fontSize: 13 }}>{verkaufItem.item.verein.name}</div>
+                  <div style={{ color: RARITAET_FARBE[verkaufItem.item.raritaetStufe], fontSize: 13, fontWeight: 700, marginTop: 4 }}>
+                    {'★'.repeat(verkaufItem.item.raritaetStufe)} {verkaufItem.item.raritaetLabel}
+                  </div>
+                  <div style={{ color: 'var(--text)', fontSize: 12, marginTop: 2 }}>
+                    Marktwert: {verkaufItem.item.spieler.marktwert} Mio. €
+                  </div>
+                </div>
+              </div>
+              <p style={{ color: 'var(--text)', margin: 0, fontSize: 14 }}>
+                Verkaufserlös:{' '}
+                <strong style={{ color: '#22c55e', fontSize: 18 }}>{verkaufItem.preis} €</strong>
+                <span style={{ fontSize: 11, color: 'var(--text)', marginLeft: 6 }}>
+                  (Faktor: {verkaufItem.item.spieler.marktwert} Mio. / 100 × 200 €)
+                </span>
+              </p>
+            </div>
+            <div className="modal-footer">
+              <button className="btn-ghost" onClick={() => setVerkaufItem(null)}>Abbrechen</button>
+              <button
+                className="btn-primary"
+                style={{ background: '#22c55e', color: '#000' }}
+                onClick={() => {
+                  loeschen(verkaufItem.item.id);
+                  buchen(
+                    verkaufItem.preis,
+                    'karten_verkauf',
+                    `Karte verkauft: ${verkaufItem.item.spieler.name} (${verkaufItem.item.verein.name})`
+                  );
+                  setVerkaufItem(null);
+                }}
+              >
+                💰 Für {verkaufItem.preis} € verkaufen
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* ── Lösch-Bestätigung ── */}
