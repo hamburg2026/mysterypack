@@ -319,7 +319,7 @@ export const SEED_BUNDESLIGA = [
     ],
   },
   {
-    id: 188, name: 'FC St. Pauli', land: 'Deutschland',
+    id: 176, name: 'FC St. Pauli', land: 'Deutschland',
     heimtrikot:      mk('#6B3A2A', '#FFFFFF'),
     auswaertstrikot: mk('#FFFFFF', '#6B3A2A'),
     spieler: [
