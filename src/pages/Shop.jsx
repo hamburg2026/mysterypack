@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
-import { useWallet }    from '../context/WalletContext';
-import { useSammlung }  from '../context/SammlungContext';
-import { useSpieler }   from '../context/SpielerContext';
-import { useLiga, LIGEN } from '../context/LigaContext';
+import { useWallet }       from '../context/WalletContext';
+import { useSammlung }     from '../context/SammlungContext';
+import { useSpieler }      from '../context/SpielerContext';
+import { useLiga, LIGEN }  from '../context/LigaContext';
+import { useMultiplayer }  from '../context/MultiplayerContext';
 import { zieheSpieler, RARITAET_FARBE, RARITAET_GLOW } from '../services/ziehung';
-import TrikotSVG        from '../components/trikot/TrikotSVG';
+import TrikotSVG           from '../components/trikot/TrikotSVG';
 import '../shop.css';
 
 // ── Vereinslogo (Transfermarkt CDN mit Farb-Fallback) ─────────────────────────
@@ -191,6 +192,7 @@ export default function Shop() {
   const { hinzufuegen }        = useSammlung();
   const { aktiverSpieler, spieler, aktiverIndex, wechseln } = useSpieler();
   const { liga } = useLiga();
+  const { onlineModus, meineTurn, dranIndex, zugBeenden, meinSpielerIndex } = useMultiplayer();
 
   const [phase, setPhase]      = useState('bereit');
   const [ergebnis, setErgebnis]= useState(null);
@@ -198,19 +200,28 @@ export default function Shop() {
   const timerRef               = useRef([]);
 
   // Refs damit der Cleanup-Effekt immer die aktuellen Werte sieht
-  const phaseRef    = useRef(phase);
-  const wechselnRef = useRef(wechseln);
-  phaseRef.current    = phase;
-  wechselnRef.current = wechseln;
+  const phaseRef      = useRef(phase);
+  const wechselnRef   = useRef(wechseln);
+  const onlineRef     = useRef(onlineModus);
+  const zugBeendenRef = useRef(zugBeenden);
+  phaseRef.current      = phase;
+  wechselnRef.current   = wechseln;
+  onlineRef.current     = onlineModus;
+  zugBeendenRef.current = zugBeenden;
 
-  const kannKaufen = guthaben >= PACK_PREIS && phase === 'bereit';
+  // Im Online-Modus nur ziehen, wenn es der eigene Zug ist
+  const kannKaufen = guthaben >= PACK_PREIS && phase === 'bereit'
+    && (!onlineModus || meineTurn);
 
   useEffect(() => () => {
     timerRef.current.forEach(clearTimeout);
-    // Wenn ein Pack gezogen wurde und der Spieler einfach navigiert statt
-    // den Wechsel-Button zu drücken, trotzdem automatisch wechseln.
+    // Beim Navigieren aus dem Shop: Zug/Spielerwechsel abschließen
     if (phaseRef.current === 'ergebnis') {
-      wechselnRef.current();
+      if (onlineRef.current) {
+        zugBeendenRef.current();
+      } else {
+        wechselnRef.current();
+      }
     }
   }, []);
 
@@ -246,10 +257,14 @@ export default function Shop() {
 
   function handleSpielerWechsel() {
     // Phase zuerst zurücksetzen, damit der Unmount-Cleanup
-    // keinen zweiten wechseln()-Aufruf macht.
+    // keinen zweiten Wechsel/Zug-Ende-Aufruf macht.
     setPhase('bereit');
     setErgebnis(null);
-    wechseln();
+    if (onlineModus) {
+      zugBeenden(); // Im Online-Modus: Zug an den anderen Spieler übergeben
+    } else {
+      wechseln();   // Offline: Spieler auf demselben Gerät wechseln
+    }
   }
 
   const naechsterSpieler = spieler[aktiverIndex === 0 ? 1 : 0];
@@ -295,6 +310,14 @@ export default function Shop() {
             </div>
             {phase === 'bereit' && (
               <>
+                {/* Online-Modus: Zug-Indikator */}
+                {onlineModus && (
+                  <div className={`shop-online-banner ${meineTurn ? 'shop-online-banner--dran' : 'shop-online-banner--warten'}`}>
+                    {meineTurn
+                      ? `🟢 Du bist dran, ${aktiverSpieler.name}!`
+                      : `⏳ Warte auf ${spieler[dranIndex]?.name ?? 'Mitspieler'} …`}
+                  </div>
+                )}
                 <button
                   className={`shop-kauf-btn ${!kannKaufen ? 'shop-kauf-btn--disabled' : ''}`}
                   disabled={!kannKaufen}
@@ -364,20 +387,30 @@ export default function Shop() {
                   </p>
                 </div>
                 <div className="ergebnis-btns">
-                  {/* Nochmal – gleicher Spieler */}
-                  {kannKaufen && (
+                  {/* Nochmal – gleicher Spieler (nur offline oder wenn noch dran) */}
+                  {kannKaufen && !onlineModus && (
                     <button className="ergebnis-btn ergebnis-btn--nochmal" onClick={handleNochmal}>
                       📦 Nochmal öffnen
                     </button>
                   )}
-                  {/* Spielerwechsel + sofort ziehen */}
-                  <button
-                    className="ergebnis-btn ergebnis-btn--wechsel"
-                    style={{ '--sp-farbe': naechsterSpieler.farbe }}
-                    onClick={handleSpielerWechsel}
-                  >
-                    ⇄ {naechsterSpieler.name} ist dran
-                  </button>
+                  {/* Zug weitergeben */}
+                  {onlineModus ? (
+                    <button
+                      className="ergebnis-btn ergebnis-btn--wechsel"
+                      style={{ '--sp-farbe': naechsterSpieler.farbe }}
+                      onClick={handleSpielerWechsel}
+                    >
+                      ✅ Zug beenden – {naechsterSpieler.name} ist dran
+                    </button>
+                  ) : (
+                    <button
+                      className="ergebnis-btn ergebnis-btn--wechsel"
+                      style={{ '--sp-farbe': naechsterSpieler.farbe }}
+                      onClick={handleSpielerWechsel}
+                    >
+                      ⇄ {naechsterSpieler.name} ist dran
+                    </button>
+                  )}
                   {/* Einfach zurück */}
                   <button className="ergebnis-btn ergebnis-btn--sammlung" onClick={handleNochmal}>
                     ← Zurück

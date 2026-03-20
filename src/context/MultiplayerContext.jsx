@@ -1,24 +1,22 @@
 /**
  * MultiplayerContext – WebRTC-Verbindung über PeerJS.
  *
- * Host   = Spieler 0  →  eröffnet Raum, teilt den Raumcode
+ * Host   = Spieler 0  →  eröffnet Raum, teilt den Raumcode, zieht zuerst
  * Gast   = Spieler 1  →  gibt Raumcode ein und tritt bei
  *
- * Jedes Gerät schickt nur seine eigenen Spielerdaten (Wallet + Sammlung)
- * zum anderen Gerät. Empfangene Daten werden direkt in die Kontexte
- * geschrieben – dadurch bleiben beide Stände synchron.
+ * Synchronisiert: Wallet, Sammlung, Spielernamen, aktiver Zug (dranIndex)
  */
 
 import {
   createContext, useContext, useState, useRef, useCallback, useEffect,
 } from 'react';
 import Peer from 'peerjs';
-import { useWallet } from './WalletContext';
+import { useWallet }   from './WalletContext';
 import { useSammlung } from './SammlungContext';
+import { useSpieler }  from './SpielerContext';
 
 const MultiplayerContext = createContext(null);
 
-/** 6-stelligen alphanumerischen Raumcode erzeugen */
 function genCode() {
   return Math.random().toString(36).slice(2, 8).toUpperCase();
 }
@@ -26,52 +24,79 @@ function genCode() {
 export function MultiplayerProvider({ children }) {
   const { wallets, setWalletsExtern }         = useWallet();
   const { sammlungen, setSammlungenExtern }    = useSammlung();
+  const { spieler, umbenennen, setAktiverIndex } = useSpieler();
 
-  const [status, setStatus]                   = useState('idle');
+  const [status, setStatus]                     = useState('idle');
   // idle | hosting | connecting | connected | error
-  const [raumCode, setRaumCode]               = useState('');
+  const [raumCode, setRaumCode]                 = useState('');
   const [meinSpielerIndex, setMeinSpielerIndex] = useState(0);
-  const [fehler, setFehler]                   = useState('');
+  const [dranIndex, setDranIndex]               = useState(0); // wer gerade ziehen darf
+  const [fehler, setFehler]                     = useState('');
 
-  const peerRef   = useRef(null);
-  const connRef   = useRef(null);
-  const indexRef  = useRef(0); // stable ref für Callbacks
+  const peerRef  = useRef(null);
+  const connRef  = useRef(null);
+  const indexRef = useRef(0);   // stable ref auf meinSpielerIndex
+  const dranRef  = useRef(0);   // stable ref auf dranIndex
 
-  // Aktuelle Sync-Daten via Ref – verhindert stale closures in send
+  // Stets aktuelle Daten in Refs halten (vermeidet stale closures in Callbacks)
   const walletsRef    = useRef(wallets);
   const sammlungenRef = useRef(sammlungen);
+  const spielerRef    = useRef(spieler);
   useEffect(() => { walletsRef.current    = wallets;    }, [wallets]);
   useEffect(() => { sammlungenRef.current = sammlungen; }, [sammlungen]);
+  useEffect(() => { spielerRef.current    = spieler;    }, [spieler]);
+  useEffect(() => { dranRef.current       = dranIndex;  }, [dranIndex]);
 
-  // ── Empfangene Daten in die Kontexte schreiben ─────────────────────────────
+  // ── Empfangene Nachrichten verarbeiten ────────────────────────────────────
   const handleData = useCallback((data) => {
-    if (data?.type !== 'player_data') return;
-    const { spielerIndex, wallet, sammlung } = data;
-    setWalletsExtern((prev) => ({ ...prev, [spielerIndex]: wallet }));
-    setSammlungenExtern((prev) => ({ ...prev, [spielerIndex]: sammlung }));
-  }, [setWalletsExtern, setSammlungenExtern]);
+    switch (data?.type) {
+      case 'player_data': {
+        const { spielerIndex, wallet, sammlung, name } = data;
+        setWalletsExtern((prev)    => ({ ...prev, [spielerIndex]: wallet }));
+        setSammlungenExtern((prev) => ({ ...prev, [spielerIndex]: sammlung }));
+        if (name) umbenennen(spielerIndex, name);
+        break;
+      }
+      case 'turn_update': {
+        setDranIndex(data.dranIndex);
+        dranRef.current = data.dranIndex;
+        break;
+      }
+    }
+  }, [setWalletsExtern, setSammlungenExtern, umbenennen]);
 
-  // ── Eigene Daten zum anderen Gerät senden ──────────────────────────────────
+  // ── Eigene Spielerdaten an Gegner senden ──────────────────────────────────
   const sendOwnData = useCallback(() => {
     const conn = connRef.current;
     if (!conn?.open) return;
     const idx = indexRef.current;
     conn.send({
-      type: 'player_data',
+      type:        'player_data',
       spielerIndex: idx,
-      wallet:    walletsRef.current[idx],
-      sammlung:  sammlungenRef.current[idx] ?? [],
+      wallet:       walletsRef.current[idx],
+      sammlung:     sammlungenRef.current[idx] ?? [],
+      name:         spielerRef.current[idx]?.name,
     });
   }, []);
 
-  // ── Verbindungs-Lifecycle ──────────────────────────────────────────────────
+  // ── Zug beenden: Turn an den anderen Spieler übergeben ───────────────────
+  const zugBeenden = useCallback(() => {
+    const naechster = 1 - dranRef.current;
+    setDranIndex(naechster);
+    dranRef.current = naechster;
+    connRef.current?.send({ type: 'turn_update', dranIndex: naechster });
+  }, []);
+
+  // ── Verbindungs-Lifecycle ─────────────────────────────────────────────────
   function setupConn(conn) {
     connRef.current = conn;
 
     conn.on('open', () => {
       setStatus('connected');
       setFehler('');
-      // Initial-Sync: eigene Daten sofort senden
+      // Aktiven Spieler auf eigenen Index fixieren
+      setAktiverIndex(indexRef.current);
+      // Eigene Daten sofort übermitteln (inkl. Name)
       setTimeout(sendOwnData, 300);
     });
 
@@ -81,6 +106,7 @@ export function MultiplayerProvider({ children }) {
       connRef.current = null;
       setStatus('idle');
       setRaumCode('');
+      setDranIndex(0);
     });
 
     conn.on('error', (err) => {
@@ -89,7 +115,7 @@ export function MultiplayerProvider({ children }) {
     });
   }
 
-  // ── Peer aufsetzen ─────────────────────────────────────────────────────────
+  // ── Peer-Instanz erstellen ────────────────────────────────────────────────
   function createPeer(id) {
     const peer = new Peer(id, {
       debug: 0,
@@ -98,7 +124,6 @@ export function MultiplayerProvider({ children }) {
     peerRef.current = peer;
 
     peer.on('error', (err) => {
-      // Raumcode bereits vergeben → neuen Code versuchen
       if (err.type === 'unavailable-id') {
         peer.destroy();
         openRoom();
@@ -112,46 +137,41 @@ export function MultiplayerProvider({ children }) {
   }
 
   // ── Raum eröffnen (Host = Spieler 0) ──────────────────────────────────────
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const openRoom = useCallback(() => {
     disconnect();
     indexRef.current = 0;
+    dranRef.current  = 0;
     setMeinSpielerIndex(0);
+    setDranIndex(0);
     setFehler('');
     setStatus('hosting');
 
     const code = genCode();
     setRaumCode(code);
-
     const peer = createPeer(code);
 
-    peer.on('open', () => {
-      // Warten auf eingehende Verbindung vom Gast
-    });
+    peer.on('connection', (conn) => setupConn(conn));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    peer.on('connection', (conn) => {
-      setupConn(conn);
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // ── Raum beitreten (Gast = Spieler 1) ─────────────────────────────────────
+  // ── Raum beitreten (Gast = Spieler 1) ────────────────────────────────────
   const joinRoom = useCallback((code) => {
     disconnect();
     indexRef.current = 1;
+    dranRef.current  = 0; // Host beginnt immer
     setMeinSpielerIndex(1);
+    setDranIndex(0);
     setFehler('');
     setStatus('connecting');
 
-    const peer = createPeer(undefined); // zufällige ID für den Gast
-
+    const peer = createPeer(undefined);
     peer.on('open', () => {
       const conn = peer.connect(code.trim().toUpperCase(), { reliable: true });
       setupConn(conn);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ── Verbindung trennen ─────────────────────────────────────────────────────
+  // ── Verbindung trennen ────────────────────────────────────────────────────
   const disconnect = useCallback(() => {
     connRef.current?.close();
     peerRef.current?.destroy();
@@ -160,24 +180,31 @@ export function MultiplayerProvider({ children }) {
     setStatus('idle');
     setRaumCode('');
     setFehler('');
+    setDranIndex(0);
   }, []);
 
-  // ── Eigene Daten senden, sobald sie sich ändern ────────────────────────────
+  // ── Auto-Sync: eigene Daten bei Änderung übertragen ──────────────────────
   useEffect(() => {
     if (status !== 'connected') return;
     sendOwnData();
-  // wallets und sammlungen (indirekt via Ref) – nur Änderungen des eigenen Spielers
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallets[meinSpielerIndex], sammlungen[meinSpielerIndex], status]);
+
+  const onlineModus = status === 'connected';
+  const meineTurn   = dranIndex === meinSpielerIndex;
 
   return (
     <MultiplayerContext.Provider value={{
       status,
       raumCode,
       meinSpielerIndex,
+      dranIndex,
+      onlineModus,
+      meineTurn,
       fehler,
       openRoom,
       joinRoom,
+      zugBeenden,
       disconnect,
     }}>
       {children}
