@@ -307,6 +307,26 @@ h1, h2, h3 {
   background: var(--bg-card);
   color: var(--text-h);
 }
+
+/* Offline-Button (nur sichtbar wenn online) */
+.navbar-offline-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: color-mix(in srgb, #ef4444 12%, transparent);
+  border: 1px solid color-mix(in srgb, #ef4444 35%, transparent);
+  border-radius: 16px;
+  padding: 5px 12px;
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+.navbar-offline-btn:hover {
+  background: color-mix(in srgb, #ef4444 22%, transparent);
+}
 .online-status-dot {
   position: absolute;
   top: 6px;

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useWallet }       from '../context/WalletContext';
 import { useSammlung }     from '../context/SammlungContext';
 import { useSpieler }      from '../context/SpielerContext';
-import { useLiga, LIGEN }  from '../context/LigaContext';
+import { useLiga }         from '../context/LigaContext';
 import { useMultiplayer }  from '../context/MultiplayerContext';
 import { zieheSpieler, RARITAET_FARBE, RARITAET_GLOW } from '../services/ziehung';
 import TrikotSVG           from '../components/trikot/TrikotSVG';
@@ -165,6 +165,26 @@ function TrikotKarte({ ergebnis, phase }) {
   );
 }
 
+// ── Mini-Karte am Rand ────────────────────────────────────────────────────────
+function MiniKarte({ karte, spielerFarbe, spielerName, seite, istNeu }) {
+  if (!karte) return <div className="mini-karte-platz" />;
+  const farbe = RARITAET_FARBE[karte.raritaetStufe] || '#6b7280';
+  return (
+    <div className={`mini-karte mini-karte--${seite} ${istNeu ? 'mini-karte--neu' : ''}`}
+         style={{ '--sp-farbe': spielerFarbe, '--r-farbe': farbe }}>
+      <div className="mini-karte-spieler-dot" style={{ background: spielerFarbe }} />
+      <span className="mini-karte-sp-name">{spielerName}</span>
+      <div className="mini-karte-trikot">
+        <TrikotSVG {...karte.trikot} nummer={karte.spieler.nummer} mini />
+      </div>
+      <span className="mini-karte-raritaet" style={{ color: farbe }}>
+        {'★'.repeat(karte.raritaetStufe)}
+      </span>
+      <span className="mini-karte-name">{karte.spieler.name.split(' ').pop()}</span>
+    </div>
+  );
+}
+
 // ── Liga-Hinweis wenn keine Spieler geladen ───────────────────────────────────
 function ShopLigaHinweis({ liga }) {
   try {
@@ -189,7 +209,7 @@ function ShopLigaHinweis({ liga }) {
 // ── Hauptseite ────────────────────────────────────────────────────────────────
 export default function Shop() {
   const { guthaben, buchen }   = useWallet();
-  const { hinzufuegen }        = useSammlung();
+  const { hinzufuegen, sammlungen } = useSammlung();
   const { aktiverSpieler, spieler, aktiverIndex, wechseln } = useSpieler();
   const { liga } = useLiga();
   const { onlineModus, meineTurn, dranIndex, zugBeenden, meinSpielerIndex } = useMultiplayer();
@@ -198,6 +218,26 @@ export default function Shop() {
   const [ergebnis, setErgebnis]= useState(null);
   const [gekaufteItems, setGekaufteItems] = useState(0);
   const timerRef               = useRef([]);
+
+  // Letzte Karte jedes Spielers für Mini-Anzeige (links = Spieler 0, rechts = Spieler 1)
+  const letzteKarte0 = sammlungen[0]?.[0] ?? null;
+  const letzteKarte1 = sammlungen[1]?.[0] ?? null;
+  const [vorherigeLaenge0, setVorherigeLaenge0] = useState(() => sammlungen[0]?.length ?? 0);
+  const [vorherigeLaenge1, setVorherigeLaenge1] = useState(() => sammlungen[1]?.length ?? 0);
+  const neuKarte0 = (sammlungen[0]?.length ?? 0) > vorherigeLaenge0;
+  const neuKarte1 = (sammlungen[1]?.length ?? 0) > vorherigeLaenge1;
+  useEffect(() => {
+    if (neuKarte0) {
+      const t = setTimeout(() => setVorherigeLaenge0(sammlungen[0]?.length ?? 0), 3000);
+      return () => clearTimeout(t);
+    }
+  }, [neuKarte0, sammlungen]);
+  useEffect(() => {
+    if (neuKarte1) {
+      const t = setTimeout(() => setVorherigeLaenge1(sammlungen[1]?.length ?? 0), 3000);
+      return () => clearTimeout(t);
+    }
+  }, [neuKarte1, sammlungen]);
 
   // Refs damit der Cleanup-Effekt immer die aktuellen Werte sieht
   const phaseRef      = useRef(phase);
@@ -299,6 +339,18 @@ export default function Shop() {
 
       {/* ── Haupt-Arena ── */}
       <div className="shop-arena">
+
+        {/* Mini-Karte links: Spieler 0 */}
+        <MiniKarte
+          karte={letzteKarte0}
+          spielerFarbe={spieler[0]?.farbe ?? '#22c55e'}
+          spielerName={spieler[0]?.name ?? 'Spieler 1'}
+          seite="links"
+          istNeu={neuKarte0}
+        />
+
+        {/* Mitte: Pack oder Karten-Enthüllung */}
+        <div className="shop-arena-mitte">
 
         {/* Pack-Animation */}
         {zeigePack && (
@@ -420,6 +472,17 @@ export default function Shop() {
             )}
           </div>
         )}
+
+        </div>{/* Ende shop-arena-mitte */}
+
+        {/* Mini-Karte rechts: Spieler 1 */}
+        <MiniKarte
+          karte={letzteKarte1}
+          spielerFarbe={spieler[1]?.farbe ?? '#3b82f6'}
+          spielerName={spieler[1]?.name ?? 'Spieler 2'}
+          seite="rechts"
+          istNeu={neuKarte1}
+        />
       </div>
 
       {/* ── Raritäts-Tabelle ── */}

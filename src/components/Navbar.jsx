@@ -22,11 +22,12 @@ const STATUS_DOT = {
 
 export default function Navbar() {
   const { spieler, aktiverIndex, wechseln } = useSpieler();
-  const { status } = useMultiplayer();
+  const { status, disconnect } = useMultiplayer();
   const aktiver   = spieler[aktiverIndex];
   const naechster = spieler[aktiverIndex === 0 ? 1 : 0];
   const [onlineOffen, setOnlineOffen] = useState(false);
   const dotFarbe = STATUS_DOT[status];
+  const istVerbunden = status === 'connected';
 
   return (
     <>
@@ -67,17 +68,28 @@ export default function Navbar() {
             )}
           </button>
 
+          {/* Offline-Button – nur sichtbar wenn online */}
+          {istVerbunden && (
+            <button
+              className="navbar-offline-btn"
+              title="Verbindung trennen – Offline spielen"
+              onClick={disconnect}
+            >
+              🔌 Offline
+            </button>
+          )}
+
           {/* Spieler-Indikator – im Online-Modus gesperrt */}
           <button
-            className={`navbar-spieler ${status === 'connected' ? 'navbar-spieler--gesperrt' : ''}`}
+            className={`navbar-spieler ${istVerbunden ? 'navbar-spieler--gesperrt' : ''}`}
             style={{ '--sp-farbe': aktiver.farbe }}
-            onClick={status === 'connected' ? undefined : wechseln}
-            title={status === 'connected' ? `Online-Modus: Du spielst als ${aktiver.name}` : `Wechseln zu ${naechster.name}`}
+            onClick={istVerbunden ? undefined : wechseln}
+            title={istVerbunden ? `Online-Modus: Du spielst als ${aktiver.name}` : `Wechseln zu ${naechster.name}`}
           >
             <span className="navbar-spieler-dot" />
             <span className="navbar-spieler-name">{aktiver.name}</span>
-            {status !== 'connected' && <span className="navbar-spieler-wechsel">⇄</span>}
-            {status === 'connected' && <span className="navbar-spieler-wechsel">🔒</span>}
+            {!istVerbunden && <span className="navbar-spieler-wechsel">⇄</span>}
+            {istVerbunden && <span className="navbar-spieler-wechsel">🔒</span>}
           </button>
         </div>
       </nav>
