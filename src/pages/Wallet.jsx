@@ -33,6 +33,10 @@ export default function Wallet() {
   const [einzahlBetrag, setEinzahlBetrag] = useState('');
   const [einzahlBeschreibung, setEinzahlBeschreibung] = useState('');
   const [loescheId, setLoescheId]         = useState(null);
+  const [codeAbfrageOffen, setCodeAbfrageOffen] = useState(false);
+  const [eingegebenerCode, setEingegebenerCode] = useState('');
+  const [codeFehler, setCodeFehler]       = useState(false);
+  const EINZAHL_CODE = '4711'; // geheim – wird dem User nicht angezeigt
 
   // ── gefilterte Transaktionen ──────────────────────────
   const gefiltert = useMemo(() => {
@@ -66,13 +70,43 @@ export default function Wallet() {
     }
   }
 
-  function handleEinzahlung() {
+  function handleEinzahlungBuchen() {
     const betrag = parseFloat(einzahlBetrag.replace(',', '.'));
     if (isNaN(betrag) || betrag === 0) return;
     buchen(betrag, betrag > 0 ? 'einzahlung' : 'sonstiges', einzahlBeschreibung || (betrag > 0 ? 'Manuelle Einzahlung' : 'Manuelle Abbuchung'));
     setEinzahlBetrag('');
     setEinzahlBeschreibung('');
     setEinzahlungOffen(false);
+    setCodeAbfrageOffen(false);
+    setEingegebenerCode('');
+    setCodeFehler(false);
+  }
+
+  function handleEinzahlung() {
+    const betrag = parseFloat(einzahlBetrag.replace(',', '.'));
+    if (isNaN(betrag) || betrag === 0) return;
+    if (betrag > 0) {
+      // Bei Einzahlungen: Code-Abfrage öffnen
+      setEinzahlungOffen(false);
+      setCodeAbfrageOffen(true);
+    } else {
+      // Abbuchungen brauchen keinen Code
+      handleEinzahlungBuchen();
+    }
+  }
+
+  function handleCodeBestaetigen() {
+    if (eingegebenerCode === EINZAHL_CODE) {
+      handleEinzahlungBuchen();
+    } else {
+      setCodeFehler(true);
+    }
+  }
+
+  function handleAdminZahlung() {
+    // Spieler zahlt 5 € Gebühr an den Admin und Einzahlung wird freigeschaltet
+    buchen(-5, 'sonstiges', 'Admin-Gebühr für Einzahlung');
+    handleEinzahlungBuchen();
   }
 
   return (
@@ -203,6 +237,54 @@ export default function Wallet() {
                 onClick={handleEinzahlung}
               >
                 Buchen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Code-Abfrage für Einzahlungen ────────────── */}
+      {codeAbfrageOffen && (
+        <div className="modal-overlay">
+          <div className="modal wallet-modal">
+            <div className="modal-header">
+              <h2>Einzahlung freischalten</h2>
+            </div>
+            <div className="modal-body">
+              <p style={{ color: 'var(--text)', marginBottom: '1rem' }}>
+                Um eine Einzahlung durchzuführen, bitte eine der folgenden Optionen wählen:
+              </p>
+              <div className="modal-fields">
+                <label>
+                  Code eingeben
+                  <input
+                    type="password"
+                    placeholder="Code eingeben…"
+                    value={eingegebenerCode}
+                    onChange={(e) => { setEingegebenerCode(e.target.value); setCodeFehler(false); }}
+                    onKeyDown={(e) => e.key === 'Enter' && handleCodeBestaetigen()}
+                    autoFocus
+                  />
+                  {codeFehler && (
+                    <span style={{ color: '#ef4444', fontSize: '0.85rem' }}>Falscher Code. Bitte erneut versuchen.</span>
+                  )}
+                </label>
+              </div>
+            </div>
+            <div className="modal-footer" style={{ flexDirection: 'column', gap: '0.5rem' }}>
+              <button className="btn-primary" onClick={handleCodeBestaetigen}>
+                Code bestätigen
+              </button>
+              <button className="btn-danger" onClick={handleAdminZahlung}>
+                5 € an Admin zahlen
+              </button>
+              <button className="btn-ghost" onClick={() => {
+                setCodeAbfrageOffen(false);
+                setEingegebenerCode('');
+                setCodeFehler(false);
+                setEinzahlungOffen(true);
+              }}>
+                Zurück
               </button>
             </div>
           </div>
