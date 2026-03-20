@@ -1,32 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMultiplayer } from '../context/MultiplayerContext';
 import { useSpieler }     from '../context/SpielerContext';
 import '../online.css';
 
 export default function OnlineSpielModal({ onClose }) {
   const {
-    status, raumCode, meinSpielerIndex, dranIndex, onlineModus, fehler,
-    openRoom, joinRoom, disconnect,
+    status, raumCode, meinSpielerIndex, dranIndex,
+    onlineModus, gameStarted, fehler,
+    openRoom, joinRoom, startSpiel, disconnect,
   } = useMultiplayer();
 
   const { spieler, umbenennen } = useSpieler();
 
   const [eingabeCode, setEingabeCode] = useState('');
-  // Name für Raum eröffnen (Host)
-  const [hostName, setHostName] = useState(spieler[0]?.name ?? 'Spieler 1');
-  // Name für Raum beitreten (Gast)
-  const [gastName, setGastName] = useState(spieler[1]?.name ?? 'Spieler 2');
+  const [hostName,    setHostName]    = useState(spieler[0]?.name ?? 'Spieler 1');
+  const [gastName,    setGastName]    = useState(spieler[1]?.name ?? 'Spieler 2');
+
+  // Modal automatisch schließen, wenn das Spiel gestartet wird
+  useEffect(() => {
+    if (gameStarted) onClose();
+  }, [gameStarted, onClose]);
 
   function handleOpenRoom() {
-    const name = hostName.trim() || 'Spieler 1';
-    umbenennen(0, name);
+    umbenennen(0, hostName.trim() || 'Spieler 1');
     openRoom();
   }
 
   function handleJoin() {
     if (eingabeCode.trim().length < 4) return;
-    const name = gastName.trim() || 'Spieler 2';
-    umbenennen(1, name);
+    umbenennen(1, gastName.trim() || 'Spieler 2');
     joinRoom(eingabeCode);
   }
 
@@ -38,11 +40,10 @@ export default function OnlineSpielModal({ onClose }) {
     error:      { text: 'Fehler',                   color: '#ef4444' },
   }[status];
 
-  // Namen beider Spieler
-  const meinName    = spieler[meinSpielerIndex]?.name ?? `Spieler ${meinSpielerIndex + 1}`;
-  const gegnerIndex = 1 - meinSpielerIndex;
-  const gegnerName  = spieler[gegnerIndex]?.name ?? `Spieler ${gegnerIndex + 1}`;
-  const dranName    = spieler[dranIndex]?.name ?? `Spieler ${dranIndex + 1}`;
+  const meinName   = spieler[meinSpielerIndex]?.name ?? `Spieler ${meinSpielerIndex + 1}`;
+  const gegnerName = spieler[1 - meinSpielerIndex]?.name ?? `Spieler ${2 - meinSpielerIndex}`;
+  const istHost    = meinSpielerIndex === 0;
+  const istVerbunden = status === 'connected' && !gameStarted;
 
   return (
     <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
@@ -55,10 +56,11 @@ export default function OnlineSpielModal({ onClose }) {
 
         {/* Status-Badge */}
         {statusLabel && (
-          <div className="online-status-badge" style={{ color: statusLabel.color, borderColor: statusLabel.color }}>
+          <div className="online-status-badge"
+               style={{ color: statusLabel.color, borderColor: statusLabel.color }}>
             <span className="online-dot" style={{ background: statusLabel.color }} />
             {statusLabel.text}
-            {onlineModus && (
+            {status === 'connected' && (
               <span className="online-spieler-chip">
                 Du: <strong>{meinName}</strong>
               </span>
@@ -66,39 +68,68 @@ export default function OnlineSpielModal({ onClose }) {
           </div>
         )}
 
-        {fehler && (
-          <div className="online-fehler">⚠ {fehler}</div>
-        )}
+        {fehler && <div className="online-fehler">⚠ {fehler}</div>}
 
         <div className="modal-body">
 
-          {/* ── Verbunden: Status + Zug-Anzeige ── */}
-          {onlineModus && (
+          {/* ── Verbunden aber noch nicht gestartet ── */}
+          {istVerbunden && (
             <div className="online-verbunden">
               {/* Spieler-Übersicht */}
               <div className="online-spieler-zeile">
-                <div className={`online-spieler-card ${meinSpielerIndex === 0 ? 'online-spieler-card--aktiv' : ''}`}
-                     style={{ '--sp-farbe': spieler[0]?.farbe ?? '#22c55e' }}>
-                  <span className="osp-dot" />
-                  <span className="osp-name">{spieler[0]?.name ?? 'Spieler 1'}</span>
-                  {dranIndex === 0 && <span className="osp-dran">dran</span>}
-                </div>
-                <span className="online-vs">VS</span>
-                <div className={`online-spieler-card ${meinSpielerIndex === 1 ? 'online-spieler-card--aktiv' : ''}`}
-                     style={{ '--sp-farbe': spieler[1]?.farbe ?? '#3b82f6' }}>
-                  <span className="osp-dot" />
-                  <span className="osp-name">{spieler[1]?.name ?? 'Spieler 2'}</span>
-                  {dranIndex === 1 && <span className="osp-dran">dran</span>}
-                </div>
+                {[0, 1].map((idx) => (
+                  <div key={idx}
+                       className={`online-spieler-card ${meinSpielerIndex === idx ? 'online-spieler-card--aktiv' : ''}`}
+                       style={{ '--sp-farbe': spieler[idx]?.farbe ?? (idx === 0 ? '#22c55e' : '#3b82f6') }}>
+                    <span className="osp-dot" />
+                    <span className="osp-name">{spieler[idx]?.name ?? `Spieler ${idx + 1}`}</span>
+                    {idx === 0 && <span className="osp-dran">zieht zuerst</span>}
+                  </div>
+                ))}
               </div>
 
-              {/* Zug-Hinweis */}
+              {/* Host: Starten-Button / Gast: Warten */}
+              {istHost ? (
+                <>
+                  <p className="online-hint" style={{ textAlign: 'center' }}>
+                    Beide Spieler sind bereit. Starte das Spiel wenn du möchtest.
+                  </p>
+                  <button className="btn-primary online-start-btn" onClick={startSpiel}>
+                    🚀 Spiel starten
+                  </button>
+                </>
+              ) : (
+                <p className="online-hint online-warten-text">
+                  ⏳ Warte auf <strong>{gegnerName}</strong>, das Spiel zu starten …
+                </p>
+              )}
+
+              <button className="btn-ghost" style={{ marginTop: '0.25rem' }}
+                onClick={() => { disconnect(); onClose(); }}>
+                Verbindung trennen
+              </button>
+            </div>
+          )}
+
+          {/* ── Im laufenden Spiel (modal vom Hook bereits geschlossen, aber als Fallback) ── */}
+          {onlineModus && (
+            <div className="online-verbunden">
+              <div className="online-spieler-zeile">
+                {[0, 1].map((idx) => (
+                  <div key={idx}
+                       className={`online-spieler-card ${meinSpielerIndex === idx ? 'online-spieler-card--aktiv' : ''}`}
+                       style={{ '--sp-farbe': spieler[idx]?.farbe ?? (idx === 0 ? '#22c55e' : '#3b82f6') }}>
+                    <span className="osp-dot" />
+                    <span className="osp-name">{spieler[idx]?.name ?? `Spieler ${idx + 1}`}</span>
+                    {dranIndex === idx && <span className="osp-dran">dran</span>}
+                  </div>
+                ))}
+              </div>
               <p className="online-hint" style={{ textAlign: 'center' }}>
                 {dranIndex === meinSpielerIndex
                   ? '🟢 Du bist dran – öffne ein Pack im Shop!'
                   : `⏳ Warte auf ${gegnerName} …`}
               </p>
-
               <button className="btn-ghost" style={{ marginTop: '0.5rem' }}
                 onClick={() => { disconnect(); onClose(); }}>
                 Verbindung trennen
@@ -114,11 +145,8 @@ export default function OnlineSpielModal({ onClose }) {
                 <p>Du spielst als <strong>Spieler 1</strong> und ziehst zuerst.</p>
                 <label className="online-label">
                   Dein Name
-                  <input
-                    className="online-code-input online-name-input"
-                    type="text"
-                    maxLength={20}
-                    placeholder="Spieler 1"
+                  <input className="online-code-input online-name-input"
+                    type="text" maxLength={20} placeholder="Spieler 1"
                     value={hostName}
                     onChange={(e) => setHostName(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleOpenRoom()}
@@ -137,21 +165,15 @@ export default function OnlineSpielModal({ onClose }) {
                 <p>Du spielst als <strong>Spieler 2</strong>. Gib den Raumcode ein.</p>
                 <label className="online-label">
                   Dein Name
-                  <input
-                    className="online-code-input online-name-input"
-                    type="text"
-                    maxLength={20}
-                    placeholder="Spieler 2"
+                  <input className="online-code-input online-name-input"
+                    type="text" maxLength={20} placeholder="Spieler 2"
                     value={gastName}
                     onChange={(e) => setGastName(e.target.value)}
                   />
                 </label>
                 <div className="online-join-row" style={{ marginTop: '0.5rem' }}>
-                  <input
-                    className="online-code-input"
-                    type="text"
-                    maxLength={6}
-                    placeholder="XXXXXX"
+                  <input className="online-code-input"
+                    type="text" maxLength={6} placeholder="XXXXXX"
                     value={eingabeCode}
                     onChange={(e) => setEingabeCode(e.target.value.toUpperCase())}
                     onKeyDown={(e) => e.key === 'Enter' && handleJoin()}
@@ -166,7 +188,7 @@ export default function OnlineSpielModal({ onClose }) {
             </div>
           )}
 
-          {/* ── Warte auf Gast ── */}
+          {/* ── Warte auf Gast (noch nicht verbunden) ── */}
           {status === 'hosting' && (
             <div className="online-hosting">
               <p className="online-hint">Teile diesen Raumcode mit dem anderen Gerät:</p>

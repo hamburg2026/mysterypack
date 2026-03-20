@@ -16,29 +16,30 @@ import { useSammlung } from './SammlungContext';
 import { useSpieler }  from './SpielerContext';
 
 const MultiplayerContext = createContext(null);
+const STANDARD_NAMEN = ['Spieler 1', 'Spieler 2'];
 
 function genCode() {
   return Math.random().toString(36).slice(2, 8).toUpperCase();
 }
 
 export function MultiplayerProvider({ children }) {
-  const { wallets, setWalletsExtern }         = useWallet();
-  const { sammlungen, setSammlungenExtern }    = useSammlung();
-  const { spieler, umbenennen, setAktiverIndex } = useSpieler();
+  const { wallets, setWalletsExtern }            = useWallet();
+  const { sammlungen, setSammlungenExtern }       = useSammlung();
+  const { spieler, umbenennen, setAktiverIndex }  = useSpieler();
 
-  const [status, setStatus]                     = useState('idle');
+  const [status, setStatus]                       = useState('idle');
   // idle | hosting | connecting | connected | error
-  const [raumCode, setRaumCode]                 = useState('');
-  const [meinSpielerIndex, setMeinSpielerIndex] = useState(0);
-  const [dranIndex, setDranIndex]               = useState(0); // wer gerade ziehen darf
-  const [fehler, setFehler]                     = useState('');
+  const [raumCode, setRaumCode]                   = useState('');
+  const [meinSpielerIndex, setMeinSpielerIndex]   = useState(0);
+  const [dranIndex, setDranIndex]                 = useState(0);
+  const [gameStarted, setGameStarted]             = useState(false);
+  const [fehler, setFehler]                       = useState('');
 
   const peerRef  = useRef(null);
   const connRef  = useRef(null);
-  const indexRef = useRef(0);   // stable ref auf meinSpielerIndex
-  const dranRef  = useRef(0);   // stable ref auf dranIndex
+  const indexRef = useRef(0);
+  const dranRef  = useRef(0);
 
-  // Stets aktuelle Daten in Refs halten (vermeidet stale closures in Callbacks)
   const walletsRef    = useRef(wallets);
   const sammlungenRef = useRef(sammlungen);
   const spielerRef    = useRef(spieler);
@@ -46,6 +47,12 @@ export function MultiplayerProvider({ children }) {
   useEffect(() => { sammlungenRef.current = sammlungen; }, [sammlungen]);
   useEffect(() => { spielerRef.current    = spieler;    }, [spieler]);
   useEffect(() => { dranRef.current       = dranIndex;  }, [dranIndex]);
+
+  // ── Namen auf Standard zurücksetzen ───────────────────────────────────────
+  const namenZuruecksetzen = useCallback(() => {
+    umbenennen(0, STANDARD_NAMEN[0]);
+    umbenennen(1, STANDARD_NAMEN[1]);
+  }, [umbenennen]);
 
   // ── Empfangene Nachrichten verarbeiten ────────────────────────────────────
   const handleData = useCallback((data) => {
@@ -62,6 +69,10 @@ export function MultiplayerProvider({ children }) {
         dranRef.current = data.dranIndex;
         break;
       }
+      case 'game_start': {
+        setGameStarted(true);
+        break;
+      }
     }
   }, [setWalletsExtern, setSammlungenExtern, umbenennen]);
 
@@ -71,7 +82,7 @@ export function MultiplayerProvider({ children }) {
     if (!conn?.open) return;
     const idx = indexRef.current;
     conn.send({
-      type:        'player_data',
+      type:         'player_data',
       spielerIndex: idx,
       wallet:       walletsRef.current[idx],
       sammlung:     sammlungenRef.current[idx] ?? [],
@@ -79,7 +90,13 @@ export function MultiplayerProvider({ children }) {
     });
   }, []);
 
-  // ── Zug beenden: Turn an den anderen Spieler übergeben ───────────────────
+  // ── Spiel starten (nur Host) ──────────────────────────────────────────────
+  const startSpiel = useCallback(() => {
+    connRef.current?.send({ type: 'game_start' });
+    setGameStarted(true);
+  }, []);
+
+  // ── Zug beenden ───────────────────────────────────────────────────────────
   const zugBeenden = useCallback(() => {
     const naechster = 1 - dranRef.current;
     setDranIndex(naechster);
@@ -94,9 +111,8 @@ export function MultiplayerProvider({ children }) {
     conn.on('open', () => {
       setStatus('connected');
       setFehler('');
-      // Aktiven Spieler auf eigenen Index fixieren
+      setGameStarted(false);
       setAktiverIndex(indexRef.current);
-      // Eigene Daten sofort übermitteln (inkl. Name)
       setTimeout(sendOwnData, 300);
     });
 
@@ -107,6 +123,8 @@ export function MultiplayerProvider({ children }) {
       setStatus('idle');
       setRaumCode('');
       setDranIndex(0);
+      setGameStarted(false);
+      namenZuruecksetzen();
     });
 
     conn.on('error', (err) => {
@@ -144,13 +162,13 @@ export function MultiplayerProvider({ children }) {
     dranRef.current  = 0;
     setMeinSpielerIndex(0);
     setDranIndex(0);
+    setGameStarted(false);
     setFehler('');
     setStatus('hosting');
 
     const code = genCode();
     setRaumCode(code);
     const peer = createPeer(code);
-
     peer.on('connection', (conn) => setupConn(conn));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -158,9 +176,10 @@ export function MultiplayerProvider({ children }) {
   const joinRoom = useCallback((code) => {
     disconnect();
     indexRef.current = 1;
-    dranRef.current  = 0; // Host beginnt immer
+    dranRef.current  = 0;
     setMeinSpielerIndex(1);
     setDranIndex(0);
+    setGameStarted(false);
     setFehler('');
     setStatus('connecting');
 
@@ -171,7 +190,7 @@ export function MultiplayerProvider({ children }) {
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ── Verbindung trennen ────────────────────────────────────────────────────
+  // ── Verbindung trennen + Namen zurücksetzen ───────────────────────────────
   const disconnect = useCallback(() => {
     connRef.current?.close();
     peerRef.current?.destroy();
@@ -181,16 +200,18 @@ export function MultiplayerProvider({ children }) {
     setRaumCode('');
     setFehler('');
     setDranIndex(0);
-  }, []);
+    setGameStarted(false);
+    namenZuruecksetzen();
+  }, [namenZuruecksetzen]);
 
-  // ── Auto-Sync: eigene Daten bei Änderung übertragen ──────────────────────
+  // ── Auto-Sync bei eigenen Änderungen ─────────────────────────────────────
   useEffect(() => {
     if (status !== 'connected') return;
     sendOwnData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallets[meinSpielerIndex], sammlungen[meinSpielerIndex], status]);
 
-  const onlineModus = status === 'connected';
+  const onlineModus = status === 'connected' && gameStarted;
   const meineTurn   = dranIndex === meinSpielerIndex;
 
   return (
@@ -199,11 +220,13 @@ export function MultiplayerProvider({ children }) {
       raumCode,
       meinSpielerIndex,
       dranIndex,
+      gameStarted,
       onlineModus,
       meineTurn,
       fehler,
       openRoom,
       joinRoom,
+      startSpiel,
       zugBeenden,
       disconnect,
     }}>
