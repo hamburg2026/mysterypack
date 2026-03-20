@@ -1,15 +1,16 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import { SpielerProvider } from './context/SpielerContext';
-import { WalletProvider }   from './context/WalletContext';
-import { SammlungProvider } from './context/SammlungContext';
-import { LigaProvider }     from './context/LigaContext';
-import Navbar      from './components/Navbar';
-import StatsLeiste from './components/StatsLeiste';
+import { SpielerProvider }     from './context/SpielerContext';
+import { WalletProvider }      from './context/WalletContext';
+import { SammlungProvider }    from './context/SammlungContext';
+import { LigaProvider }        from './context/LigaContext';
+import { MultiplayerProvider } from './context/MultiplayerContext';
+import Navbar         from './components/Navbar';
+import StatsLeiste    from './components/StatsLeiste';
 import TrikotDatenbank from './pages/TrikotDatenbank';
-import Quiz from './pages/Quiz';
-import Shop from './pages/Shop';
-import MeineSammlung from './pages/MeineSammlung';
-import Wallet from './pages/Wallet';
+import Quiz           from './pages/Quiz';
+import Shop           from './pages/Shop';
+import MeineSammlung  from './pages/MeineSammlung';
+import Wallet         from './pages/Wallet';
 import './App.css';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
     <WalletProvider>
     <SammlungProvider>
     <HashRouter>
+    <MultiplayerProvider>
       <div className="app">
         <Navbar />
         <StatsLeiste />
@@ -32,6 +34,7 @@ export default function App() {
           </Routes>
         </main>
       </div>
+    </MultiplayerProvider>
     </HashRouter>
     </SammlungProvider>
     </WalletProvider>

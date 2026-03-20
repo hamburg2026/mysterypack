@@ -1,0 +1,152 @@
+/* ── Online-Spiel Modal ──────────────────────────────────────────────────── */
+
+.online-modal {
+  width: min(480px, 95vw);
+}
+
+.online-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.75rem 1.5rem 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.online-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.online-spieler-chip {
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.6rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.online-fehler {
+  margin: 0.5rem 1.5rem 0;
+  padding: 0.5rem 0.75rem;
+  background: #ef444422;
+  border: 1px solid #ef4444;
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 0.85rem;
+}
+
+.online-optionen {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.online-option {
+  padding: 1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+}
+
+.online-option h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  color: var(--text, #fff);
+}
+
+.online-option p {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text-muted, #aaa);
+}
+
+.online-divider {
+  text-align: center;
+  color: var(--text-muted, #aaa);
+  font-size: 0.85rem;
+  position: relative;
+}
+
+.online-divider::before,
+.online-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+}
+
+.online-divider::before { left: 0; }
+.online-divider::after  { right: 0; }
+
+.online-join-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.online-code-input {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 8px;
+  color: var(--text, #fff);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.online-code-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.online-hosting {
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.online-raumcode {
+  display: inline-block;
+  margin: 0.5rem auto;
+  padding: 0.6rem 2rem;
+  background: rgba(59,130,246,0.15);
+  border: 2px solid #3b82f6;
+  border-radius: 12px;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: #3b82f6;
+  cursor: default;
+  user-select: all;
+}
+
+.online-hint {
+  color: var(--text-muted, #aaa);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.online-verbunden {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}

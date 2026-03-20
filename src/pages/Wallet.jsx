@@ -36,6 +36,7 @@ export default function Wallet() {
   const [codeAbfrageOffen, setCodeAbfrageOffen] = useState(false);
   const [eingegebenerCode, setEingegebenerCode] = useState('');
   const [codeFehler, setCodeFehler]       = useState(false);
+  const [adminHinweis, setAdminHinweis]   = useState(false);
   const EINZAHL_CODE = '4711'; // geheim – wird dem User nicht angezeigt
 
   // ── gefilterte Transaktionen ──────────────────────────
@@ -104,9 +105,8 @@ export default function Wallet() {
   }
 
   function handleAdminZahlung() {
-    // Spieler zahlt 5 € Gebühr an den Admin und Einzahlung wird freigeschaltet
-    buchen(-5, 'sonstiges', 'Admin-Gebühr für Einzahlung');
-    handleEinzahlungBuchen();
+    // Zeigt nur einen Hinweis – Einzahlung erfordert den Code
+    setAdminHinweis(true);
   }
 
   return (
@@ -278,10 +278,16 @@ export default function Wallet() {
               <button className="btn-danger" onClick={handleAdminZahlung}>
                 5 € an Admin zahlen
               </button>
+              {adminHinweis && (
+                <p style={{ color: '#f59e0b', fontSize: '0.85rem', textAlign: 'center', margin: '0' }}>
+                  Bitte zahle 5 € an den Admin – du erhältst danach den Code für die Einzahlung.
+                </p>
+              )}
               <button className="btn-ghost" onClick={() => {
                 setCodeAbfrageOffen(false);
                 setEingegebenerCode('');
                 setCodeFehler(false);
+                setAdminHinweis(false);
                 setEinzahlungOffen(true);
               }}>
                 Zurück
