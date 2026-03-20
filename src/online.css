@@ -1,7 +1,7 @@
 /* ── Online-Spiel Modal ──────────────────────────────────────────────────── */
 
 .online-modal {
-  width: min(520px, 95vw);
+  width: min(480px, 95vw);
 }
 
 .online-status-badge {

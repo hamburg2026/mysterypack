@@ -75,85 +75,116 @@
   padding: 16px 24px;
 }
 
-/* ── Mini-Karten am Rand ──────────────────────────────── */
-.mini-karte-platz {
-  width: 80px;
-  flex-shrink: 0;
-}
-
-.mini-karte {
-  width: 80px;
+/* ── Mini-Karten-Spalten am Rand ──────────────────────── */
+.mini-spalte {
+  width: 110px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 10px 4px;
-  border-right: 1px solid color-mix(in srgb, var(--sp-farbe, #22c55e) 20%, transparent);
-  border-radius: 0;
-  background: color-mix(in srgb, var(--sp-farbe, #22c55e) 5%, transparent);
-  animation: mini-karte-ein 0.4s ease;
-  position: relative;
   align-self: stretch;
-  justify-content: center;
+  background: color-mix(in srgb, var(--sp-farbe, #22c55e) 5%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--sp-farbe, #22c55e) 20%, transparent);
 }
 
-.mini-karte--rechts {
+.mini-spalte--rechts {
   border-right: none;
   border-left: 1px solid color-mix(in srgb, var(--sp-farbe, #3b82f6) 20%, transparent);
 }
 
-.mini-karte--neu {
-  animation: mini-karte-neu 0.5s ease;
+.mini-spalte-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 8px 6px;
+  border-bottom: 1px solid color-mix(in srgb, var(--sp-farbe, #22c55e) 15%, transparent);
 }
 
-@keyframes mini-karte-ein {
-  from { opacity: 0; transform: scale(0.85); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-@keyframes mini-karte-neu {
-  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--r-farbe, #22c55e) 60%, transparent); }
-  50%  { box-shadow: 0 0 0 8px color-mix(in srgb, var(--r-farbe, #22c55e) 20%, transparent); }
-  100% { box-shadow: 0 0 0 0 transparent; }
-}
-
-.mini-karte-spieler-dot {
+.mini-spalte-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
-.mini-karte-sp-name {
-  font-size: 9px;
+.mini-spalte-name {
+  font-size: 10px;
   font-weight: 700;
   color: var(--sp-farbe, #22c55e);
-  text-align: center;
-  max-width: 72px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.mini-karte-trikot {
-  margin: 2px 0;
+.mini-spalte-liste {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 4px;
+  flex: 1;
+  overflow: hidden;
 }
 
-.mini-karte-raritaet {
-  font-size: 10px;
+.mini-spalte-leer {
+  font-size: 11px;
+  color: var(--text-muted, #666);
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* Einzelner Karten-Eintrag in der Spalte */
+.mini-eintrag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--r-farbe, #6b7280) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--r-farbe, #6b7280) 20%, transparent);
+  min-height: 0;
+}
+
+.mini-eintrag--neu {
+  animation: mini-neu-blink 0.6s ease;
+}
+
+@keyframes mini-neu-blink {
+  0%   { box-shadow: 0 0 0 0   color-mix(in srgb, var(--r-farbe) 70%, transparent); }
+  40%  { box-shadow: 0 0 6px 3px color-mix(in srgb, var(--r-farbe) 40%, transparent); }
+  100% { box-shadow: 0 0 0 0   transparent; }
+}
+
+.mini-eintrag-trikot {
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.mini-eintrag-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+
+.mini-eintrag-sp-name {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-h, #fff);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mini-eintrag-wert {
+  font-size: 9px;
+  font-weight: 600;
   line-height: 1;
 }
 
-.mini-karte-name {
-  font-size: 9px;
-  color: var(--text);
-  text-align: center;
-  max-width: 72px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  opacity: 0.8;
+.mini-eintrag-sterne {
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: -0.5px;
 }
 
 /* ── Pack-Bereich ─────────────────────────────────────── */
