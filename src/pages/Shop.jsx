@@ -165,22 +165,41 @@ function TrikotKarte({ ergebnis, phase }) {
   );
 }
 
-// ── Mini-Karte am Rand ────────────────────────────────────────────────────────
-function MiniKarte({ karte, spielerFarbe, spielerName, seite, istNeu }) {
-  if (!karte) return <div className="mini-karte-platz" />;
-  const farbe = RARITAET_FARBE[karte.raritaetStufe] || '#6b7280';
+// ── Mini-Karten-Spalte am Rand (letzte 5) ────────────────────────────────────
+function MiniKartenSpalte({ karten, spielerFarbe, spielerName, seite, neueAnzahl }) {
+  const istNeu = (idx) => idx < neueAnzahl;
   return (
-    <div className={`mini-karte mini-karte--${seite} ${istNeu ? 'mini-karte--neu' : ''}`}
-         style={{ '--sp-farbe': spielerFarbe, '--r-farbe': farbe }}>
-      <div className="mini-karte-spieler-dot" style={{ background: spielerFarbe }} />
-      <span className="mini-karte-sp-name">{spielerName}</span>
-      <div className="mini-karte-trikot">
-        <TrikotSVG {...karte.trikot} nummer={karte.spieler.nummer} mini />
+    <div className={`mini-spalte mini-spalte--${seite}`} style={{ '--sp-farbe': spielerFarbe }}>
+      <div className="mini-spalte-header">
+        <span className="mini-spalte-dot" style={{ background: spielerFarbe }} />
+        <span className="mini-spalte-name">{spielerName}</span>
       </div>
-      <span className="mini-karte-raritaet" style={{ color: farbe }}>
-        {'★'.repeat(karte.raritaetStufe)}
-      </span>
-      <span className="mini-karte-name">{karte.spieler.name.split(' ').pop()}</span>
+      <div className="mini-spalte-liste">
+        {karten.length === 0 && (
+          <span className="mini-spalte-leer">–</span>
+        )}
+        {karten.map((k, idx) => {
+          const farbe = RARITAET_FARBE[k.raritaetStufe] || '#6b7280';
+          return (
+            <div key={k.id ?? idx}
+                 className={`mini-eintrag ${istNeu(idx) ? 'mini-eintrag--neu' : ''}`}
+                 style={{ '--r-farbe': farbe }}>
+              <div className="mini-eintrag-trikot">
+                <TrikotSVG {...k.trikot} nummer={k.spieler.nummer} mini />
+              </div>
+              <div className="mini-eintrag-info">
+                <span className="mini-eintrag-sp-name">{k.spieler.name.split(' ').pop()}</span>
+                <span className="mini-eintrag-wert" style={{ color: farbe }}>
+                  {k.spieler.marktwert} Mio.
+                </span>
+                <span className="mini-eintrag-sterne" style={{ color: farbe }}>
+                  {'★'.repeat(k.raritaetStufe)}
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -219,25 +238,25 @@ export default function Shop() {
   const [gekaufteItems, setGekaufteItems] = useState(0);
   const timerRef               = useRef([]);
 
-  // Letzte Karte jedes Spielers für Mini-Anzeige (links = Spieler 0, rechts = Spieler 1)
-  const letzteKarte0 = sammlungen[0]?.[0] ?? null;
-  const letzteKarte1 = sammlungen[1]?.[0] ?? null;
-  const [vorherigeLaenge0, setVorherigeLaenge0] = useState(() => sammlungen[0]?.length ?? 0);
-  const [vorherigeLaenge1, setVorherigeLaenge1] = useState(() => sammlungen[1]?.length ?? 0);
-  const neuKarte0 = (sammlungen[0]?.length ?? 0) > vorherigeLaenge0;
-  const neuKarte1 = (sammlungen[1]?.length ?? 0) > vorherigeLaenge1;
+  // Letzte 5 Karten je Spieler für die Seitenleisten
+  const karten0 = (sammlungen[0] ?? []).slice(0, 5);
+  const karten1 = (sammlungen[1] ?? []).slice(0, 5);
+  const [vorherigeAnzahl0, setVorherigeAnzahl0] = useState(() => sammlungen[0]?.length ?? 0);
+  const [vorherigeAnzahl1, setVorherigeAnzahl1] = useState(() => sammlungen[1]?.length ?? 0);
+  const neueAnzahl0 = Math.max(0, (sammlungen[0]?.length ?? 0) - vorherigeAnzahl0);
+  const neueAnzahl1 = Math.max(0, (sammlungen[1]?.length ?? 0) - vorherigeAnzahl1);
   useEffect(() => {
-    if (neuKarte0) {
-      const t = setTimeout(() => setVorherigeLaenge0(sammlungen[0]?.length ?? 0), 3000);
+    if (neueAnzahl0 > 0) {
+      const t = setTimeout(() => setVorherigeAnzahl0(sammlungen[0]?.length ?? 0), 3000);
       return () => clearTimeout(t);
     }
-  }, [neuKarte0, sammlungen]);
+  }, [neueAnzahl0, sammlungen]);
   useEffect(() => {
-    if (neuKarte1) {
-      const t = setTimeout(() => setVorherigeLaenge1(sammlungen[1]?.length ?? 0), 3000);
+    if (neueAnzahl1 > 0) {
+      const t = setTimeout(() => setVorherigeAnzahl1(sammlungen[1]?.length ?? 0), 3000);
       return () => clearTimeout(t);
     }
-  }, [neuKarte1, sammlungen]);
+  }, [neueAnzahl1, sammlungen]);
 
   // Refs damit der Cleanup-Effekt immer die aktuellen Werte sieht
   const phaseRef      = useRef(phase);
@@ -340,13 +359,13 @@ export default function Shop() {
       {/* ── Haupt-Arena ── */}
       <div className="shop-arena">
 
-        {/* Mini-Karte links: Spieler 0 */}
-        <MiniKarte
-          karte={letzteKarte0}
+        {/* Mini-Karten links: Spieler 0 (letzte 5) */}
+        <MiniKartenSpalte
+          karten={karten0}
           spielerFarbe={spieler[0]?.farbe ?? '#22c55e'}
           spielerName={spieler[0]?.name ?? 'Spieler 1'}
           seite="links"
-          istNeu={neuKarte0}
+          neueAnzahl={neueAnzahl0}
         />
 
         {/* Mitte: Pack oder Karten-Enthüllung */}
@@ -475,13 +494,13 @@ export default function Shop() {
 
         </div>{/* Ende shop-arena-mitte */}
 
-        {/* Mini-Karte rechts: Spieler 1 */}
-        <MiniKarte
-          karte={letzteKarte1}
+        {/* Mini-Karten rechts: Spieler 1 (letzte 5) */}
+        <MiniKartenSpalte
+          karten={karten1}
           spielerFarbe={spieler[1]?.farbe ?? '#3b82f6'}
           spielerName={spieler[1]?.name ?? 'Spieler 2'}
           seite="rechts"
-          istNeu={neuKarte1}
+          neueAnzahl={neueAnzahl1}
         />
       </div>
 

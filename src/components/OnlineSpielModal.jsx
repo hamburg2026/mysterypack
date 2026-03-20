@@ -137,50 +137,24 @@ export default function OnlineSpielModal({ onClose }) {
             </div>
           )}
 
-          {/* ── Offline: Namen setzen ── */}
-          {(status === 'idle' || status === 'error') && (
-            <div className="online-offline-namen">
-              <h3 style={{ marginBottom: '0.5rem' }}>🎮 Offline-Modus – Namen</h3>
-              <div className="online-namen-zeile">
-                <label className="online-label" style={{ flex: 1 }}>
-                  <span style={{ color: '#22c55e' }}>Spieler 1</span>
-                  <input className="online-code-input online-name-input"
-                    type="text" maxLength={20} placeholder="Spieler 1"
-                    value={hostName}
-                    onChange={(e) => {
-                      setHostName(e.target.value);
-                      umbenennen(0, e.target.value || 'Spieler 1');
-                    }}
-                  />
-                </label>
-                <label className="online-label" style={{ flex: 1 }}>
-                  <span style={{ color: '#3b82f6' }}>Spieler 2</span>
-                  <input className="online-code-input online-name-input"
-                    type="text" maxLength={20} placeholder="Spieler 2"
-                    value={gastName}
-                    onChange={(e) => {
-                      setGastName(e.target.value);
-                      umbenennen(1, e.target.value || 'Spieler 2');
-                    }}
-                  />
-                </label>
-              </div>
-              <button className="btn-ghost" style={{ marginTop: '0.25rem', alignSelf: 'flex-end' }}
-                onClick={onClose}>
-                ✓ Übernehmen & schließen
-              </button>
-            </div>
-          )}
-
           {/* ── Raum eröffnen / beitreten ── */}
           {(status === 'idle' || status === 'error') && (
             <div className="online-optionen">
               <div className="online-option">
                 <h3>Raum eröffnen</h3>
-                <p>Du spielst als <strong>{hostName || 'Spieler 1'}</strong> und ziehst zuerst.</p>
+                <p>Du spielst als <strong>Spieler 1</strong> und ziehst zuerst.</p>
+                <label className="online-label">
+                  Dein Name
+                  <input className="online-code-input online-name-input"
+                    type="text" maxLength={20} placeholder="Spieler 1"
+                    value={hostName}
+                    onChange={(e) => setHostName(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleOpenRoom()}
+                  />
+                </label>
                 <button className="btn-primary" style={{ marginTop: '0.5rem' }}
                   onClick={handleOpenRoom}>
-                  🌐 Raum eröffnen
+                  🎮 Raum eröffnen
                 </button>
               </div>
 
@@ -188,7 +162,15 @@ export default function OnlineSpielModal({ onClose }) {
 
               <div className="online-option">
                 <h3>Raum beitreten</h3>
-                <p>Du spielst als <strong>{gastName || 'Spieler 2'}</strong>. Gib den Raumcode ein.</p>
+                <p>Du spielst als <strong>Spieler 2</strong>. Gib den Raumcode ein.</p>
+                <label className="online-label">
+                  Dein Name
+                  <input className="online-code-input online-name-input"
+                    type="text" maxLength={20} placeholder="Spieler 2"
+                    value={gastName}
+                    onChange={(e) => setGastName(e.target.value)}
+                  />
+                </label>
                 <div className="online-join-row" style={{ marginTop: '0.5rem' }}>
                   <input className="online-code-input"
                     type="text" maxLength={6} placeholder="XXXXXX"
