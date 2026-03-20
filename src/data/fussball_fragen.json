@@ -8,175 +8,480 @@
           "id": "cl_1_1",
           "schwierigkeit": 1,
           "frage": "Welcher Verein hat die Champions League am häufigsten gewonnen?",
-          "antworten": ["Real Madrid", "FC Bayern München", "FC Barcelona", "AC Milan"],
+          "antworten": [
+            "Real Madrid",
+            "FC Bayern München",
+            "FC Barcelona",
+            "AC Milan"
+          ],
           "richtig": 0
         },
         {
           "id": "cl_1_2",
           "schwierigkeit": 1,
           "frage": "In welcher Stadt findet das Champions League Finale 2024 statt?",
-          "antworten": ["London", "Paris", "Wembley", "Madrid"],
+          "antworten": [
+            "London",
+            "Paris",
+            "Wembley",
+            "Madrid"
+          ],
           "richtig": 2
         },
         {
           "id": "cl_1_3",
           "schwierigkeit": 1,
           "frage": "Wie viele Mannschaften nehmen an der Champions League Gruppenphase teil?",
-          "antworten": ["24", "32", "16", "20"],
+          "antworten": [
+            "24",
+            "32",
+            "16",
+            "20"
+          ],
           "richtig": 1
         },
         {
           "id": "cl_1_4",
           "schwierigkeit": 1,
           "frage": "Welche Farbe hat die Champions League Trophäe?",
-          "antworten": ["Silber", "Gold", "Bronze", "Schwarz"],
+          "antworten": [
+            "Silber",
+            "Gold",
+            "Bronze",
+            "Schwarz"
+          ],
           "richtig": 1
         },
         {
           "id": "cl_1_5",
           "schwierigkeit": 1,
           "frage": "Wer ist der Rekordtorschütze der Champions League?",
-          "antworten": ["Lionel Messi", "Karim Benzema", "Cristiano Ronaldo", "Robert Lewandowski"],
+          "antworten": [
+            "Lionel Messi",
+            "Karim Benzema",
+            "Cristiano Ronaldo",
+            "Robert Lewandowski"
+          ],
           "richtig": 2
         },
         {
           "id": "cl_2_1",
           "schwierigkeit": 2,
           "frage": "Welcher Verein gewann die Champions League Saison 2022/23?",
-          "antworten": ["FC Barcelona", "Manchester City", "Real Madrid", "Inter Mailand"],
+          "antworten": [
+            "FC Barcelona",
+            "Manchester City",
+            "Real Madrid",
+            "Inter Mailand"
+          ],
           "richtig": 1
         },
         {
           "id": "cl_2_2",
           "schwierigkeit": 2,
           "frage": "In welchem Jahr wurde die Champions League in ihrer heutigen Form eingeführt?",
-          "antworten": ["1985", "1992", "1995", "2000"],
+          "antworten": [
+            "1985",
+            "1992",
+            "1995",
+            "2000"
+          ],
           "richtig": 1
         },
         {
           "id": "cl_2_3",
           "schwierigkeit": 2,
           "frage": "Welcher Trainer gewann die Champions League mit zwei verschiedenen Vereinen?",
-          "antworten": ["José Mourinho", "Pep Guardiola", "Carlo Ancelotti", "Zinédine Zidane"],
+          "antworten": [
+            "José Mourinho",
+            "Pep Guardiola",
+            "Carlo Ancelotti",
+            "Zinédine Zidane"
+          ],
           "richtig": 2
         },
         {
           "id": "cl_2_4",
           "schwierigkeit": 2,
           "frage": "Wie heißt die Hymne der Champions League?",
-          "antworten": ["Champions Anthem", "UEFA Hymne", "Die Königsklasse", "Glory Glory"],
+          "antworten": [
+            "Champions Anthem",
+            "UEFA Hymne",
+            "Die Königsklasse",
+            "Glory Glory"
+          ],
           "richtig": 0
         },
         {
           "id": "cl_2_5",
           "schwierigkeit": 2,
           "frage": "Welcher Spieler erzielte das schnellste Tor in der Champions League Geschichte?",
-          "antworten": ["Clarence Seedorf", "Roy Makaay", "Filippo Inzaghi", "Alessandro Del Piero"],
+          "antworten": [
+            "Clarence Seedorf",
+            "Roy Makaay",
+            "Filippo Inzaghi",
+            "Alessandro Del Piero"
+          ],
           "richtig": 1
         },
         {
           "id": "cl_3_1",
           "schwierigkeit": 3,
           "frage": "Welcher Verein verlor 2012 das Champions League Finale im eigenen Stadion?",
-          "antworten": ["FC Bayern München", "Borussia Dortmund", "Juventus Turin", "FC Chelsea"],
+          "antworten": [
+            "FC Bayern München",
+            "Borussia Dortmund",
+            "Juventus Turin",
+            "FC Chelsea"
+          ],
           "richtig": 0
         },
         {
           "id": "cl_3_2",
           "schwierigkeit": 3,
           "frage": "Wer schoss das berühmte 'Miracle of Istanbul' Ausgleichstor für Liverpool 2005?",
-          "antworten": ["Steven Gerrard", "Vladimir Smicer", "Xabi Alonso", "Djibril Cissé"],
+          "antworten": [
+            "Steven Gerrard",
+            "Vladimir Smicer",
+            "Xabi Alonso",
+            "Djibril Cissé"
+          ],
           "richtig": 0
         },
         {
           "id": "cl_3_3",
           "schwierigkeit": 3,
           "frage": "Welcher Verein schied als erstes Team nach der Gruppenphase mit 0 Punkten aus?",
-          "antworten": ["Anderlecht", "Rotor Volgograd", "Spartak Moskau", "FC Levski Sofia"],
+          "antworten": [
+            "Anderlecht",
+            "Rotor Volgograd",
+            "Spartak Moskau",
+            "FC Levski Sofia"
+          ],
           "richtig": 1
         },
         {
           "id": "cl_3_4",
           "schwierigkeit": 3,
           "frage": "Wie viele Tore erzielte Cristiano Ronaldo in der CL-Saison 2013/14?",
-          "antworten": ["15", "17", "13", "16"],
+          "antworten": [
+            "15",
+            "17",
+            "13",
+            "16"
+          ],
           "richtig": 1
         },
         {
           "id": "cl_3_5",
           "schwierigkeit": 3,
           "frage": "Welches Team gewann als erstes die Champions League ohne ein einziges Gegentor?",
-          "antworten": ["AC Milan", "Real Madrid", "FC Bayern München", "Juventus Turin"],
+          "antworten": [
+            "AC Milan",
+            "Real Madrid",
+            "FC Bayern München",
+            "Juventus Turin"
+          ],
           "richtig": 0
         },
         {
           "id": "cl_4_1",
           "schwierigkeit": 4,
           "frage": "In welchem Jahr gewann Borussia Dortmund zum letzten Mal die Champions League?",
-          "antworten": ["1995", "1996", "1997", "1998"],
+          "antworten": [
+            "1995",
+            "1996",
+            "1997",
+            "1998"
+          ],
           "richtig": 2
         },
         {
           "id": "cl_4_2",
           "schwierigkeit": 4,
           "frage": "Welcher Torwart hält den Rekord für die meisten Champions League Spiele ohne Gegentor?",
-          "antworten": ["Iker Casillas", "Gianluigi Buffon", "Manuel Neuer", "Edwin van der Sar"],
+          "antworten": [
+            "Iker Casillas",
+            "Gianluigi Buffon",
+            "Manuel Neuer",
+            "Edwin van der Sar"
+          ],
           "richtig": 3
         },
         {
           "id": "cl_4_3",
           "schwierigkeit": 4,
           "frage": "Wer war der erste Spieler der in einem CL-Finale einen Hattrick erzielte?",
-          "antworten": ["Filippo Inzaghi", "Gareth Bale", "Cristiano Ronaldo", "Karl-Heinz Rummenigge"],
+          "antworten": [
+            "Filippo Inzaghi",
+            "Gareth Bale",
+            "Cristiano Ronaldo",
+            "Karl-Heinz Rummenigge"
+          ],
           "richtig": 0
         },
         {
           "id": "cl_4_4",
           "schwierigkeit": 4,
           "frage": "Welcher Verein schied 1999 im Halbfinale gegen Manchester United aus?",
-          "antworten": ["Juventus Turin", "Inter Mailand", "FC Bayern München", "Real Madrid"],
+          "antworten": [
+            "Juventus Turin",
+            "Inter Mailand",
+            "FC Bayern München",
+            "Real Madrid"
+          ],
           "richtig": 0
         },
         {
           "id": "cl_4_5",
           "schwierigkeit": 4,
           "frage": "Wie viele Vereine haben die Champions League in drei aufeinanderfolgenden Jahren gewonnen?",
-          "antworten": ["Keiner", "Einer", "Zwei", "Drei"],
+          "antworten": [
+            "Keiner",
+            "Einer",
+            "Zwei",
+            "Drei"
+          ],
           "richtig": 1
         },
         {
           "id": "cl_5_1",
           "schwierigkeit": 5,
           "frage": "Welcher Schiedsrichter leitete das Champions League Finale 1999?",
-          "antworten": ["Pierluigi Collina", "Markus Merk", "Anders Frisk", "Hugh Dallas"],
+          "antworten": [
+            "Pierluigi Collina",
+            "Markus Merk",
+            "Anders Frisk",
+            "Hugh Dallas"
+          ],
           "richtig": 0
         },
         {
           "id": "cl_5_2",
           "schwierigkeit": 5,
           "frage": "In welcher Minute erzielte Sergio Ramos sein berühmtes Ausgleichstor im Finale 2014?",
-          "antworten": ["88.", "90.", "92.", "93."],
+          "antworten": [
+            "88.",
+            "90.",
+            "92.",
+            "93."
+          ],
           "richtig": 2
         },
         {
           "id": "cl_5_3",
           "schwierigkeit": 5,
           "frage": "Welcher Spieler gewann die Champions League mit drei verschiedenen Vereinen?",
-          "antworten": ["Clarence Seedorf", "Samuel Eto'o", "Carlo Ancelotti", "Zlatan Ibrahimović"],
+          "antworten": [
+            "Clarence Seedorf",
+            "Samuel Eto'o",
+            "Carlo Ancelotti",
+            "Zlatan Ibrahimović"
+          ],
           "richtig": 0
         },
         {
           "id": "cl_5_4",
           "schwierigkeit": 5,
           "frage": "Wie hieß der Vorgängerwettbewerb der Champions League?",
-          "antworten": ["UEFA Super Cup", "Europapokal der Landesmeister", "Intercontinental Cup", "UEFA Cup"],
+          "antworten": [
+            "UEFA Super Cup",
+            "Europapokal der Landesmeister",
+            "Intercontinental Cup",
+            "UEFA Cup"
+          ],
           "richtig": 1
         },
         {
           "id": "cl_5_5",
           "schwierigkeit": 5,
           "frage": "Welches war das erste osteuropäische Team das ein Champions League Finale erreichte?",
-          "antworten": ["Dynamo Kiew", "Steaua Bukarest", "Roter Stern Belgrad", "Spartak Moskau"],
+          "antworten": [
+            "Dynamo Kiew",
+            "Steaua Bukarest",
+            "Roter Stern Belgrad",
+            "Spartak Moskau"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "cl_1_6",
+          "schwierigkeit": 1,
+          "frage": "Welches Land hat die meisten Champions-League-Sieger hervorgebracht?",
+          "antworten": [
+            "Spanien",
+            "England",
+            "Deutschland",
+            "Italien"
+          ],
+          "richtig": 0
+        },
+        {
+          "id": "cl_1_7",
+          "schwierigkeit": 1,
+          "frage": "Welcher Verein gewann die Champions League dreimal in Folge (2016–2018)?",
+          "antworten": [
+            "FC Bayern München",
+            "FC Barcelona",
+            "Juventus Turin",
+            "Real Madrid"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "cl_1_8",
+          "schwierigkeit": 1,
+          "frage": "Wie heißt der Preis für den besten Spieler eines Champions-League-Endspiels?",
+          "antworten": [
+            "Man of the Match",
+            "Golden Boot",
+            "UEFA Best Player",
+            "Ballon d'Or"
+          ],
+          "richtig": 0
+        },
+        {
+          "id": "cl_2_6",
+          "schwierigkeit": 2,
+          "frage": "Wer war der Torschützenkönig der Champions League Saison 2021/22?",
+          "antworten": [
+            "Robert Lewandowski",
+            "Erling Haaland",
+            "Karim Benzema",
+            "Kylian Mbappé"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "cl_2_7",
+          "schwierigkeit": 2,
+          "frage": "Welche Mannschaft verlor das Champions-League-Finale 2023 gegen Manchester City?",
+          "antworten": [
+            "AC Milan",
+            "Juventus Turin",
+            "Inter Mailand",
+            "Atletico Madrid"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "cl_2_8",
+          "schwierigkeit": 2,
+          "frage": "Wer ist der Topscorer des FC Bayern München in der Champions League?",
+          "antworten": [
+            "Thomas Müller",
+            "Gerd Müller",
+            "Robert Lewandowski",
+            "Karl-Heinz Rummenigge"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "cl_3_6",
+          "schwierigkeit": 3,
+          "frage": "Welches Team schied 2019 im Halbfinale nach einer 3:0-Hinspiel-Führung gegen Liverpool aus?",
+          "antworten": [
+            "AS Roma",
+            "FC Porto",
+            "FC Barcelona",
+            "Borussia Dortmund"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "cl_3_7",
+          "schwierigkeit": 3,
+          "frage": "In welchem Jahr erzielte Bayern München einen Rekord von 101 Toren in einer Champions-League-Saison?",
+          "antworten": [
+            "2019/20",
+            "2013/14",
+            "2014/15",
+            "2015/16"
+          ],
+          "richtig": 0
+        },
+        {
+          "id": "cl_3_8",
+          "schwierigkeit": 3,
+          "frage": "Welcher Torwart gewann 2005 trotz finaler Niederlage den Preis des besten Torhüters (Dida)?",
+          "antworten": [
+            "Petr Čech",
+            "Oliver Kahn",
+            "Jerzy Dudek",
+            "Dida"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "cl_4_6",
+          "schwierigkeit": 4,
+          "frage": "In welchem Stadion fand das Champions-League-Finale 2021 statt?",
+          "antworten": [
+            "Wembley",
+            "Estádio do Dragão",
+            "Estádio da Luz",
+            "Estadio Alfredo Di Stéfano"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "cl_4_7",
+          "schwierigkeit": 4,
+          "frage": "Welcher Verein war der erste, der ein Champions-League-Finale im eigenen Stadion verlor?",
+          "antworten": [
+            "Juventus Turin",
+            "FC Bayern München",
+            "FC Barcelona",
+            "Inter Mailand"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "cl_4_8",
+          "schwierigkeit": 4,
+          "frage": "Wie viele verschiedene Länder haben bisher einen Champions-League-Sieger gestellt?",
+          "antworten": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "cl_5_6",
+          "schwierigkeit": 5,
+          "frage": "In welchem Jahr gewann Nottingham Forest den Europapokal der Landesmeister?",
+          "antworten": [
+            "1979 und 1980",
+            "1977 und 1978",
+            "1980 und 1981",
+            "1978 und 1979"
+          ],
+          "richtig": 0
+        },
+        {
+          "id": "cl_5_7",
+          "schwierigkeit": 5,
+          "frage": "Welcher Torwart hält den Rekord für die meisten Champions-League-Spiele ohne Gegentor?",
+          "antworten": [
+            "Edwin van der Sar",
+            "Gianluigi Buffon",
+            "Manuel Neuer",
+            "Iker Casillas"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "cl_5_8",
+          "schwierigkeit": 5,
+          "frage": "Welches war das erste Champions-League-Finale der Geschichte (1992/93) und wer gewann?",
+          "antworten": [
+            "Real Madrid",
+            "Olympique Marseille",
+            "AC Milan",
+            "Juventus Turin"
+          ],
           "richtig": 1
         }
       ]
@@ -189,176 +494,481 @@
           "id": "bl_1_1",
           "schwierigkeit": 1,
           "frage": "Welcher Verein hat die meisten Bundesliga-Meisterschaften gewonnen?",
-          "antworten": ["Borussia Dortmund", "FC Bayern München", "Borussia Mönchengladbach", "Werder Bremen"],
+          "antworten": [
+            "Borussia Dortmund",
+            "FC Bayern München",
+            "Borussia Mönchengladbach",
+            "Werder Bremen"
+          ],
           "richtig": 1
         },
         {
           "id": "bl_1_2",
           "schwierigkeit": 1,
           "frage": "Wer ist der Rekordtorschütze der Bundesliga?",
-          "antworten": ["Robert Lewandowski", "Gerd Müller", "Klaus Fischer", "Jupp Heynckes"],
+          "antworten": [
+            "Robert Lewandowski",
+            "Gerd Müller",
+            "Klaus Fischer",
+            "Jupp Heynckes"
+          ],
           "richtig": 1
         },
         {
           "id": "bl_1_3",
           "schwierigkeit": 1,
           "frage": "In welchem Jahr wurde die Bundesliga gegründet?",
-          "antworten": ["1955", "1963", "1970", "1958"],
+          "antworten": [
+            "1955",
+            "1963",
+            "1970",
+            "1958"
+          ],
           "richtig": 1
         },
         {
           "id": "bl_1_4",
           "schwierigkeit": 1,
           "frage": "Wie viele Vereine spielen in der Bundesliga?",
-          "antworten": ["16", "20", "18", "22"],
+          "antworten": [
+            "16",
+            "20",
+            "18",
+            "22"
+          ],
           "richtig": 2
         },
         {
           "id": "bl_1_5",
           "schwierigkeit": 1,
           "frage": "Welcher Verein trägt den Spitznamen 'Die Borussen'?",
-          "antworten": ["Nur Borussia Dortmund", "Nur Borussia Mönchengladbach", "Beide", "Keiner"],
+          "antworten": [
+            "Nur Borussia Dortmund",
+            "Nur Borussia Mönchengladbach",
+            "Beide",
+            "Keiner"
+          ],
           "richtig": 2
         },
         {
           "id": "bl_2_1",
           "schwierigkeit": 2,
           "frage": "Wer erzielte in der Saison 2020/21 die meisten Tore in einer Bundesliga-Saison?",
-          "antworten": ["Thomas Müller", "Erling Haaland", "Robert Lewandowski", "André Silva"],
+          "antworten": [
+            "Thomas Müller",
+            "Erling Haaland",
+            "Robert Lewandowski",
+            "André Silva"
+          ],
           "richtig": 2
         },
         {
           "id": "bl_2_2",
           "schwierigkeit": 2,
           "frage": "Welcher Verein wurde noch nie aus der Bundesliga abgestiegen?",
-          "antworten": ["FC Bayern München", "Borussia Dortmund", "Bayer Leverkusen", "Werder Bremen"],
+          "antworten": [
+            "FC Bayern München",
+            "Borussia Dortmund",
+            "Bayer Leverkusen",
+            "Werder Bremen"
+          ],
           "richtig": 0
         },
         {
           "id": "bl_2_3",
           "schwierigkeit": 2,
           "frage": "Wie heißt das Stadion von Borussia Dortmund?",
-          "antworten": ["Allianz Arena", "Signal Iduna Park", "Westfalenstadion", "Signal Iduna Park und Westfalenstadion"],
+          "antworten": [
+            "Allianz Arena",
+            "Signal Iduna Park",
+            "Westfalenstadion",
+            "Signal Iduna Park und Westfalenstadion"
+          ],
           "richtig": 3
         },
         {
           "id": "bl_2_4",
           "schwierigkeit": 2,
           "frage": "Welcher Trainer gewann mit Bayer Leverkusen die Meisterschaft 2023/24?",
-          "antworten": ["Roger Schmidt", "Gerardo Seoane", "Xabi Alonso", "Peter Bosz"],
+          "antworten": [
+            "Roger Schmidt",
+            "Gerardo Seoane",
+            "Xabi Alonso",
+            "Peter Bosz"
+          ],
           "richtig": 2
         },
         {
           "id": "bl_2_5",
           "schwierigkeit": 2,
           "frage": "Welcher Verein gewann die erste Bundesliga-Meisterschaft 1963/64?",
-          "antworten": ["FC Bayern München", "1. FC Köln", "Borussia Dortmund", "Hamburger SV"],
+          "antworten": [
+            "FC Bayern München",
+            "1. FC Köln",
+            "Borussia Dortmund",
+            "Hamburger SV"
+          ],
           "richtig": 1
         },
         {
           "id": "bl_3_1",
           "schwierigkeit": 3,
           "frage": "Wer hält den Rekord für die meisten Assists in einer Bundesliga-Saison?",
-          "antworten": ["Thomas Müller", "Kevin De Bruyne", "Franck Ribéry", "Michael Ballack"],
+          "antworten": [
+            "Thomas Müller",
+            "Kevin De Bruyne",
+            "Franck Ribéry",
+            "Michael Ballack"
+          ],
           "richtig": 0
         },
         {
           "id": "bl_3_2",
           "schwierigkeit": 3,
           "frage": "Welcher Verein stieg als Meister aus der Bundesliga ab?",
-          "antworten": ["Kaiserslautern", "1. FC Nürnberg", "Hamburger SV", "Eintracht Frankfurt"],
+          "antworten": [
+            "Kaiserslautern",
+            "1. FC Nürnberg",
+            "Hamburger SV",
+            "Eintracht Frankfurt"
+          ],
           "richtig": 1
         },
         {
           "id": "bl_3_3",
           "schwierigkeit": 3,
           "frage": "Wie viele Tore erzielte Gerd Müller in seiner Bundesliga-Karriere?",
-          "antworten": ["356", "365", "372", "398"],
+          "antworten": [
+            "356",
+            "365",
+            "372",
+            "398"
+          ],
           "richtig": 2
         },
         {
           "id": "bl_3_4",
           "schwierigkeit": 3,
           "frage": "Welcher Spieler hält den Rekord für die meisten Bundesliga-Spiele?",
-          "antworten": ["Oliver Kahn", "Sepp Maier", "Karl-Heinz Körbel", "Manfred Burgsmüller"],
+          "antworten": [
+            "Oliver Kahn",
+            "Sepp Maier",
+            "Karl-Heinz Körbel",
+            "Manfred Burgsmüller"
+          ],
           "richtig": 2
         },
         {
           "id": "bl_3_5",
           "schwierigkeit": 3,
           "frage": "In welcher Saison gewann der FC Bayern München das Triple?",
-          "antworten": ["2012/13", "2014/15", "2019/20", "Alle genannten"],
+          "antworten": [
+            "2012/13",
+            "2014/15",
+            "2019/20",
+            "Alle genannten"
+          ],
           "richtig": 3
         },
         {
           "id": "bl_4_1",
           "schwierigkeit": 4,
           "frage": "Welcher Verein gewann in der Saison 1997/98 überraschend die Bundesliga-Meisterschaft?",
-          "antworten": ["1. FC Kaiserslautern", "Borussia Dortmund", "Schalke 04", "Bayer Leverkusen"],
+          "antworten": [
+            "1. FC Kaiserslautern",
+            "Borussia Dortmund",
+            "Schalke 04",
+            "Bayer Leverkusen"
+          ],
           "richtig": 0
         },
         {
           "id": "bl_4_2",
           "schwierigkeit": 4,
           "frage": "Wer war der erste ausländische Torschützenkönig der Bundesliga?",
-          "antworten": ["Jupp Heynckes", "Gerd Müller", "Timo Konietzka", "Lothar Emmerich"],
+          "antworten": [
+            "Jupp Heynckes",
+            "Gerd Müller",
+            "Timo Konietzka",
+            "Lothar Emmerich"
+          ],
           "richtig": 2
         },
         {
           "id": "bl_4_3",
           "schwierigkeit": 4,
           "frage": "Welcher Bundesliga-Verein hat die größte Stadionfassungskapazität?",
-          "antworten": ["FC Bayern München", "Borussia Dortmund", "Schalke 04", "Hamburger SV"],
+          "antworten": [
+            "FC Bayern München",
+            "Borussia Dortmund",
+            "Schalke 04",
+            "Hamburger SV"
+          ],
           "richtig": 1
         },
         {
           "id": "bl_4_4",
           "schwierigkeit": 4,
           "frage": "Wann wurde der Hamburger SV zum ersten Mal aus der Bundesliga abgestiegen?",
-          "antworten": ["2016", "2017", "2018", "2019"],
+          "antworten": [
+            "2016",
+            "2017",
+            "2018",
+            "2019"
+          ],
           "richtig": 2
         },
         {
           "id": "bl_4_5",
           "schwierigkeit": 4,
           "frage": "Welcher Bundesliga-Klub wurde als 'Neuer Markt' Verein bekannt?",
-          "antworten": ["RB Leipzig", "TSG Hoffenheim", "Bayer Leverkusen", "FC Augsburg"],
+          "antworten": [
+            "RB Leipzig",
+            "TSG Hoffenheim",
+            "Bayer Leverkusen",
+            "FC Augsburg"
+          ],
           "richtig": 1
         },
         {
           "id": "bl_5_1",
           "schwierigkeit": 5,
           "frage": "Wer erzielte das erste Tor in der Bundesliga-Geschichte?",
-          "antworten": ["Gerd Müller", "Timo Konietzka", "Uwe Seeler", "Helmut Haller"],
+          "antworten": [
+            "Gerd Müller",
+            "Timo Konietzka",
+            "Uwe Seeler",
+            "Helmut Haller"
+          ],
           "richtig": 1
         },
         {
           "id": "bl_5_2",
           "schwierigkeit": 5,
           "frage": "Wie lautete der genaue Punkterekord des FC Bayern in der Saison 2012/13?",
-          "antworten": ["88", "91", "90", "87"],
+          "antworten": [
+            "88",
+            "91",
+            "90",
+            "87"
+          ],
           "richtig": 1
         },
         {
           "id": "bl_5_3",
           "schwierigkeit": 5,
           "frage": "Welcher Verein hatte in der Bundesliga-Geschichte die längste Heimserie ohne Niederlage?",
-          "antworten": ["FC Bayern München", "Borussia Mönchengladbach", "Hamburger SV", "1. FC Köln"],
+          "antworten": [
+            "FC Bayern München",
+            "Borussia Mönchengladbach",
+            "Hamburger SV",
+            "1. FC Köln"
+          ],
           "richtig": 0
         },
         {
           "id": "bl_5_4",
           "schwierigkeit": 5,
           "frage": "In welcher Saison erzielte Robert Lewandowski seinen legendären Bundesliga-Rekord mit 41 Toren?",
-          "antworten": ["2019/20", "2020/21", "2021/22", "2018/19"],
+          "antworten": [
+            "2019/20",
+            "2020/21",
+            "2021/22",
+            "2018/19"
+          ],
           "richtig": 1
         },
         {
           "id": "bl_5_5",
           "schwierigkeit": 5,
           "frage": "Welcher Trainer gewann als einziger die Bundesliga mit drei verschiedenen Vereinen?",
-          "antworten": ["Ottmar Hitzfeld", "Jupp Heynckes", "Udo Lattek", "Hennes Weisweiler"],
+          "antworten": [
+            "Ottmar Hitzfeld",
+            "Jupp Heynckes",
+            "Udo Lattek",
+            "Hennes Weisweiler"
+          ],
           "richtig": 2
+        },
+        {
+          "id": "bl_1_6",
+          "schwierigkeit": 1,
+          "frage": "In welchem Stadion trägt der FC Bayern seine Heimspiele aus?",
+          "antworten": [
+            "Signal Iduna Park",
+            "Olympiastadion",
+            "Allianz Arena",
+            "SAP Arena"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "bl_1_7",
+          "schwierigkeit": 1,
+          "frage": "Welcher Verein gewann in der Saison 2023/24 erstmals die Bundesliga ungeschlagen?",
+          "antworten": [
+            "Borussia Dortmund",
+            "Bayer Leverkusen",
+            "RB Leipzig",
+            "FC Bayern München"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "bl_1_8",
+          "schwierigkeit": 1,
+          "frage": "Wie heißt das Derby zwischen Borussia Dortmund und Schalke 04?",
+          "antworten": [
+            "Rheinderby",
+            "Revierderby",
+            "Westfalenduell",
+            "Ruhrpott-Klassiker"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "bl_2_6",
+          "schwierigkeit": 2,
+          "frage": "Welcher Bundesliga-Verein trägt den Spitznamen 'Die Werkself'?",
+          "antworten": [
+            "VfL Wolfsburg",
+            "Bayer Leverkusen",
+            "TSG Hoffenheim",
+            "FC Augsburg"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "bl_2_7",
+          "schwierigkeit": 2,
+          "frage": "Welcher Spieler gewann in der Saison 2019/20 die Torjägerkanone der Bundesliga mit 34 Toren?",
+          "antworten": [
+            "Thomas Müller",
+            "Erling Haaland",
+            "Robert Lewandowski",
+            "André Silva"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "bl_2_8",
+          "schwierigkeit": 2,
+          "frage": "Wie heißt der Wettbewerb, in dem Bundesliga-Klubs ab dem dritten Gruppenrang in die Europa League wechseln?",
+          "antworten": [
+            "UEFA-Pokal",
+            "DFL Supercup",
+            "UEFA Champions League Playoff",
+            "Europa League Play-off"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "bl_3_6",
+          "schwierigkeit": 3,
+          "frage": "Welcher Trainer führte Borussia Dortmund 2011 und 2012 zur Bundesliga-Meisterschaft?",
+          "antworten": [
+            "Thomas Tuchel",
+            "Ottmar Hitzfeld",
+            "Jürgen Klopp",
+            "Lucien Favre"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "bl_3_7",
+          "schwierigkeit": 3,
+          "frage": "Wie viele aufeinanderfolgende Bundesliga-Meisterschaften gewann der FC Bayern München von 2013 bis 2022?",
+          "antworten": [
+            "8",
+            "9",
+            "10",
+            "11"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "bl_3_8",
+          "schwierigkeit": 3,
+          "frage": "In welcher Saison erzielte Robert Lewandowski 5 Tore in 9 Minuten als Einwechselspieler gegen den VfL Wolfsburg?",
+          "antworten": [
+            "2014/15",
+            "2015/16",
+            "2016/17",
+            "2013/14"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "bl_4_6",
+          "schwierigkeit": 4,
+          "frage": "In welcher Saison verlor Bayer Leverkusen als 'Neverkusen' Meisterschaft und beide Pokalfinals?",
+          "antworten": [
+            "1998/99",
+            "1999/00",
+            "2001/02",
+            "2000/01"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "bl_4_7",
+          "schwierigkeit": 4,
+          "frage": "Welchen Spitznamen erhielt das Bayern-Dortmund-Duell in der Bundesliga?",
+          "antworten": [
+            "Das Finale dahoam",
+            "Der Klassiker",
+            "Das Gipfeltreffen",
+            "Das Jahrhundertspiel"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "bl_4_8",
+          "schwierigkeit": 4,
+          "frage": "Welcher Verein stieg 1998 als frischer Aufsteiger direkt zur Bundesliga-Meisterschaft auf?",
+          "antworten": [
+            "Bayer Leverkusen",
+            "Schalke 04",
+            "1. FC Kaiserslautern",
+            "Borussia Dortmund"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "bl_5_6",
+          "schwierigkeit": 5,
+          "frage": "In welchem Jahr erzielte Timo Konietzka das erste Tor der Bundesliga-Geschichte?",
+          "antworten": [
+            "1963",
+            "1965",
+            "1970",
+            "1961"
+          ],
+          "richtig": 0
+        },
+        {
+          "id": "bl_5_7",
+          "schwierigkeit": 5,
+          "frage": "Wer gewann als einziger Trainer die Bundesliga mit drei verschiedenen Vereinen?",
+          "antworten": [
+            "Ottmar Hitzfeld",
+            "Jupp Heynckes",
+            "Udo Lattek",
+            "Dettmar Cramer"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "bl_5_8",
+          "schwierigkeit": 5,
+          "frage": "Wie viele Tore erzielte Gerd Müller in der Saison 1971/72 – ein Bundesliga-Rekord der Jahrzehnte stand?",
+          "antworten": [
+            "36",
+            "40",
+            "42",
+            "38"
+          ],
+          "richtig": 1
         }
       ]
     },
@@ -370,176 +980,481 @@
           "id": "wm_1_1",
           "schwierigkeit": 1,
           "frage": "Welches Land hat die meisten Weltmeisterschaften gewonnen?",
-          "antworten": ["Deutschland", "Argentinien", "Brasilien", "Italien"],
+          "antworten": [
+            "Deutschland",
+            "Argentinien",
+            "Brasilien",
+            "Italien"
+          ],
           "richtig": 2
         },
         {
           "id": "wm_1_2",
           "schwierigkeit": 1,
           "frage": "In welchem Jahr gewann Deutschland zuletzt die Weltmeisterschaft?",
-          "antworten": ["2006", "2010", "2014", "2018"],
+          "antworten": [
+            "2006",
+            "2010",
+            "2014",
+            "2018"
+          ],
           "richtig": 2
         },
         {
           "id": "wm_1_3",
           "schwierigkeit": 1,
           "frage": "Wo fand die WM 2022 statt?",
-          "antworten": ["Saudi-Arabien", "Katar", "Vereinigte Arabische Emirate", "Bahrain"],
+          "antworten": [
+            "Saudi-Arabien",
+            "Katar",
+            "Vereinigte Arabische Emirate",
+            "Bahrain"
+          ],
           "richtig": 1
         },
         {
           "id": "wm_1_4",
           "schwierigkeit": 1,
           "frage": "Wer ist der Rekordtorschütze bei Weltmeisterschaften?",
-          "antworten": ["Ronaldo", "Miroslav Klose", "Pelé", "Just Fontaine"],
+          "antworten": [
+            "Ronaldo",
+            "Miroslav Klose",
+            "Pelé",
+            "Just Fontaine"
+          ],
           "richtig": 1
         },
         {
           "id": "wm_1_5",
           "schwierigkeit": 1,
           "frage": "Wie viele Teams nehmen an einer WM-Endrunde teil (seit 1998)?",
-          "antworten": ["24", "32", "36", "48"],
+          "antworten": [
+            "24",
+            "32",
+            "36",
+            "48"
+          ],
           "richtig": 1
         },
         {
           "id": "wm_2_1",
           "schwierigkeit": 2,
           "frage": "Wer gewann die WM 2022 in Katar?",
-          "antworten": ["Frankreich", "Brasilien", "Argentinien", "Deutschland"],
+          "antworten": [
+            "Frankreich",
+            "Brasilien",
+            "Argentinien",
+            "Deutschland"
+          ],
           "richtig": 2
         },
         {
           "id": "wm_2_2",
           "schwierigkeit": 2,
           "frage": "In welchem Land fand die erste Weltmeisterschaft statt?",
-          "antworten": ["Brasilien", "Uruguay", "Argentinien", "Italien"],
+          "antworten": [
+            "Brasilien",
+            "Uruguay",
+            "Argentinien",
+            "Italien"
+          ],
           "richtig": 1
         },
         {
           "id": "wm_2_3",
           "schwierigkeit": 2,
           "frage": "Wer erzielte das berühmte 'Hand Gottes' Tor bei der WM 1986?",
-          "antworten": ["Pelé", "Diego Maradona", "Ronaldo", "Zinédine Zidane"],
+          "antworten": [
+            "Pelé",
+            "Diego Maradona",
+            "Ronaldo",
+            "Zinédine Zidane"
+          ],
           "richtig": 1
         },
         {
           "id": "wm_2_4",
           "schwierigkeit": 2,
           "frage": "Welches Land schied bei der WM 2018 als Titelverteidiger in der Gruppenphase aus?",
-          "antworten": ["Spanien", "Brasilien", "Deutschland", "Frankreich"],
+          "antworten": [
+            "Spanien",
+            "Brasilien",
+            "Deutschland",
+            "Frankreich"
+          ],
           "richtig": 2
         },
         {
           "id": "wm_2_5",
           "schwierigkeit": 2,
           "frage": "Wer war Torschützenkönig der WM 2014?",
-          "antworten": ["Lionel Messi", "Thomas Müller", "James Rodríguez", "Neymar"],
+          "antworten": [
+            "Lionel Messi",
+            "Thomas Müller",
+            "James Rodríguez",
+            "Neymar"
+          ],
           "richtig": 2
         },
         {
           "id": "wm_3_1",
           "schwierigkeit": 3,
           "frage": "Welches war das höchste Ergebnis in einem WM-Spiel?",
-          "antworten": ["10:1", "9:0", "12:0", "11:0"],
+          "antworten": [
+            "10:1",
+            "9:0",
+            "12:0",
+            "11:0"
+          ],
           "richtig": 0
         },
         {
           "id": "wm_3_2",
           "schwierigkeit": 3,
           "frage": "Wer ist der jüngste Torschütze bei einer WM?",
-          "antworten": ["Pelé", "Michael Owen", "Cesc Fàbregas", "Kylian Mbappé"],
+          "antworten": [
+            "Pelé",
+            "Michael Owen",
+            "Cesc Fàbregas",
+            "Kylian Mbappé"
+          ],
           "richtig": 0
         },
         {
           "id": "wm_3_3",
           "schwierigkeit": 3,
           "frage": "Welches Land gewann die WM 1966 im eigenen Land?",
-          "antworten": ["Deutschland", "Brasilien", "England", "Frankreich"],
+          "antworten": [
+            "Deutschland",
+            "Brasilien",
+            "England",
+            "Frankreich"
+          ],
           "richtig": 2
         },
         {
           "id": "wm_3_4",
           "schwierigkeit": 3,
           "frage": "Wie endete das legendäre Spiel Deutschland gegen Brasilien bei der WM 2014?",
-          "antworten": ["6:0", "7:1", "5:0", "8:2"],
+          "antworten": [
+            "6:0",
+            "7:1",
+            "5:0",
+            "8:2"
+          ],
           "richtig": 1
         },
         {
           "id": "wm_3_5",
           "schwierigkeit": 3,
           "frage": "Welcher Spieler wurde bei der WM 2006 im Finale des Feldes verwiesen?",
-          "antworten": ["Ronaldo", "Zinédine Zidane", "Thierry Henry", "Marco Materazzi"],
+          "antworten": [
+            "Ronaldo",
+            "Zinédine Zidane",
+            "Thierry Henry",
+            "Marco Materazzi"
+          ],
           "richtig": 1
         },
         {
           "id": "wm_4_1",
           "schwierigkeit": 4,
           "frage": "Welches Land hat an den meisten WM-Endrunden teilgenommen ohne je einen Titel zu gewinnen?",
-          "antworten": ["Mexiko", "Niederlande", "England", "Portugal"],
+          "antworten": [
+            "Mexiko",
+            "Niederlande",
+            "England",
+            "Portugal"
+          ],
           "richtig": 1
         },
         {
           "id": "wm_4_2",
           "schwierigkeit": 4,
           "frage": "Wer erzielte bei der WM 1958 die meisten Tore in einem einzelnen Turnier?",
-          "antworten": ["Pelé", "Just Fontaine", "Helmut Rahn", "Eusébio"],
+          "antworten": [
+            "Pelé",
+            "Just Fontaine",
+            "Helmut Rahn",
+            "Eusébio"
+          ],
           "richtig": 1
         },
         {
           "id": "wm_4_3",
           "schwierigkeit": 4,
           "frage": "Welcher Torwart spielte bei der WM 1966 kein einziges Gegentor?",
-          "antworten": ["Gordon Banks", "Lev Yashin", "Sepp Maier", "Peter Bonetti"],
+          "antworten": [
+            "Gordon Banks",
+            "Lev Yashin",
+            "Sepp Maier",
+            "Peter Bonetti"
+          ],
           "richtig": 0
         },
         {
           "id": "wm_4_4",
           "schwierigkeit": 4,
           "frage": "In welchem Jahr fand die einzige WM statt, bei der kein einziger Elfmeter gepfiffen wurde?",
-          "antworten": ["1930", "1950", "1954", "1962"],
+          "antworten": [
+            "1930",
+            "1950",
+            "1954",
+            "1962"
+          ],
           "richtig": 0
         },
         {
           "id": "wm_4_5",
           "schwierigkeit": 4,
           "frage": "Welcher Spieler nahm an fünf verschiedenen Weltmeisterschaften teil?",
-          "antworten": ["Lothar Matthäus", "Gianluigi Buffon", "Ronaldo", "Cafu"],
+          "antworten": [
+            "Lothar Matthäus",
+            "Gianluigi Buffon",
+            "Ronaldo",
+            "Cafu"
+          ],
           "richtig": 0
         },
         {
           "id": "wm_5_1",
           "schwierigkeit": 5,
           "frage": "Wer schoss das Goldene Tor im WM-Finale 1998?",
-          "antworten": ["Zinédine Zidane", "Emmanuel Petit", "Ronaldo", "Thierry Henry"],
+          "antworten": [
+            "Zinédine Zidane",
+            "Emmanuel Petit",
+            "Ronaldo",
+            "Thierry Henry"
+          ],
           "richtig": 1
         },
         {
           "id": "wm_5_2",
           "schwierigkeit": 5,
           "frage": "Wie hieß der Schiedsrichter der das WM-Finale 2014 leitete?",
-          "antworten": ["Howard Webb", "Nicola Rizzoli", "Björn Kuipers", "Jonas Eriksson"],
+          "antworten": [
+            "Howard Webb",
+            "Nicola Rizzoli",
+            "Björn Kuipers",
+            "Jonas Eriksson"
+          ],
           "richtig": 1
         },
         {
           "id": "wm_5_3",
           "schwierigkeit": 5,
           "frage": "Welches Land war Gastgeber der WM 1934?",
-          "antworten": ["Frankreich", "Brasilien", "Italien", "Spanien"],
+          "antworten": [
+            "Frankreich",
+            "Brasilien",
+            "Italien",
+            "Spanien"
+          ],
           "richtig": 2
         },
         {
           "id": "wm_5_4",
           "schwierigkeit": 5,
           "frage": "Wer erzielte das erste WM-Tor der Geschichte?",
-          "antworten": ["Lucien Laurent", "Bert Patenaude", "Guillermo Stábile", "Pedro Cea"],
+          "antworten": [
+            "Lucien Laurent",
+            "Bert Patenaude",
+            "Guillermo Stábile",
+            "Pedro Cea"
+          ],
           "richtig": 0
         },
         {
           "id": "wm_5_5",
           "schwierigkeit": 5,
           "frage": "Welches Land nahm an der ersten WM 1930 teil aber nicht an der zweiten 1934?",
-          "antworten": ["England", "Uruguay", "Deutschland", "Spanien"],
+          "antworten": [
+            "England",
+            "Uruguay",
+            "Deutschland",
+            "Spanien"
+          ],
           "richtig": 1
+        },
+        {
+          "id": "wm_1_6",
+          "schwierigkeit": 1,
+          "frage": "In welchem Land fand die WM 2018 statt?",
+          "antworten": [
+            "China",
+            "Russland",
+            "Deutschland",
+            "Frankreich"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "wm_1_7",
+          "schwierigkeit": 1,
+          "frage": "Wie viele Teams nehmen an der WM 2026 teil?",
+          "antworten": [
+            "32",
+            "40",
+            "48",
+            "36"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "wm_1_8",
+          "schwierigkeit": 1,
+          "frage": "Wer gewann die WM 2010 in Südafrika?",
+          "antworten": [
+            "Deutschland",
+            "Niederlande",
+            "Spanien",
+            "Argentinien"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "wm_2_6",
+          "schwierigkeit": 2,
+          "frage": "Wer erzielte das Goldene Tor im WM-Finale 2014 und schoss Deutschland zum Titel?",
+          "antworten": [
+            "Thomas Müller",
+            "Miroslav Klose",
+            "Mario Götze",
+            "Toni Kroos"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "wm_2_7",
+          "schwierigkeit": 2,
+          "frage": "In welchem Jahr gewann Frankreich erstmals die Weltmeisterschaft?",
+          "antworten": [
+            "1994",
+            "1996",
+            "1998",
+            "2000"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "wm_2_8",
+          "schwierigkeit": 2,
+          "frage": "Wer war Goldener Ball Gewinner (bester Spieler) der WM 2014?",
+          "antworten": [
+            "Thomas Müller",
+            "Toni Kroos",
+            "Mario Götze",
+            "Lionel Messi"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "wm_3_6",
+          "schwierigkeit": 3,
+          "frage": "Welches Land nahm als einziges an jeder WM-Endrunde seit 1930 teil?",
+          "antworten": [
+            "Deutschland",
+            "Argentinien",
+            "Brasilien",
+            "England"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "wm_3_7",
+          "schwierigkeit": 3,
+          "frage": "Wann wurde in einem WM-Spiel zum ersten Mal ein Elfmeterschießen durchgeführt?",
+          "antworten": [
+            "1978",
+            "1982",
+            "1986",
+            "1990"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "wm_3_8",
+          "schwierigkeit": 3,
+          "frage": "Welches WM-Finale wurde erstmals durch ein Elfmeterschießen entschieden?",
+          "antworten": [
+            "1978",
+            "1986",
+            "1990",
+            "1994"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "wm_4_6",
+          "schwierigkeit": 4,
+          "frage": "Wer gewann die WM 1950 durch den legendären 'Maracanazo' im entscheidenden Spiel gegen Brasilien?",
+          "antworten": [
+            "Argentinien",
+            "Spanien",
+            "Uruguay",
+            "Chile"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "wm_4_7",
+          "schwierigkeit": 4,
+          "frage": "Wie viele WM-Titel hat Argentinien insgesamt gewonnen (Stand 2022)?",
+          "antworten": [
+            "2",
+            "3",
+            "4",
+            "1"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "wm_4_8",
+          "schwierigkeit": 4,
+          "frage": "In welchem Jahr nahm England erstmals an einer Weltmeisterschaft teil?",
+          "antworten": [
+            "1930",
+            "1938",
+            "1950",
+            "1954"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "wm_5_6",
+          "schwierigkeit": 5,
+          "frage": "Welcher Schiedsrichter leitete das umstrittene WM-Finale 1966 mit dem 'Wembley-Tor'?",
+          "antworten": [
+            "Jack Taylor",
+            "Gottfried Dienst",
+            "Pierluigi Collina",
+            "Howard Webb"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "wm_5_7",
+          "schwierigkeit": 5,
+          "frage": "Welcher Spieler erzielte bei der WM 1966 für Portugal 9 Tore und war Topscorer?",
+          "antworten": [
+            "Luis Figo",
+            "Cristiano Ronaldo",
+            "Eusébio",
+            "Rui Costa"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "wm_5_8",
+          "schwierigkeit": 5,
+          "frage": "Welches Land wurde bei der WM 2002 überraschend Halbfinalist und besiegte u.a. den amtierenden Weltmeister?",
+          "antworten": [
+            "Senegal",
+            "Türkei",
+            "Südkorea",
+            "USA"
+          ],
+          "richtig": 2
         }
       ]
     },
@@ -551,176 +1466,481 @@
           "id": "tm_1_1",
           "schwierigkeit": 1,
           "frage": "Wer war der erste Spieler der für über 100 Millionen Euro transferiert wurde?",
-          "antworten": ["Cristiano Ronaldo", "Gareth Bale", "Zlatan Ibrahimović", "Kaká"],
+          "antworten": [
+            "Cristiano Ronaldo",
+            "Gareth Bale",
+            "Zlatan Ibrahimović",
+            "Kaká"
+          ],
           "richtig": 0
         },
         {
           "id": "tm_1_2",
           "schwierigkeit": 1,
           "frage": "Für wie viel wurde Neymar 2017 von Barcelona zu PSG transferiert?",
-          "antworten": ["150 Mio €", "200 Mio €", "222 Mio €", "250 Mio €"],
+          "antworten": [
+            "150 Mio €",
+            "200 Mio €",
+            "222 Mio €",
+            "250 Mio €"
+          ],
           "richtig": 2
         },
         {
           "id": "tm_1_3",
           "schwierigkeit": 1,
           "frage": "Von welchem Verein wechselte Erling Haaland zu Manchester City?",
-          "antworten": ["RB Salzburg", "Ajax Amsterdam", "Borussia Dortmund", "RB Leipzig"],
+          "antworten": [
+            "RB Salzburg",
+            "Ajax Amsterdam",
+            "Borussia Dortmund",
+            "RB Leipzig"
+          ],
           "richtig": 2
         },
         {
           "id": "tm_1_4",
           "schwierigkeit": 1,
           "frage": "Zu welchem Verein wechselte Kylian Mbappé 2024?",
-          "antworten": ["FC Barcelona", "Real Madrid", "Manchester City", "FC Bayern München"],
+          "antworten": [
+            "FC Barcelona",
+            "Real Madrid",
+            "Manchester City",
+            "FC Bayern München"
+          ],
           "richtig": 1
         },
         {
           "id": "tm_1_5",
           "schwierigkeit": 1,
           "frage": "Was ist ein 'Ablösefreier Transfer'?",
-          "antworten": ["Kostenloser Transfer nach Vertragsende", "Transfer innerhalb eines Landes", "Leihe ohne Kaufoption", "Tauschgeschäft zweier Spieler"],
+          "antworten": [
+            "Kostenloser Transfer nach Vertragsende",
+            "Transfer innerhalb eines Landes",
+            "Leihe ohne Kaufoption",
+            "Tauschgeschäft zweier Spieler"
+          ],
           "richtig": 0
         },
         {
           "id": "tm_2_1",
           "schwierigkeit": 2,
           "frage": "Wer war der teuerste Transfer im Sommer 2023?",
-          "antworten": ["Jude Bellingham", "Declan Rice", "Moises Caicedo", "Harry Kane"],
+          "antworten": [
+            "Jude Bellingham",
+            "Declan Rice",
+            "Moises Caicedo",
+            "Harry Kane"
+          ],
           "richtig": 0
         },
         {
           "id": "tm_2_2",
           "schwierigkeit": 2,
           "frage": "Für wie viel wechselte Gareth Bale 2013 zu Real Madrid?",
-          "antworten": ["91 Mio €", "101 Mio €", "100 Mio €", "85 Mio €"],
+          "antworten": [
+            "91 Mio €",
+            "101 Mio €",
+            "100 Mio €",
+            "85 Mio €"
+          ],
           "richtig": 1
         },
         {
           "id": "tm_2_3",
           "schwierigkeit": 2,
           "frage": "Von welchem Verein kam Virgil van Dijk zu Liverpool?",
-          "antworten": ["Celtic Glasgow", "AZ Alkmaar", "Southampton", "Feyenoord"],
+          "antworten": [
+            "Celtic Glasgow",
+            "AZ Alkmaar",
+            "Southampton",
+            "Feyenoord"
+          ],
           "richtig": 2
         },
         {
           "id": "tm_2_4",
           "schwierigkeit": 2,
           "frage": "Welcher Verein verkaufte Cristiano Ronaldo 2009 für eine damalige Rekordsumme?",
-          "antworten": ["Sporting Lissabon", "Manchester United", "FC Porto", "Benfica Lissabon"],
+          "antworten": [
+            "Sporting Lissabon",
+            "Manchester United",
+            "FC Porto",
+            "Benfica Lissabon"
+          ],
           "richtig": 1
         },
         {
           "id": "tm_2_5",
           "schwierigkeit": 2,
           "frage": "Was versteht man unter einer 'Leihe' im Fußball?",
-          "antworten": ["Dauerhafter Transfer", "Zeitlich befristete Überlassung eines Spielers", "Spielertausch", "Ablösefreier Transfer"],
+          "antworten": [
+            "Dauerhafter Transfer",
+            "Zeitlich befristete Überlassung eines Spielers",
+            "Spielertausch",
+            "Ablösefreier Transfer"
+          ],
           "richtig": 1
         },
         {
           "id": "tm_3_1",
           "schwierigkeit": 3,
           "frage": "Für wie viel wechselte Paul Pogba 2016 zurück zu Manchester United?",
-          "antworten": ["89 Mio €", "99 Mio €", "105 Mio €", "115 Mio €"],
+          "antworten": [
+            "89 Mio €",
+            "99 Mio €",
+            "105 Mio €",
+            "115 Mio €"
+          ],
           "richtig": 2
         },
         {
           "id": "tm_3_2",
           "schwierigkeit": 3,
           "frage": "Welcher Verein zahlte die höchste Ablöse für einen Torwart?",
-          "antworten": ["FC Chelsea", "Manchester City", "FC Barcelona", "Real Madrid"],
+          "antworten": [
+            "FC Chelsea",
+            "Manchester City",
+            "FC Barcelona",
+            "Real Madrid"
+          ],
           "richtig": 0
         },
         {
           "id": "tm_3_3",
           "schwierigkeit": 3,
           "frage": "Wann endete die erste große Transferperiode im europäischen Fußball offiziell?",
-          "antworten": ["31. August", "1. September", "30. Juni", "31. Januar"],
+          "antworten": [
+            "31. August",
+            "1. September",
+            "30. Juni",
+            "31. Januar"
+          ],
           "richtig": 0
         },
         {
           "id": "tm_3_4",
           "schwierigkeit": 3,
           "frage": "Welcher Spieler wechselte für eine Rekordablöse von Atletico Madrid zu einem anderen Verein?",
-          "antworten": ["Antoine Griezmann", "Diego Costa", "João Félix", "Álvaro Morata"],
+          "antworten": [
+            "Antoine Griezmann",
+            "Diego Costa",
+            "João Félix",
+            "Álvaro Morata"
+          ],
           "richtig": 2
         },
         {
           "id": "tm_3_5",
           "schwierigkeit": 3,
           "frage": "Was regelt das 'Bosman-Urteil' von 1995?",
-          "antworten": ["Gehaltsobergrenzen", "Ablösefreie Transfers nach Vertragsende", "Ausländerkontingente", "Solidaritätsbeiträge"],
+          "antworten": [
+            "Gehaltsobergrenzen",
+            "Ablösefreie Transfers nach Vertragsende",
+            "Ausländerkontingente",
+            "Solidaritätsbeiträge"
+          ],
           "richtig": 1
         },
         {
           "id": "tm_4_1",
           "schwierigkeit": 4,
           "frage": "Wer war vor Neymar der teuerste Transfer der Welt?",
-          "antworten": ["Paul Pogba", "Gareth Bale", "Cristiano Ronaldo", "Gonzalo Higuaín"],
+          "antworten": [
+            "Paul Pogba",
+            "Gareth Bale",
+            "Cristiano Ronaldo",
+            "Gonzalo Higuaín"
+          ],
           "richtig": 0
         },
         {
           "id": "tm_4_2",
           "schwierigkeit": 4,
           "frage": "Für welche Summe wechselte Zinédine Zidane 2001 zu Real Madrid?",
-          "antworten": ["73,5 Mio €", "77,5 Mio €", "80 Mio €", "65 Mio €"],
+          "antworten": [
+            "73,5 Mio €",
+            "77,5 Mio €",
+            "80 Mio €",
+            "65 Mio €"
+          ],
           "richtig": 0
         },
         {
           "id": "tm_4_3",
           "schwierigkeit": 4,
           "frage": "Welcher Verein hat in der Geschichte die meisten Transferausgaben getätigt?",
-          "antworten": ["Real Madrid", "FC Barcelona", "Manchester City", "FC Chelsea"],
+          "antworten": [
+            "Real Madrid",
+            "FC Barcelona",
+            "Manchester City",
+            "FC Chelsea"
+          ],
           "richtig": 3
         },
         {
           "id": "tm_4_4",
           "schwierigkeit": 4,
           "frage": "Was ist die 'Financial Fair Play' Regelung der UEFA?",
-          "antworten": ["Verbot von Transfers über 100 Mio €", "Ausgaben dürfen Einnahmen nicht dauerhaft übersteigen", "Gleiches Gehalt für alle Spieler", "Mindestablöse für Nationalspieler"],
+          "antworten": [
+            "Verbot von Transfers über 100 Mio €",
+            "Ausgaben dürfen Einnahmen nicht dauerhaft übersteigen",
+            "Gleiches Gehalt für alle Spieler",
+            "Mindestablöse für Nationalspieler"
+          ],
           "richtig": 1
         },
         {
           "id": "tm_4_5",
           "schwierigkeit": 4,
           "frage": "Für welche Ablöse wechselte Ronaldo 2018 von Real Madrid zu Juventus?",
-          "antworten": ["100 Mio €", "112 Mio €", "117 Mio €", "105 Mio €"],
+          "antworten": [
+            "100 Mio €",
+            "112 Mio €",
+            "117 Mio €",
+            "105 Mio €"
+          ],
           "richtig": 1
         },
         {
           "id": "tm_5_1",
           "schwierigkeit": 5,
           "frage": "Wer war der erste Spieler der die 100-Mio-€-Grenze überschritt?",
-          "antworten": ["Zinédine Zidane", "Ronaldo (R9)", "Kaká", "Cristiano Ronaldo"],
+          "antworten": [
+            "Zinédine Zidane",
+            "Ronaldo (R9)",
+            "Kaká",
+            "Cristiano Ronaldo"
+          ],
           "richtig": 2
         },
         {
           "id": "tm_5_2",
           "schwierigkeit": 5,
           "frage": "Für welche Ablöse wechselte Romelu Lukaku 2021 von Inter zu Chelsea?",
-          "antworten": ["103 Mio €", "113 Mio €", "115 Mio €", "120 Mio €"],
+          "antworten": [
+            "103 Mio €",
+            "113 Mio €",
+            "115 Mio €",
+            "120 Mio €"
+          ],
           "richtig": 1
         },
         {
           "id": "tm_5_3",
           "schwierigkeit": 5,
           "frage": "Welcher Spieler wechselte im Winter 2023 für eine Rekordsumme in der Winterperiode?",
-          "antworten": ["Enzo Fernández", "Moisés Caicedo", "Josko Gvardiol", "Alexis Mac Allister"],
+          "antworten": [
+            "Enzo Fernández",
+            "Moisés Caicedo",
+            "Josko Gvardiol",
+            "Alexis Mac Allister"
+          ],
           "richtig": 0
         },
         {
           "id": "tm_5_4",
           "schwierigkeit": 5,
           "frage": "Was besagt die '5+6 Regel' im Transferrecht?",
-          "antworten": ["Maximale Spielerleihen pro Saison", "Ausbildungsentschädigungen für Nachwuchsvereine", "Solidaritätsmechanismus bei Transfers", "Mindestlaufzeit von Verträgen"],
+          "antworten": [
+            "Maximale Spielerleihen pro Saison",
+            "Ausbildungsentschädigungen für Nachwuchsvereine",
+            "Solidaritätsmechanismus bei Transfers",
+            "Mindestlaufzeit von Verträgen"
+          ],
           "richtig": 1
         },
         {
           "id": "tm_5_5",
           "schwierigkeit": 5,
           "frage": "Welcher Verein kassierte die höchste Ablöse in seiner Geschichte beim Verkauf eines Spielers?",
-          "antworten": ["AS Monaco (Mbappé)", "FC Santos (Neymar)", "Atletico Madrid (Griezmann)", "Ajax Amsterdam (de Ligt)"],
+          "antworten": [
+            "AS Monaco (Mbappé)",
+            "FC Santos (Neymar)",
+            "Atletico Madrid (Griezmann)",
+            "Ajax Amsterdam (de Ligt)"
+          ],
           "richtig": 0
+        },
+        {
+          "id": "tm_1_6",
+          "schwierigkeit": 1,
+          "frage": "Was ist ein 'Handgeld' beim Transfer?",
+          "antworten": [
+            "Extra-Vergütung für den Spieler beim Vereinswechsel",
+            "Vertragsstrafe bei frühzeitigem Abgang",
+            "Handshake-Gebühr für Agenten",
+            "Ausbildungsentschädigung"
+          ],
+          "richtig": 0
+        },
+        {
+          "id": "tm_1_7",
+          "schwierigkeit": 1,
+          "frage": "Welcher Verein verpflichtete Declan Rice 2023 für über 100 Mio €?",
+          "antworten": [
+            "Manchester City",
+            "Liverpool FC",
+            "Arsenal FC",
+            "Chelsea FC"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "tm_1_8",
+          "schwierigkeit": 1,
+          "frage": "Zu welchem Verein wechselte Harry Kane im Sommer 2023?",
+          "antworten": [
+            "FC Barcelona",
+            "Real Madrid",
+            "FC Bayern München",
+            "Manchester United"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "tm_2_6",
+          "schwierigkeit": 2,
+          "frage": "Was besagt die 'Ausbildungsentschädigung' im Fußball?",
+          "antworten": [
+            "Zahlung an den Ausbildungsverein des Spielers",
+            "Entschädigung bei Verletzungen",
+            "Gehaltszuschuss für den Trainerstaff",
+            "Zahlung für Kaderplätze"
+          ],
+          "richtig": 0
+        },
+        {
+          "id": "tm_2_7",
+          "schwierigkeit": 2,
+          "frage": "Welcher Spieler wechselte 2019 von Ajax Amsterdam zu Juventus Turin?",
+          "antworten": [
+            "Frenkie de Jong",
+            "Donny van de Beek",
+            "Matthijs de Ligt",
+            "André Onana"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "tm_2_8",
+          "schwierigkeit": 2,
+          "frage": "Für welche Rekordsumme wechselte Jack Grealish 2021 zu Manchester City?",
+          "antworten": [
+            "100 Mio £",
+            "120 Mio £",
+            "80 Mio £",
+            "90 Mio £"
+          ],
+          "richtig": 0
+        },
+        {
+          "id": "tm_3_6",
+          "schwierigkeit": 3,
+          "frage": "Welcher Spieler setzte im Januar 2023 mit seinem Wechsel zu Chelsea den Winterrekord?",
+          "antworten": [
+            "Josko Gvardiol",
+            "Moisés Caicedo",
+            "Enzo Fernández",
+            "Alexis Mac Allister"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "tm_3_7",
+          "schwierigkeit": 3,
+          "frage": "Was ist eine 'Ausstiegsklausel' in einem Spielervertrag?",
+          "antworten": [
+            "Feste Ablöse, zu der ein Klub den Spieler loskaufen kann",
+            "Klausel die den Spieler zum vorzeitigen Abgang zwingt",
+            "Bonus bei Gewinn eines Titels",
+            "Vertragsstrafe bei Rücktritt"
+          ],
+          "richtig": 0
+        },
+        {
+          "id": "tm_3_8",
+          "schwierigkeit": 3,
+          "frage": "Für welche Ablöse wechselte Eden Hazard 2019 von Chelsea zu Real Madrid?",
+          "antworten": [
+            "115 Mio €",
+            "100 Mio €",
+            "90 Mio €",
+            "130 Mio €"
+          ],
+          "richtig": 0
+        },
+        {
+          "id": "tm_4_6",
+          "schwierigkeit": 4,
+          "frage": "In welchem Jahr wurde das Bosman-Urteil gesprochen, das ablösefreie Transfers nach Vertragsende erlaubt?",
+          "antworten": [
+            "1993",
+            "1995",
+            "1997",
+            "1991"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "tm_4_7",
+          "schwierigkeit": 4,
+          "frage": "Welcher Agent gilt als einer der mächtigsten und einflussreichsten Fußball-Agenten der Geschichte?",
+          "antworten": [
+            "Jonathan Barnett",
+            "Pini Zahavi",
+            "Jorge Mendes",
+            "Mino Raiola"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "tm_4_8",
+          "schwierigkeit": 4,
+          "frage": "Welcher Verein tätigte historisch gesehen die höchsten kumulierten Transferausgaben aller Zeiten?",
+          "antworten": [
+            "Real Madrid",
+            "FC Barcelona",
+            "Manchester City",
+            "FC Chelsea"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "tm_5_6",
+          "schwierigkeit": 5,
+          "frage": "Welcher Verein zahlte 2023 für Moisés Caicedo die damals höchste Ablöse für einen Defensivspieler?",
+          "antworten": [
+            "Manchester City",
+            "Arsenal",
+            "Liverpool",
+            "FC Chelsea"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "tm_5_7",
+          "schwierigkeit": 5,
+          "frage": "Was ist der 'Solidaritätsbeitrag' bei internationalen Transfers laut FIFA?",
+          "antworten": [
+            "5 % der Ablöse fließen anteilig an frühere Ausbildungsvereine",
+            "Steuer auf große Transfers zugunsten der FIFA",
+            "Beteiligung des nationalen Verbandes an der Ablöse",
+            "Pflichtbeitrag aller Vereine zur Spielerförderung"
+          ],
+          "richtig": 0
+        },
+        {
+          "id": "tm_5_8",
+          "schwierigkeit": 5,
+          "frage": "Für welche genaue Ablösesumme wechselte Zinédine Zidane 2001 von Juventus zu Real Madrid?",
+          "antworten": [
+            "65 Mio €",
+            "73,5 Mio €",
+            "77,5 Mio €",
+            "80 Mio €"
+          ],
+          "richtig": 1
         }
       ]
     },
@@ -732,176 +1952,481 @@
           "id": "sk_1_1",
           "schwierigkeit": 1,
           "frage": "Bei welchem Verein begann Lionel Messi seine Profikarriere?",
-          "antworten": ["River Plate", "Boca Juniors", "FC Barcelona", "Newell's Old Boys"],
+          "antworten": [
+            "River Plate",
+            "Boca Juniors",
+            "FC Barcelona",
+            "Newell's Old Boys"
+          ],
           "richtig": 2
         },
         {
           "id": "sk_1_2",
           "schwierigkeit": 1,
           "frage": "In welchem Land wurde Cristiano Ronaldo geboren?",
-          "antworten": ["Spanien", "Portugal", "Brasilien", "Angola"],
+          "antworten": [
+            "Spanien",
+            "Portugal",
+            "Brasilien",
+            "Angola"
+          ],
           "richtig": 1
         },
         {
           "id": "sk_1_3",
           "schwierigkeit": 1,
           "frage": "Welche Rückennummer trägt Lionel Messi bei der argentinischen Nationalmannschaft?",
-          "antworten": ["7", "9", "10", "11"],
+          "antworten": [
+            "7",
+            "9",
+            "10",
+            "11"
+          ],
           "richtig": 2
         },
         {
           "id": "sk_1_4",
           "schwierigkeit": 1,
           "frage": "Bei welchem Verein spielte Pelé den Großteil seiner Karriere?",
-          "antworten": ["Flamengo", "Santos FC", "Corinthians", "São Paulo FC"],
+          "antworten": [
+            "Flamengo",
+            "Santos FC",
+            "Corinthians",
+            "São Paulo FC"
+          ],
           "richtig": 1
         },
         {
           "id": "sk_1_5",
           "schwierigkeit": 1,
           "frage": "Wie viele Mal wurde Lionel Messi Weltfußballer des Jahres (Ballon d'Or)?",
-          "antworten": ["6", "7", "8", "9"],
+          "antworten": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
           "richtig": 2
         },
         {
           "id": "sk_2_1",
           "schwierigkeit": 2,
           "frage": "In welcher Stadt wurde Ronaldo (R9) geboren?",
-          "antworten": ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Recife"],
+          "antworten": [
+            "São Paulo",
+            "Rio de Janeiro",
+            "Belo Horizonte",
+            "Recife"
+          ],
           "richtig": 1
         },
         {
           "id": "sk_2_2",
           "schwierigkeit": 2,
           "frage": "Bei welchem deutschen Verein spielte Michael Ballack?",
-          "antworten": ["Nur FC Bayern München", "Nur Bayer Leverkusen", "FC Bayern München und Bayer Leverkusen", "Borussia Dortmund"],
+          "antworten": [
+            "Nur FC Bayern München",
+            "Nur Bayer Leverkusen",
+            "FC Bayern München und Bayer Leverkusen",
+            "Borussia Dortmund"
+          ],
           "richtig": 2
         },
         {
           "id": "sk_2_3",
           "schwierigkeit": 2,
           "frage": "Welchen Spitznamen hatte Franz Beckenbauer?",
-          "antworten": ["Der Bomber", "Der Kaiser", "Das Phantom", "Der Libero"],
+          "antworten": [
+            "Der Bomber",
+            "Der Kaiser",
+            "Das Phantom",
+            "Der Libero"
+          ],
           "richtig": 1
         },
         {
           "id": "sk_2_4",
           "schwierigkeit": 2,
           "frage": "Bei welchem Verein beendete Zinédine Zidane seine Spielerkarriere?",
-          "antworten": ["Juventus Turin", "FC Barcelona", "Real Madrid", "Olympique Marseille"],
+          "antworten": [
+            "Juventus Turin",
+            "FC Barcelona",
+            "Real Madrid",
+            "Olympique Marseille"
+          ],
           "richtig": 2
         },
         {
           "id": "sk_2_5",
           "schwierigkeit": 2,
           "frage": "Welcher Spieler wurde als 'El Fenómeno' bekannt?",
-          "antworten": ["Ronaldinho", "Ronaldo (R9)", "Roberto Carlos", "Rivaldo"],
+          "antworten": [
+            "Ronaldinho",
+            "Ronaldo (R9)",
+            "Roberto Carlos",
+            "Rivaldo"
+          ],
           "richtig": 1
         },
         {
           "id": "sk_3_1",
           "schwierigkeit": 3,
           "frage": "In welchem Jahr wurde Thierry Henry Weltfußballer?",
-          "antworten": ["Er wurde nie Weltfußballer", "2003", "2004", "2006"],
+          "antworten": [
+            "Er wurde nie Weltfußballer",
+            "2003",
+            "2004",
+            "2006"
+          ],
           "richtig": 0
         },
         {
           "id": "sk_3_2",
           "schwierigkeit": 3,
           "frage": "Von welchem Verein wechselte Ronaldinho 2003 zu Barcelona?",
-          "antworten": ["Grêmio", "Flamengo", "Paris Saint-Germain", "AC Milan"],
+          "antworten": [
+            "Grêmio",
+            "Flamengo",
+            "Paris Saint-Germain",
+            "AC Milan"
+          ],
           "richtig": 2
         },
         {
           "id": "sk_3_3",
           "schwierigkeit": 3,
           "frage": "Bei welchem Verein absolvierte Oliver Kahn den Großteil seiner Karriere?",
-          "antworten": ["Karlsruher SC", "FC Bayern München", "Werder Bremen", "VfB Stuttgart"],
+          "antworten": [
+            "Karlsruher SC",
+            "FC Bayern München",
+            "Werder Bremen",
+            "VfB Stuttgart"
+          ],
           "richtig": 1
         },
         {
           "id": "sk_3_4",
           "schwierigkeit": 3,
           "frage": "Wie alt war Wayne Rooney bei seinem ersten Premier League Tor?",
-          "antworten": ["16", "17", "15", "18"],
+          "antworten": [
+            "16",
+            "17",
+            "15",
+            "18"
+          ],
           "richtig": 0
         },
         {
           "id": "sk_3_5",
           "schwierigkeit": 3,
           "frage": "Welcher Spieler wurde als jüngster in der Geschichte des FC Barcelona eingesetzt?",
-          "antworten": ["Lionel Messi", "Pedri", "Ansu Fati", "Bojan Krkić"],
+          "antworten": [
+            "Lionel Messi",
+            "Pedri",
+            "Ansu Fati",
+            "Bojan Krkić"
+          ],
           "richtig": 2
         },
         {
           "id": "sk_4_1",
           "schwierigkeit": 4,
           "frage": "Bei welchem Verein begann Ronaldo (R9) seine Karriere in Europa?",
-          "antworten": ["PSV Eindhoven", "FC Barcelona", "Inter Mailand", "Real Madrid"],
+          "antworten": [
+            "PSV Eindhoven",
+            "FC Barcelona",
+            "Inter Mailand",
+            "Real Madrid"
+          ],
           "richtig": 0
         },
         {
           "id": "sk_4_2",
           "schwierigkeit": 4,
           "frage": "In welchem Jahr zog sich Ronaldo (R9) beim WM-Finale seinen berühmten Krampfanfall zu?",
-          "antworten": ["1994", "1998", "2002", "2006"],
+          "antworten": [
+            "1994",
+            "1998",
+            "2002",
+            "2006"
+          ],
           "richtig": 1
         },
         {
           "id": "sk_4_3",
           "schwierigkeit": 4,
           "frage": "Welcher Spieler hält den Rekord für die meisten Länderspiele?",
-          "antworten": ["Cristiano Ronaldo", "Lionel Messi", "Bader Al-Mutawa", "Ahmed Hassan"],
+          "antworten": [
+            "Cristiano Ronaldo",
+            "Lionel Messi",
+            "Bader Al-Mutawa",
+            "Ahmed Hassan"
+          ],
           "richtig": 2
         },
         {
           "id": "sk_4_4",
           "schwierigkeit": 4,
           "frage": "Bei welchem Verein spielte Johan Cruyff NICHT in seiner Karriere?",
-          "antworten": ["Ajax Amsterdam", "FC Barcelona", "LA Aztecs", "Real Madrid"],
+          "antworten": [
+            "Ajax Amsterdam",
+            "FC Barcelona",
+            "LA Aztecs",
+            "Real Madrid"
+          ],
           "richtig": 3
         },
         {
           "id": "sk_4_5",
           "schwierigkeit": 4,
           "frage": "In welchem Jahr beendete Gerd Müller seine aktive Karriere?",
-          "antworten": ["1979", "1981", "1982", "1984"],
+          "antworten": [
+            "1979",
+            "1981",
+            "1982",
+            "1984"
+          ],
           "richtig": 1
         },
         {
           "id": "sk_5_1",
           "schwierigkeit": 5,
           "frage": "Welcher Spieler gewann als einziger sowohl die WM als auch den Ballon d'Or als Torwart?",
-          "antworten": ["Lev Yashin", "Dino Zoff", "Gordon Banks", "Gianluigi Buffon"],
+          "antworten": [
+            "Lev Yashin",
+            "Dino Zoff",
+            "Gordon Banks",
+            "Gianluigi Buffon"
+          ],
           "richtig": 0
         },
         {
           "id": "sk_5_2",
           "schwierigkeit": 5,
           "frage": "Wie lautete der vollständige bürgerliche Name von Pelé?",
-          "antworten": ["Edson Arantes do Nascimento", "Edison Arantes da Silva", "Edson Arantes dos Santos", "Pelé Arantes do Nascimento"],
+          "antworten": [
+            "Edson Arantes do Nascimento",
+            "Edison Arantes da Silva",
+            "Edson Arantes dos Santos",
+            "Pelé Arantes do Nascimento"
+          ],
           "richtig": 0
         },
         {
           "id": "sk_5_3",
           "schwierigkeit": 5,
           "frage": "Welcher Spieler bestritt die meisten Spiele in der Geschichte der Primera División?",
-          "antworten": ["Iker Casillas", "Andoni Zubizarreta", "Lionel Messi", "Xavi Hernández"],
+          "antworten": [
+            "Iker Casillas",
+            "Andoni Zubizarreta",
+            "Lionel Messi",
+            "Xavi Hernández"
+          ],
           "richtig": 0
         },
         {
           "id": "sk_5_4",
           "schwierigkeit": 5,
           "frage": "In welchem Jahr debütierte Franz Beckenbauer bei den Bayern?",
-          "antworten": ["1962", "1964", "1966", "1960"],
+          "antworten": [
+            "1962",
+            "1964",
+            "1966",
+            "1960"
+          ],
           "richtig": 1
         },
         {
           "id": "sk_5_5",
           "schwierigkeit": 5,
           "frage": "Welcher Spieler erzielte in einer einzigen Saison Tore in 11 verschiedenen Wettbewerben?",
-          "antworten": ["Cristiano Ronaldo", "Robert Lewandowski", "Lionel Messi", "Zlatan Ibrahimović"],
+          "antworten": [
+            "Cristiano Ronaldo",
+            "Robert Lewandowski",
+            "Lionel Messi",
+            "Zlatan Ibrahimović"
+          ],
           "richtig": 3
+        },
+        {
+          "id": "sk_1_6",
+          "schwierigkeit": 1,
+          "frage": "In welchem Land wurde Kylian Mbappé geboren?",
+          "antworten": [
+            "Belgien",
+            "Kamerun",
+            "Frankreich",
+            "Algerien"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "sk_1_7",
+          "schwierigkeit": 1,
+          "frage": "Welchen Verein verließ Erling Haaland, um zu Manchester City zu wechseln?",
+          "antworten": [
+            "RB Salzburg",
+            "RB Leipzig",
+            "Borussia Dortmund",
+            "Ajax Amsterdam"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "sk_1_8",
+          "schwierigkeit": 1,
+          "frage": "Welcher Spieler wird als 'La Pulga' (der Floh) bezeichnet?",
+          "antworten": [
+            "Xavi Hernández",
+            "Andrés Iniesta",
+            "Lionel Messi",
+            "Sergio Busquets"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "sk_2_6",
+          "schwierigkeit": 2,
+          "frage": "Welchen Spitznamen trägt Thomas Müller wegen seiner unberechenbaren Spielweise?",
+          "antworten": [
+            "Der Bomber",
+            "Der Raumdeuter",
+            "Der Zehner",
+            "Der Libero"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "sk_2_7",
+          "schwierigkeit": 2,
+          "frage": "Bei welchem polnischen Verein begann Robert Lewandowskis Profikarriere?",
+          "antworten": [
+            "Lechia Gdańsk",
+            "Wisła Kraków",
+            "Lech Posen",
+            "Zagłębie Lubin"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "sk_2_8",
+          "schwierigkeit": 2,
+          "frage": "In welchem Land wurde Mesut Özil geboren?",
+          "antworten": [
+            "Türkei",
+            "Spanien",
+            "Marokko",
+            "Deutschland"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "sk_3_6",
+          "schwierigkeit": 3,
+          "frage": "In welchem Jahr wurde Cristiano Ronaldo zum ersten Mal Weltfußballer des Jahres (Ballon d'Or)?",
+          "antworten": [
+            "2007",
+            "2008",
+            "2009",
+            "2010"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "sk_3_7",
+          "schwierigkeit": 3,
+          "frage": "Welcher Spieler gewann die Champions League fünfmal mit Real Madrid?",
+          "antworten": [
+            "Sergio Ramos",
+            "Cristiano Ronaldo",
+            "Luka Modric",
+            "Karim Benzema"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "sk_3_8",
+          "schwierigkeit": 3,
+          "frage": "In welchem Jahr beendete Miroslav Klose seine aktive Karriere bei Lazio Rom?",
+          "antworten": [
+            "2014",
+            "2016",
+            "2018",
+            "2012"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "sk_4_6",
+          "schwierigkeit": 4,
+          "frage": "In welchem Jahr erzielte Pelé sein 1000. Profitor?",
+          "antworten": [
+            "1967",
+            "1969",
+            "1971",
+            "1973"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "sk_4_7",
+          "schwierigkeit": 4,
+          "frage": "In welchem Jahr bestritt Franz Beckenbauer sein letztes Länderspiel für Deutschland?",
+          "antworten": [
+            "1974",
+            "1977",
+            "1981",
+            "1983"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "sk_4_8",
+          "schwierigkeit": 4,
+          "frage": "Welcher Spieler wurde im Sommer 2023 von Inter Miami verpflichtet und sorgte für Rekord-Einschaltquoten in den USA?",
+          "antworten": [
+            "David Beckham",
+            "Sergio Busquets",
+            "Jordi Alba",
+            "Lionel Messi"
+          ],
+          "richtig": 3
+        },
+        {
+          "id": "sk_5_6",
+          "schwierigkeit": 5,
+          "frage": "Bei welchem Verein begann Johan Cruyff seine Trainerkarriere und gewann 4 spanische Meisterschaften?",
+          "antworten": [
+            "Ajax Amsterdam",
+            "Feyenoord",
+            "FC Barcelona",
+            "Oranje"
+          ],
+          "richtig": 2
+        },
+        {
+          "id": "sk_5_7",
+          "schwierigkeit": 5,
+          "frage": "Wer hält den Rekord für die meisten Tore in einem Kalenderjahr (91 Tore im Jahr 2012)?",
+          "antworten": [
+            "Cristiano Ronaldo",
+            "Lionel Messi",
+            "Robert Lewandowski",
+            "Gerd Müller"
+          ],
+          "richtig": 1
+        },
+        {
+          "id": "sk_5_8",
+          "schwierigkeit": 5,
+          "frage": "Bei welchem Verein gab Zinédine Zidane sein Profi-Debüt?",
+          "antworten": [
+            "Bordeaux",
+            "Juventus Turin",
+            "AS Cannes",
+            "Olympique Marseille"
+          ],
+          "richtig": 2
         }
       ]
     }

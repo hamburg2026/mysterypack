@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
 import fragenDaten from '../data/fussball_fragen.json';
 import { useWallet } from '../context/WalletContext';
 import '../quiz.css';
@@ -24,12 +24,15 @@ const SCHWIERIGKEIT_META = {
 
 const SCHNELLEINSAETZE = [5, 10, 25, 50];
 
-function zufaelligeFrage(kategorieId, schwierigkeit) {
+function zufaelligeFrage(kategorieId, schwierigkeit, gezeigte) {
   const kat = KATEGORIEN.find((k) => k.id === kategorieId);
   if (!kat) return null;
   const passend = kat.fragen.filter((f) => f.schwierigkeit === schwierigkeit);
   if (passend.length === 0) return null;
-  return passend[Math.floor(Math.random() * passend.length)];
+  // Versuche zunächst eine noch nicht gezeigte Frage
+  const nochNicht = passend.filter((f) => !gezeigte.has(f.id));
+  const pool = nochNicht.length > 0 ? nochNicht : passend;
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
 // ── Screen 1: Auswahl ─────────────────────────────────────────────────────────
@@ -267,10 +270,20 @@ export default function Quiz() {
   const [aktuellerEinsatz, setAktuellerEinsatz]     = useState(0);
   const [aktuelleFrage, setAktuelleFrage]           = useState(null);
   const [letzteRunde, setLetzteRunde]               = useState(null);
+  // Tracking gezeigte Fragen je Kategorie+Schwierigkeit um Wiederholungen zu vermeiden
+  const gezeigteFragenRef = useRef({});
+
+  function getGezeigteSet(kategorieId, schwierigkeit) {
+    const key = `${kategorieId}_${schwierigkeit}`;
+    if (!gezeigteFragenRef.current[key]) gezeigteFragenRef.current[key] = new Set();
+    return gezeigteFragenRef.current[key];
+  }
 
   const handleStart = useCallback(({ kategorie, schwierigkeit, einsatz }) => {
-    const frage = zufaelligeFrage(kategorie, schwierigkeit);
+    const gezeigte = getGezeigteSet(kategorie, schwierigkeit);
+    const frage = zufaelligeFrage(kategorie, schwierigkeit, gezeigte);
     if (!frage) return;
+    gezeigte.add(frage.id);
     setAktuelleKategorie(kategorie);
     setAktuelleSchwierigkeit(schwierigkeit);
     setAktuellerEinsatz(einsatz);
@@ -308,8 +321,11 @@ export default function Quiz() {
   }, [aktuelleSchwierigkeit, aktuellerEinsatz, aktuelleKategorie, aktuelleFrage, buchen]);
 
   const handleNochmal = useCallback(() => {
-    const frage = zufaelligeFrage(aktuelleKategorie, aktuelleSchwierigkeit);
-    if (!frage || guthaben < 1) { setScreen('auswahl'); return; }
+    if (guthaben < 1) { setScreen('auswahl'); return; }
+    const gezeigte = getGezeigteSet(aktuelleKategorie, aktuelleSchwierigkeit);
+    const frage = zufaelligeFrage(aktuelleKategorie, aktuelleSchwierigkeit, gezeigte);
+    if (!frage) { setScreen('auswahl'); return; }
+    gezeigte.add(frage.id);
     setAktuelleFrage(frage);
     setScreen('frage');
   }, [aktuelleKategorie, aktuelleSchwierigkeit, guthaben]);
