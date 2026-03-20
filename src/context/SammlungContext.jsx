@@ -75,8 +75,17 @@ export function SammlungProvider({ children }) {
     setSammlungen(leer);
   }, []);
 
+  /** Sammlungen von außen überschreiben (Multiplayer-Sync) */
+  const setSammlungenExtern = useCallback((updater) => {
+    setSammlungen((prev) => {
+      const neu = typeof updater === 'function' ? updater(prev) : updater;
+      speichern(neu);
+      return neu;
+    });
+  }, []);
+
   return (
-    <SammlungContext.Provider value={{ sammlung, sammlungen, sammlungVon, hinzufuegen, loeschen, resetAlle }}>
+    <SammlungContext.Provider value={{ sammlung, sammlungen, sammlungVon, hinzufuegen, loeschen, resetAlle, setSammlungenExtern }}>
       {children}
     </SammlungContext.Provider>
   );

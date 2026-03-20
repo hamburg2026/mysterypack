@@ -122,6 +122,11 @@ export function WalletProvider({ children }) {
   /** Wallet eines bestimmten Spielers lesen (für Vergleichsansichten) */
   const walletVon = useCallback((index) => wallets[index] ?? initialWallet(), [wallets]);
 
+  /** Wallets von außen überschreiben (Multiplayer-Sync) */
+  const setWalletsExtern = useCallback((updater) => {
+    setWallets(updater);
+  }, []);
+
   /** Beide Wallets auf Startguthaben zurücksetzen */
   const resetAlle = useCallback(() => {
     setWallets({ 0: initialWallet(), 1: initialWallet() });
@@ -134,6 +139,7 @@ export function WalletProvider({ children }) {
       transaktionen: aktuellesWallet.transaktionen,
       wallets,
       walletVon,
+      setWalletsExtern,
       resetAlle,
       buchen,
       setStartguthaben,
