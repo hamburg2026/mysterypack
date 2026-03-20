@@ -1,7 +1,7 @@
 /* ── Online-Spiel Modal ──────────────────────────────────────────────────── */
 
 .online-modal {
-  width: min(480px, 95vw);
+  width: min(520px, 95vw);
 }
 
 .online-status-badge {
@@ -46,6 +46,23 @@
   border-radius: 8px;
   color: #ef4444;
   font-size: 0.85rem;
+}
+
+/* Offline-Namen-Sektion */
+.online-offline-namen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  margin-bottom: 0.25rem;
+}
+
+.online-namen-zeile {
+  display: flex;
+  gap: 0.75rem;
 }
 
 .online-optionen {
@@ -115,6 +132,13 @@
 .online-code-input:focus {
   outline: none;
   border-color: #3b82f6;
+}
+
+.online-name-input {
+  text-transform: none;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  font-weight: 600;
 }
 
 .online-hosting {

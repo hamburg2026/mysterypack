@@ -56,13 +56,104 @@
 .shop-arena {
   min-height: 520px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 0;
   background: radial-gradient(ellipse at 50% 30%, rgba(34,197,94,0.06) 0%, transparent 65%),
               var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 40px 24px;
+  padding: 24px 0;
+  overflow: hidden;
+}
+
+.shop-arena-mitte {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+}
+
+/* ── Mini-Karten am Rand ──────────────────────────────── */
+.mini-karte-platz {
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.mini-karte {
+  width: 80px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 4px;
+  border-right: 1px solid color-mix(in srgb, var(--sp-farbe, #22c55e) 20%, transparent);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--sp-farbe, #22c55e) 5%, transparent);
+  animation: mini-karte-ein 0.4s ease;
+  position: relative;
+  align-self: stretch;
+  justify-content: center;
+}
+
+.mini-karte--rechts {
+  border-right: none;
+  border-left: 1px solid color-mix(in srgb, var(--sp-farbe, #3b82f6) 20%, transparent);
+}
+
+.mini-karte--neu {
+  animation: mini-karte-neu 0.5s ease;
+}
+
+@keyframes mini-karte-ein {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes mini-karte-neu {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--r-farbe, #22c55e) 60%, transparent); }
+  50%  { box-shadow: 0 0 0 8px color-mix(in srgb, var(--r-farbe, #22c55e) 20%, transparent); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+.mini-karte-spieler-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mini-karte-sp-name {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--sp-farbe, #22c55e);
+  text-align: center;
+  max-width: 72px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mini-karte-trikot {
+  margin: 2px 0;
+}
+
+.mini-karte-raritaet {
+  font-size: 10px;
+  line-height: 1;
+}
+
+.mini-karte-name {
+  font-size: 9px;
+  color: var(--text);
+  text-align: center;
+  max-width: 72px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.8;
 }
 
 /* ── Pack-Bereich ─────────────────────────────────────── */

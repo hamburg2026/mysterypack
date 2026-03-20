@@ -124,7 +124,6 @@ export function MultiplayerProvider({ children }) {
       setRaumCode('');
       setDranIndex(0);
       setGameStarted(false);
-      namenZuruecksetzen();
     });
 
     conn.on('error', (err) => {
@@ -201,8 +200,7 @@ export function MultiplayerProvider({ children }) {
     setFehler('');
     setDranIndex(0);
     setGameStarted(false);
-    namenZuruecksetzen();
-  }, [namenZuruecksetzen]);
+  }, []);
 
   // ── Auto-Sync bei eigenen Änderungen ─────────────────────────────────────
   useEffect(() => {
