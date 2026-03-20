@@ -67,16 +67,17 @@ export default function Navbar() {
             )}
           </button>
 
-          {/* Spieler-Indikator */}
+          {/* Spieler-Indikator – im Online-Modus gesperrt */}
           <button
-            className="navbar-spieler"
+            className={`navbar-spieler ${status === 'connected' ? 'navbar-spieler--gesperrt' : ''}`}
             style={{ '--sp-farbe': aktiver.farbe }}
-            onClick={wechseln}
-            title={`Wechseln zu ${naechster.name}`}
+            onClick={status === 'connected' ? undefined : wechseln}
+            title={status === 'connected' ? `Online-Modus: Du spielst als ${aktiver.name}` : `Wechseln zu ${naechster.name}`}
           >
             <span className="navbar-spieler-dot" />
             <span className="navbar-spieler-name">{aktiver.name}</span>
-            <span className="navbar-spieler-wechsel">⇄</span>
+            {status !== 'connected' && <span className="navbar-spieler-wechsel">⇄</span>}
+            {status === 'connected' && <span className="navbar-spieler-wechsel">🔒</span>}
           </button>
         </div>
       </nav>

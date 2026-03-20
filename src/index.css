@@ -330,8 +330,12 @@ h1, h2, h3 {
   flex-shrink: 0;
   transition: background 0.15s, border-color 0.15s;
 }
-.navbar-spieler:hover {
+.navbar-spieler:hover:not(.navbar-spieler--gesperrt) {
   background: color-mix(in srgb, var(--sp-farbe, #22c55e) 18%, transparent);
+}
+.navbar-spieler--gesperrt {
+  cursor: default;
+  opacity: 0.85;
 }
 .navbar-spieler-dot {
   width: 9px;

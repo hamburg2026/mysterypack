@@ -49,6 +49,15 @@ export function SpielerProvider({ children }) {
     });
   }, []);
 
+  const setAktiverIndex = useCallback((index) => {
+    setState((prev) => {
+      if (prev.aktiverIndex === index) return prev;
+      const neu = { ...prev, aktiverIndex: index };
+      speichern(neu);
+      return neu;
+    });
+  }, []);
+
   return (
     <SpielerContext.Provider value={{
       spieler:       state.spieler,
@@ -56,6 +65,7 @@ export function SpielerProvider({ children }) {
       aktiverSpieler: state.spieler[state.aktiverIndex],
       wechseln,
       umbenennen,
+      setAktiverIndex,
     }}>
       {children}
     </SpielerContext.Provider>
